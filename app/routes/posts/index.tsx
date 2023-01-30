@@ -16,7 +16,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function PostsRoute() {
   const { posts } = useLoaderData() as unknown as LoaderData;
   const adminUser = useOptionalAdminUser();
-  console.log({ adminUser });
+
   return (
     <main>
       <h1 className="mb-16">Posts</h1>

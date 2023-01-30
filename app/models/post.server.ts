@@ -1,5 +1,8 @@
 import { Post } from "@prisma/client";
 import { prisma } from "~/db.server";
+import PostRoute from "~/routes/posts/$slug";
+
+export type { Post };
 
 export async function getPostListings() {
   return prisma.post.findMany({
@@ -20,6 +23,37 @@ export async function getPost(slug: string) {
   });
 }
 
+export async function getClosestPost(slug: string) {
+  const searchQueryLength =
+    slug.length > 15 ? slug.length / 3 : slug.length / 2;
+
+  const beginsWith = prisma.post.findMany({
+    where: {
+      slug: {
+        startsWith: slug.slice(0, searchQueryLength),
+      },
+    },
+  });
+
+  const contains = prisma.post.findMany({
+    where: {
+      slug: {
+        contains: slug.slice(0, searchQueryLength),
+      },
+    },
+  });
+
+  const endsWith = prisma.post.findMany({
+    where: {
+      slug: {
+        contains: slug.slice(searchQueryLength, slug.length),
+      },
+    },
+  });
+
+  return [beginsWith, contains, endsWith];
+}
+
 export async function createPost(
   post: Pick<Post, "slug" | "title" | "markdown">
 ) {
@@ -31,4 +65,8 @@ export async function updatePost(
   post: Pick<Post, "slug" | "title" | "markdown">
 ) {
   return prisma.post.update({ data: post, where: { slug } });
+}
+
+export async function deletePost(slug: string) {
+  return prisma.post.delete({ where: { slug } });
 }
