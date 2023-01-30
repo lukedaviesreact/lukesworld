@@ -183,7 +183,7 @@ export function CatchBoundary() {
 
     return (
       <div>
-        Uh Oh! The post <b>{params.slug}</b> does not exist
+        Uh Oh.. The post <b>{params.slug}</b> does not exist
       </div>
     );
   }
