@@ -17,7 +17,6 @@ import invariant from "tiny-invariant";
 import {
   createPost,
   deletePost,
-  getClosestPost,
   getPost,
   Post,
   updatePost,
