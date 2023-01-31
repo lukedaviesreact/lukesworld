@@ -1,5 +1,6 @@
-import { json, LoaderFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 import { requireAdminUser } from "~/session.server";
 
@@ -9,20 +10,14 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminUser(request);
-  const posts = await getPostListings();
-
-  return json<LoaderData>({ posts });
+  return json<LoaderData>({ posts: await getPostListings() });
 };
 
 export default function AdminRoute() {
-  const { posts } = useLoaderData() as unknown as LoaderData;
-
+  const { posts } = useLoaderData() as LoaderData;
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">Blog Admin</h1>
-      <Link to="/posts" className="text-blue-600 underline">
-        Back to posts
-      </Link>
       <div className="grid grid-cols-4 gap-6">
         <nav className="col-span-4 md:col-span-1">
           <ul>
@@ -39,6 +34,15 @@ export default function AdminRoute() {
           <Outlet />
         </main>
       </div>
+    </div>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <div className="text-red-500">
+      Oh no, something went wrong!
+      <pre>{error.message}</pre>
     </div>
   );
 }

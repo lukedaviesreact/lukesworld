@@ -1,4 +1,4 @@
-app = "lukesworld-ae5d"
+app = "onewheel-blog-fl0t"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
@@ -40,11 +40,11 @@ script_checks = [ ]
   timeout = "2s"
 
   [[services.http_checks]]
-  interval = "10s"
+  interval = 10_000
   grace_period = "5s"
   method = "get"
   path = "/healthcheck"
   protocol = "http"
-  timeout = "2s"
+  timeout = 2_000
   tls_skip_verify = false
   headers = { }

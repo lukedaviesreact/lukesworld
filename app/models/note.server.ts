@@ -11,7 +11,6 @@ export function getNote({
   userId: User["id"];
 }) {
   return prisma.note.findFirst({
-    select: { id: true, body: true, title: true },
     where: { id, userId },
   });
 }

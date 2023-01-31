@@ -1,17 +1,17 @@
+import "./env.server";
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
-import { getEnv } from "./env.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
-global.ENV = getEnv();
 
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "__session",
     httpOnly: true,
+    maxAge: 0,
     path: "/",
     sameSite: "lax",
     secrets: [process.env.SESSION_SECRET],
@@ -67,11 +67,9 @@ export async function requireUser(request: Request) {
 
 export async function requireAdminUser(request: Request) {
   const user = await requireUser(request);
-
   if (user.email !== ENV.ADMIN_EMAIL) {
     throw await logout(request);
   }
-
   return user;
 }
 
