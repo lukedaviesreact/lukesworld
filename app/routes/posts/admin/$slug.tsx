@@ -97,9 +97,9 @@ export default function NewPostRoute() {
 
   return (
     <Form method="post" key={data.post?.slug ?? "new"}>
-      <p>
-        <label>
-          Post Title:{" "}
+      <div>
+        <label htmlFor="title">
+          Post Title:
           {errors?.title ? (
             <em className="text-red-600">{errors.title}</em>
           ) : null}
@@ -110,10 +110,17 @@ export default function NewPostRoute() {
             defaultValue={data.post?.title}
           />
         </label>
-      </p>
-      <p>
-        <label>
-          Post Slug:{" "}
+        <input
+          type="text"
+          name="title"
+          id=""
+          className={inputClassName}
+          defaultValue={data.post?.title}
+        />
+      </div>
+      <div>
+        <label htmlFor="slug">
+          Post Slug:
           {errors?.slug ? (
             <em className="text-red-600">{errors.slug}</em>
           ) : null}
@@ -124,8 +131,15 @@ export default function NewPostRoute() {
             defaultValue={data.post?.slug}
           />
         </label>
-      </p>
-      <p>
+        <input
+          type="text"
+          name="slug"
+          id=""
+          className={inputClassName}
+          defaultValue={data.post?.slug}
+        />
+      </div>
+      <div>
         <label htmlFor="markdown">
           Markdown:{" "}
           {errors?.markdown ? (
@@ -138,8 +152,8 @@ export default function NewPostRoute() {
           name="markdown"
           className={`${inputClassName} font-mono`}
           defaultValue={data.post?.markdown}
-        />
-      </p>
+        ></textarea>
+      </div>
       <div className="flex justify-end gap-4">
         {isNewPost ? null : (
           <button

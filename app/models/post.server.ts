@@ -17,7 +17,9 @@ export async function getPosts() {
 }
 
 export async function getPost(slug: string) {
-  return prisma.post.findUnique({ where: { slug } });
+  return prisma.post.findUnique({
+    where: { slug },
+  });
 }
 
 export async function createPost(
