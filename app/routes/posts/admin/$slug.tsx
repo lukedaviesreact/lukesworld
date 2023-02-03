@@ -17,7 +17,6 @@ import invariant from "tiny-invariant";
 import {
   createPost,
   deletePost,
-  getClosestPost,
   getPost,
   Post,
   updatePost,
@@ -103,7 +102,7 @@ export default function NewPostRoute() {
 
   return (
     <Form method="post" key={data.post?.slug ?? "new"}>
-      <p>
+      <div>
         <label htmlFor="title">
           Post Title:
           {errors?.title ? (
@@ -117,8 +116,8 @@ export default function NewPostRoute() {
           className={inputClassName}
           defaultValue={data.post?.title}
         />
-      </p>
-      <p>
+      </div>
+      <div>
         <label htmlFor="slug">
           Post Slug:
           {errors?.slug ? (
@@ -132,8 +131,8 @@ export default function NewPostRoute() {
           className={inputClassName}
           defaultValue={data.post?.slug}
         />
-      </p>
-      <p>
+      </div>
+      <div>
         <label htmlFor="markdown">
           Markdown:{" "}
           {errors?.markdown ? (
@@ -147,7 +146,7 @@ export default function NewPostRoute() {
           className={`${inputClassName} font-mono`}
           defaultValue={data.post?.markdown}
         ></textarea>
-      </p>
+      </div>
       <div className="flex justify-end gap-4">
         {isNewPost ? null : (
           <button
