@@ -1,6 +1,5 @@
 import { Post } from "@prisma/client";
 import { prisma } from "~/db.server";
-import PostRoute from "~/routes/posts/$slug";
 
 export type { Post };
 
