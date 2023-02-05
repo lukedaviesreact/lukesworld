@@ -4,6 +4,7 @@ module.exports = {
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/node",
     "@remix-run/eslint-config/jest-testing-library",
+    "plugin:cypress/recommended",
     "prettier",
   ],
   env: {
