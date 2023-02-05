@@ -1,4 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { requireAdminUser } from "~/session.server";
 
@@ -11,7 +12,7 @@ export default function AdminIndexRoute() {
   return (
     <div>
       <Link to="new" className="text-blue-600 underline">
-        Create new post
+        Create a New Post
       </Link>
     </div>
   );

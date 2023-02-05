@@ -5,48 +5,7 @@ const prisma = new PrismaClient();
 
 async function seed() {
   const email = "rachel@remix.run";
-  const posts = [
-    {
-      slug: "first-post",
-      title: "This is the first post!",
-      markdown: `
-        ## This is the first post!
 
-        Its really easy to create these notes!
-      `.trim(),
-    },
-    {
-      slug: "lorem-ipsum",
-      title: "Lorem Ipsum",
-      markdown: `## Lorem ipsum dolor sit amet, consectetur
-lorem nec dignissim porttitor, elit enim consectetur erat, at congue purus magna non nunc. Nullam porta, massa non facilisis mattis, velit massa tincidunt est, ac commodo ligula elit rhoncus orci. Pellentesque volutpat, nisi ut porttitor suscipit, purus erat sollicitudin magna, non consequat justo m!
-Nam imperdiet, mauris eu viverra tempus, odio diam iaculis felis, et hendrerit orci justo nec dolor. Nam dignissim elit eget orci porttitor, sit amet egestas massa gravida. Donec fringilla suscipit ligula vel **malesuada**. Ut maximus, est at posuere elementum, enim eros vulputate turpis, ac hendrerit massa massa hendrerit sapien. Etiam quis arcu lacus. Sed et dolor dui. Morbi luctus vehicula nisl, sit amet maximus sem pharetra quis. Vivamus pharetra tellus non est placerat dapibus.
----
-
->Nunc eget placerat libero. Cras a imperdiet nisl. Duis pretium enim massa, quis porttitor mauris gravida eget. >Donec a odio sit amet urna pharetra iaculis quis vel nunc. 
-
-## Nunc eget placerat libero.
-
-Cras a imperdiet nisl. Duis pretium enim massa, quis porttitor mauris gravida eget. *Donec a odio* sit amet urna pharetra iaculis quis vel nunc. Vestibulum rutrum nunc risus, ut vulputate libero lobortis id. Duis dignissim, arcu sit amet pellentesque placerat, arcu massa varius elit, sed interdum orci leo et eros. Quisque eget blandit ipsum, id dignissim diam. Quisque lacinia vestibulum nibh. In sit amet malesuada ante, eu porttitor diam. Etiam ac fermentum dui. Aliquam erat volutpat. Cras id tortor iaculis, porttitor libero at, eleifend leo.`.trim(),
-    },
-    {
-      slug: "third-post",
-      title: "This is the third post!",
-      markdown: `
-      ## This is the third post!
-
-      Its really easy to create these notes!
-    `.trim(),
-    },
-  ];
-
-  for (const post of posts) {
-    await prisma.post.upsert({
-      where: { slug: post.slug },
-      update: post,
-      create: post,
-    });
-  }
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
     // no worries if it doesn't exist yet
@@ -80,6 +39,36 @@ Cras a imperdiet nisl. Duis pretium enim massa, quis porttitor mauris gravida eg
       userId: user.id,
     },
   });
+
+  const posts = [
+    {
+      slug: "my-first-post",
+      title: "My First Post!",
+      markdown: `
+# This is my first post!
+
+Isn't it great?
+      `.trim(),
+    },
+    {
+      slug: "trail-riding-with-onewheel",
+      title: "Trail Riding with Onewheel",
+      markdown: `
+# Floating the trails
+
+Have you ever tried riding a onewheel? It's an out-of-this-world _experience_!
+Imagine that, but in the beauty of nature and it's just amazing.
+      `.trim(),
+    },
+  ];
+
+  for (const post of posts) {
+    await prisma.post.upsert({
+      where: { slug: post.slug },
+      update: post,
+      create: post,
+    });
+  }
 
   console.log(`Database has been seeded. 🌱`);
 }
