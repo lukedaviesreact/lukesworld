@@ -1,36 +1,43 @@
-import { marked } from "marked";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useCatch, useLoaderData, useParams } from "@remix-run/react";
-import { getPost } from "~/models/post.server";
 import invariant from "tiny-invariant";
+import { convertBlocksToHTML, getPageData } from "./posts.utils";
 
-type LoaderData = {
-  title: string;
-  html: string;
-};
+type LoaderData = any;
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const { slug } = params;
-  invariant(slug, "slug is required");
-  const post = await getPost(slug);
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const id = url.searchParams.get("id");
+  invariant(id, "id is required");
 
-  if (!post) {
+  const postPageData = await getPageData(ENV.NOTION_CLIENT, id);
+
+  if (!postPageData) {
     throw new Response("Not Found", { status: 404 });
   }
-  const html = marked(post.markdown);
-  return json<LoaderData>({ title: post.title, html });
+
+  const postPageContent = await convertBlocksToHTML({ url: postPageData.url });
+
+  return json<LoaderData>({ postPageContent, postPageData });
 };
 
 export default function PostRoute() {
-  const { title, html } = useLoaderData() as LoaderData;
+  const { postPageContent, postPageData } = useLoaderData() as LoaderData;
+  console.log(postPageData);
   return (
     <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">{title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <h1 className="my-6 border-b-2 text-center text-3xl">
+        {postPageContent.icon} {postPageContent.title}
+      </h1>
+      <div
+        className=""
+        dangerouslySetInnerHTML={{ __html: postPageContent.html }}
+      />
     </main>
   );
 }
+
 export function CatchBoundary() {
   const caught = useCatch();
   const params = useParams();

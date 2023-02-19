@@ -1491,7 +1491,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@notionhq/client@^2.2.3":
+"@notionhq/client@^2.2.1":
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/@notionhq/client/-/client-2.2.3.tgz#b8563994fd116123b0b2e39fca43a593faaf8360"
   integrity sha512-ZqUzY0iRg/LIrwS+wzz/6osSB2nxIpmqdAtdUwzpcimc9Jlu1j85FeYdaU26Shr193CFrl2TLFeKqpk/APRQ4g==
@@ -6837,6 +6837,11 @@ normalize-url@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
+
+notion-page-to-html@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/notion-page-to-html/-/notion-page-to-html-1.2.0.tgz#ef5b9f237debc3913065d5f04194719a7d7694c5"
+  integrity sha512-AOWjFABQlN2R3i5hcj1b6QFk5ctINFrKiu1vUcUEyundvRSHxRYAIoPXTJ1gx7S4Yfdh+2NcwEm1119k9awEeA==
 
 npm-run-all@^4.1.5:
   version "4.1.5"
