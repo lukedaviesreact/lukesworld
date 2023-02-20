@@ -5,6 +5,17 @@ export const formatTitleForURL = (title: string) => {
   return title.toLowerCase().replace(/ /g, "-");
 };
 
+export const hasExpired = (date: Date) => {
+  const postDate = date.getTime();
+  const now = new Date().getTime();
+
+  if (now > postDate) {
+    return true;
+  }
+
+  return false;
+};
+
 export async function getBlockData(client: Client, publicId: string) {
   let response;
 
@@ -46,20 +57,6 @@ export async function getPageData(client: Client, pageId: string) {
 
   return response;
 }
-
-export const getLukesWorldId = (blocks: any) => {
-  const lukesWorldBlock = blocks.filter(
-    (child: any) => child.child_page?.title === "Lukes World"
-  )[0];
-  return lukesWorldBlock.id;
-};
-
-export const getPostListId = (blocks: any) => {
-  const posts = blocks.filter(
-    (child: any) => child.child_page?.title === "Posts"
-  )[0];
-  return posts.id;
-};
 
 export const convertBlocksToHTML = async ({ url }: { url: string }) => {
   return await NotionPageToHtml.convert(url, {
