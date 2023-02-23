@@ -1,17 +1,12 @@
 import { Client } from "@notionhq/client";
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useCatch, useLoaderData, useParams } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import { createPost, getPost, updatePost } from "~/models/post.server";
 import { convertBlocksToHTML, getPageData } from "./posts.utils";
 
 type LoaderData = any;
-
-export const headers = () => {
-  return {
-    "Cache-Control": "public, s-maxage=60",
-  };
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -20,29 +15,50 @@ export const loader: LoaderFunction = async ({ request }) => {
   const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
   invariant(id, "id is required");
 
-  const postPageData = await getPageData(NOTION_CLIENT, id);
+  const dbPost = await getPost(id);
 
-  if (!postPageData) {
-    throw new Response("Not Found", { status: 404 });
+  if (dbPost?.html) {
+    return json<LoaderData>({
+      post: dbPost,
+    });
+  } else {
+    const postPageData = await getPageData(NOTION_CLIENT, id);
+
+    if (!postPageData) {
+      throw new Response("Not Found", { status: 404 });
+    }
+
+    const postPageContent = await convertBlocksToHTML({
+      url: postPageData.url,
+    });
+
+    const post = {
+      url: `${postPageData.url}`,
+      html: postPageContent.html,
+    };
+
+    await updatePost(id, post);
+
+    return json<LoaderData>({ post });
   }
+};
 
-  const postPageContent = await convertBlocksToHTML({ url: postPageData.url });
-
-  return json<LoaderData>({ postPageContent, postPageData });
+export const meta: MetaFunction = ({ data }) => {
+  console.log("data from meta", data);
+  return {
+    title: `${data.post.title}`,
+  };
 };
 
 export default function PostRoute() {
-  const { postPageContent, postPageData } = useLoaderData() as LoaderData;
-  console.log("postPageData", postPageData);
+  const { post } = useLoaderData() as LoaderData;
+
   return (
-    <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">
-        {postPageContent.icon} {postPageContent.title}
+    <main>
+      <h1>
+        {post.icon} {post.title}
       </h1>
-      <div
-        className=""
-        dangerouslySetInnerHTML={{ __html: postPageContent.html }}
-      />
+      <div className="" dangerouslySetInnerHTML={{ __html: post.html }} />
     </main>
   );
 }
@@ -52,9 +68,7 @@ export function CatchBoundary() {
   const params = useParams();
   if (caught.status === 404) {
     return (
-      <div className="text-red-500">
-        Uh oh! The post with the slug "{params.slug}" does not exist!
-      </div>
+      <div>Uh oh! The post with the slug "{params.slug}" does not exist!</div>
     );
   }
   throw new Error(`Unsupported thrown response status code: ${caught.status}`);

@@ -14,17 +14,16 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
-};
+// export const links: LinksFunction = () => {
+//   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+// };
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Lukes World",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -52,11 +51,7 @@ export default function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
-          }}
-        />
+
         <LiveReload />
       </body>
     </html>

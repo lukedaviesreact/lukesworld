@@ -6,7 +6,7 @@ export type { Post };
 export async function getPostListings() {
   return prisma.post.findMany({
     select: {
-      slug: true,
+      id: true,
       title: true,
     },
   });
@@ -24,9 +24,9 @@ export async function getLatestPost() {
   });
 }
 
-export async function getPost(slug: string) {
+export async function getPost(id: string) {
   return prisma.post.findUnique({
-    where: { slug },
+    where: { id },
   });
 }
 
@@ -42,11 +42,8 @@ export async function createPost(
   });
 }
 
-export async function updatePost(
-  slug: string,
-  post: Pick<Post, "slug" | "title" | "id">
-) {
-  return prisma.post.update({ data: post, where: { slug } });
+export async function updatePost(id: string, post: Pick<Post, "url" | "html">) {
+  return prisma.post.update({ data: post, where: { id } });
 }
 
 export async function deletePost(slug: string) {
