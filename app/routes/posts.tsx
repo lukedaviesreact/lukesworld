@@ -6,7 +6,7 @@ export default function PostsRoute() {
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <div className="text-red-500">
+    <div>
       Oh no, something went wrong!
       <pre>{error.message}</pre>
     </div>
