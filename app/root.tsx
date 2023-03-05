@@ -21,6 +21,8 @@ import variablesStyles from '~/styles/variables.css';
 
 import { getUser } from './session.server';
 import { getEnv } from './env.server';
+import { NavBar } from './components/navbar/Navbar';
+import NavBarStyle from './components/navbar/navbar.css';
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -34,6 +36,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: resetStyles },
         { rel: 'stylesheet', href: variablesStyles },
         { rel: 'stylesheet', href: styles },
+        { rel: 'stylesheet', href: NavBarStyle },
     ];
 };
 
@@ -57,6 +60,8 @@ export default function App() {
                 <Links />
             </head>
             <body className="h-full">
+                <NavBar />
+
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />

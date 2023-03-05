@@ -324,15 +324,18 @@ textarea {
 }
 
 body {
-    margin: auto;
-    max-width: 50rem;
     min-height: 100%;
     overflow-x: hidden;
     background: var(--color-background-main);
     font-family: var(--font-family-sans);
     font-size: var(--font-size-200);
     color: var(--color-text-main);
+}
+
+main {
     padding: 1em;
+    margin: auto;
+    max-width: 50rem;
 }
 
 /* ----- Typography ----- */

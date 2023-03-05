@@ -1,0 +1,22 @@
+.nav-bar {
+    border-bottom: 1px solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-bar ul li {
+    padding: 0.25rem;
+    margin: 0;
+}
