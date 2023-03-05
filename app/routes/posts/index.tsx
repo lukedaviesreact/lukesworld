@@ -8,7 +8,7 @@ import { json } from '@remix-run/node';
 import { Client } from '@notionhq/client';
 
 import { formatTitleForURL, hasExpired } from './posts.utils';
-import { usePostBlocks } from '~/hooks/posts/hooks';
+import { getPostBlocks } from '~/utils/posts';
 import {
     createPost,
     getLatestPost,
@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async () => {
             postList,
         });
     } else {
-        const { postList } = await usePostBlocks({
+        const { postList } = await getPostBlocks({
             client: NOTION_CLIENT,
             id: ENV.NOTION_POSTLIST_ID,
         });
@@ -64,8 +64,6 @@ export const loader: LoaderFunction = async () => {
         for await (const request of createPostRequests) {
             responseArr.push(request);
         }
-
-        console.log('responseArr:', responseArr);
 
         return json<LoaderData>({
             postList,
