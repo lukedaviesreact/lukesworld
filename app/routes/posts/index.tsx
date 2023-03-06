@@ -14,12 +14,7 @@ import {
     getLatestPost,
     getPostListings,
 } from '~/models/post.server';
-
-import postsStyle from './styles/posts.css';
-
-export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: postsStyle }];
-};
+import { VStack, StackDivider, Box } from '@chakra-ui/react';
 
 type LoaderData = {
     postList?: { id: string; title: string | undefined }[] | undefined;
@@ -72,7 +67,7 @@ export const loader: LoaderFunction = async () => {
 };
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
-    title: 'Lukes World - Posts',
+    title: 'Posts | Luke Davies Dev',
     viewport: 'width=device-width,initial-scale=1',
 });
 
@@ -83,28 +78,33 @@ export default function PostsRoute() {
 
     return (
         <main>
-            <h1>Posts</h1>
-            {!postList && <p>no posts found.</p>}
-            <ul>
-                {postList?.map((post) => {
-                    if (!post.title || !post.id) {
-                        return <li>Invalid Post</li>;
-                    }
-                    return (
-                        <li key={post.id}>
-                            <Link
-                                to={`/posts/${formatTitleForURL(
-                                    post.title
-                                )}?id=${post.id}`}
-                                prefetch="intent"
-                            >
-                                {post.title}
-                            </Link>
-                            {isLoading && <p>loading...</p>}
-                        </li>
-                    );
-                })}
-            </ul>
+            <Box pt={2}>
+                {!postList && <p>no posts found.</p>}
+
+                <VStack
+                    divider={<StackDivider borderColor="gray.200" />}
+                    spacing={2}
+                    align="stretch"
+                >
+                    {postList?.map((post) => {
+                        if (!post.title || !post.id) {
+                            return <li>Invalid Post</li>;
+                        }
+                        return (
+                            <Box key={post.id}>
+                                <Link
+                                    to={`/posts/${formatTitleForURL(
+                                        post.title
+                                    )}?id=${post.id}`}
+                                    prefetch="intent"
+                                >
+                                    {post.title}
+                                </Link>
+                            </Box>
+                        );
+                    })}
+                </VStack>
+            </Box>
         </main>
     );
 }
