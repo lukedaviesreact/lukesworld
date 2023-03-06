@@ -1,14 +1,21 @@
+import { Box, Heading, Text } from '@chakra-ui/react';
+
 export default function Index() {
     return (
         <main>
-            <span>Hi, my name is</span>
-            <h1>Luke Davies</h1>
-            <span>I&apos;m a front-end developer</span>
-            <br />
-            <br />
-            <br />
-            <br />
-            <span>Website coming soon...</span>
+            <Box>
+                <Text>Hi, my name is</Text>
+                <Box mt={2} mb={4}>
+                    <Heading size="2xl" as="h2">
+                        Luke Davies
+                    </Heading>
+                    <Heading as="h1" size="md" fontWeight={400}>
+                        Front-end developer, specialising in React
+                    </Heading>
+                </Box>
+
+                <Text>Website coming soon</Text>
+            </Box>
         </main>
     );
 }
