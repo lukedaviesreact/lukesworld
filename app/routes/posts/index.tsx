@@ -14,7 +14,7 @@ import {
     getLatestPost,
     getPostListings,
 } from '~/models/post.server';
-import { VStack, StackDivider, Box } from '@chakra-ui/react';
+import { VStack, StackDivider, Box, theme, Heading } from '@chakra-ui/react';
 
 type LoaderData = {
     postList?: { id: string; title: string | undefined }[] | undefined;
@@ -80,18 +80,21 @@ export default function PostsRoute() {
         <main>
             <Box pt={2}>
                 {!postList && <p>no posts found.</p>}
-
-                <VStack
-                    divider={<StackDivider borderColor="gray.200" />}
-                    spacing={2}
-                    align="stretch"
-                >
+                <Heading as="h1" size="lg" mb="8">
+                    Posts 🗒
+                </Heading>
+                <VStack align="start">
                     {postList?.map((post) => {
                         if (!post.title || !post.id) {
                             return <li>Invalid Post</li>;
                         }
                         return (
-                            <Box key={post.id}>
+                            <Box
+                                key={post.id}
+                                shadow="md"
+                                borderBottom={`2px solid gray.200`}
+                                p="2"
+                            >
                                 <Link
                                     to={`/posts/${formatTitleForURL(
                                         post.title
