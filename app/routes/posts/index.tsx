@@ -1,87 +1,35 @@
-import { Link, useLoaderData, useNavigation } from '@remix-run/react';
-import type {
-    LinksFunction,
-    LoaderFunction,
-    MetaFunction,
-} from '@remix-run/node';
-import { json } from '@remix-run/node';
+import { Badge, Box, Heading, HStack, VStack } from '@chakra-ui/react';
 import { Client } from '@notionhq/client';
-
-import { formatTitleForURL, hasExpired } from './posts.utils';
-import { getPostBlocks } from '~/utils/posts';
-import {
-    createPost,
-    getLatestPost,
-    getPostListings,
-} from '~/models/post.server';
-import { VStack, StackDivider, Box, theme, Heading } from '@chakra-ui/react';
+import { json, LoaderFunction, MetaFunction } from '@remix-run/node';
+import { Link, useLoaderData } from '@remix-run/react';
+import { formatTitleForURL, getDbData } from '~/utils/posts';
 
 type LoaderData = {
-    postList?: { id: string; title: string | undefined }[] | undefined;
+    postList: any;
 };
-
 export const loader: LoaderFunction = async () => {
     const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
-    let responseArr = [];
-    const dbPosts = await getPostListings();
-    const latestPost = await getLatestPost();
 
-    if (latestPost && !hasExpired(latestPost.expiresAt)) {
-        const postList = dbPosts.map((post) => ({
-            title: post.title,
-            id: post.id,
-        }));
-        return json<LoaderData>({
-            postList,
-        });
-    } else {
-        const { postList } = await getPostBlocks({
-            client: NOTION_CLIENT,
-            id: ENV.NOTION_POSTLIST_ID,
-        });
+    const data = await getDbData({
+        client: NOTION_CLIENT,
+        dbId: ENV.NOTION_DATABASE_ID,
+    });
 
-        if (!postList) {
-            return json<LoaderData>({});
-        }
-
-        const createPostRequests = postList.map((post) => {
-            if (!post.title) {
-                return;
-            }
-            return createPost({
-                id: post.id,
-                title: post.title,
-                slug: formatTitleForURL(post.title),
-                expiresAt: new Date(new Date().getTime() + 10 * 60000),
-            });
-        });
-
-        for await (const request of createPostRequests) {
-            responseArr.push(request);
-        }
-
-        return json<LoaderData>({
-            postList,
-        });
-    }
+    return json<LoaderData>({ postList: data.posts });
 };
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
-    title: 'Posts | Luke Davies Dev',
+    title: 'Dev Posts | Luke Davies Dev',
     viewport: 'width=device-width,initial-scale=1',
 });
 
 export default function PostsRoute() {
     const { postList } = useLoaderData() as LoaderData;
-    const navigation = useNavigation();
-    const isLoading = Boolean(navigation.state === 'loading');
-
     return (
         <main>
             <Box pt={2}>
-                {!postList && <p>no posts found.</p>}
                 <Heading as="h1" size="lg" mb="8">
-                    Posts 🗒
+                    Dev Posts 💻🗒
                 </Heading>
                 <VStack align="start">
                     {postList?.map((post) => {
@@ -98,11 +46,27 @@ export default function PostsRoute() {
                                 <Link
                                     to={`/posts/${formatTitleForURL(
                                         post.title
-                                    )}?id=${post.id}`}
+                                    )}`}
                                     prefetch="intent"
                                 >
                                     {post.title}
                                 </Link>
+                                <HStack>
+                                    {JSON.parse(post.tags).map(
+                                        (tag: {
+                                            id: string;
+                                            name: string;
+                                            color: string;
+                                        }) => (
+                                            <Badge
+                                                key={tag.id}
+                                                colorScheme={tag.color}
+                                            >
+                                                {tag.name}
+                                            </Badge>
+                                        )
+                                    )}
+                                </HStack>
                             </Box>
                         );
                     })}

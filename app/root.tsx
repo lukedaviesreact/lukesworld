@@ -14,7 +14,6 @@ import {
 } from '@remix-run/react';
 import { cssBundleHref } from '@remix-run/css-bundle';
 
-import { getUser } from './session.server';
 import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
 import { useContext, useEffect } from 'react';
@@ -42,13 +41,11 @@ export const links: LinksFunction = () => {
 };
 
 type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
     ENV: ReturnType<typeof getEnv>;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({
-        user: await getUser(request),
         ENV: getEnv(),
     });
 };
