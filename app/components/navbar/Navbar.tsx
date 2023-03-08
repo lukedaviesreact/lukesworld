@@ -24,11 +24,6 @@ export const NavBar = () => {
                 </Link>
                 <Link to="/">
                     <Button variant="solid">
-                        <span>Work</span>
-                    </Button>
-                </Link>
-                <Link to="/">
-                    <Button variant="solid">
                         <span>Projects</span>
                     </Button>
                 </Link>
