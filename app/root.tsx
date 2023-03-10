@@ -18,8 +18,7 @@ import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
-import { Box, ChakraProvider } from '@chakra-ui/react';
-import { theme } from './style/theme';
+import { Box, ChakraProvider, theme } from '@chakra-ui/react';
 import { NavBar } from './components/navbar/Navbar';
 
 export const meta: MetaFunction = () => ({
@@ -88,10 +87,9 @@ const Document = withEmotionCache(
                 </head>
                 <body>
                     <Box
-                        maxW={theme.breakpoints.xl}
                         margin="0 auto"
-                        paddingLeft="4"
-                        paddingRight="4"
+                        paddingLeft={theme.space[4]}
+                        paddingRight={theme.space[4]}
                     >
                         <NavBar />
 
