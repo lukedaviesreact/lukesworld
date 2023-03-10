@@ -34,14 +34,16 @@ export const getDbData = async ({
         const posts = await getPosts();
 
         return { posts };
-    } else {
-        const { data } = await addToDb({
-            client,
-            dbId,
-        });
+    }
 
+    const { data } = await addToDb({
+        client,
+        dbId,
+    });
+    if (data) {
         return { posts: data };
     }
+    return { posts: [] };
 };
 
 export const getDbPost = async ({ slug }: { slug: string }) => {

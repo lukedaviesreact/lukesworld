@@ -1,4 +1,9 @@
-import { APIErrorCode, Client, isNotionClientError } from '@notionhq/client';
+import {
+    APIErrorCode,
+    Client,
+    isFullPage,
+    isNotionClientError,
+} from '@notionhq/client';
 import { formatTitleForURL } from './';
 
 export const getPostsFromNotion = async ({
@@ -8,20 +13,33 @@ export const getPostsFromNotion = async ({
     client: Client;
     dbId: string;
 }) => {
-    let result = [];
-
     try {
         const notionDb = await client.databases.query({
             database_id: dbId,
         });
 
         if (!notionDb) return null;
-        console.log('notion data', notionDb.results[0]);
+
         const data = notionDb.results.map((entry) => {
+            if (!isFullPage(entry)) {
+                return {
+                    id: '',
+                    title: '',
+                    author: '',
+                    createdAt: '',
+                    tags: '',
+                    icon: '',
+                    cover: '',
+                    url: '',
+                    html: '',
+                    slug: '',
+                };
+            }
+
             const id = entry.id;
             const createdAt = entry.properties.Created.created_time;
             const title = entry.properties.Name.title[0].plain_text;
-            const authorId = entry.created_by.id;
+            const author = 'Luke Davies';
             const url = entry.url;
 
             let cover: string = '';
@@ -33,23 +51,28 @@ export const getPostsFromNotion = async ({
             if (entry.icon && entry.icon.type === 'emoji') {
                 icon = entry.icon.emoji;
             }
-            let tags: [] = [];
+            let tags = '';
 
             if (entry.properties.Tags.type === 'multi_select') {
-                tags = JSON.stringify(entry.properties.Tags.multi_select);
+                tags =
+                    '[' +
+                    entry.properties.Tags.multi_select
+                        .map((el) => JSON.stringify(el))
+                        .join(',') +
+                    ']';
             }
 
             return {
                 id,
                 title,
-                authorId,
+                author,
                 createdAt,
                 tags,
                 icon,
                 cover,
                 url,
                 html: '',
-                slug: formatTitleForURL(title),
+                slug: formatTitleForURL(title) || '',
             };
         });
         return data;
@@ -62,6 +85,4 @@ export const getPostsFromNotion = async ({
             }
         }
     }
-
-    return result;
 };
