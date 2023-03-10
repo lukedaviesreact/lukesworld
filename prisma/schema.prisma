@@ -41,7 +41,7 @@ model Post {
   slug      String  @id
   title     String
   id        String  @unique
-  authorId  String
+  author    String
   tags      String
   url       String
   html      String?

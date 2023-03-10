@@ -12,12 +12,19 @@ export const addToDb = async ({
     const responseArr = [];
     const notionData = await getPostsFromNotion({ client, dbId });
     const EXPIRE_MINS = 2;
-    if (!notionData) return null;
+    if (!notionData)
+        return {
+            status: 'failed',
+            msg: 'posts not added',
+            data: [],
+        };
 
-    const createPostPromises = notionData?.map((entry) =>
+    const createPostPromises = notionData.map((entry) =>
         createPost({
             ...entry,
-            expiresAt: new Date(new Date().getTime() + EXPIRE_MINS * 60000),
+            expiresAt: new Date(
+                new Date().getTime() + EXPIRE_MINS * 60000
+            ).toISOString(),
         })
     );
     try {
@@ -38,6 +45,6 @@ export const addToDb = async ({
     return {
         status: 'failed',
         msg: 'posts not added',
-        data: null,
+        data: [],
     };
 };
