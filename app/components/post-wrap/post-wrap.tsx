@@ -27,7 +27,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
         <Box>
             <StyledHeading mb={4}>
                 <Heading as="h1" fontSize={'4xl'}>
-                    {post.icon !== '' && post.icon} {post.title}
+                    {post?.icon !== '' && post.icon} {post.title}
                 </Heading>
                 <Box bg="#edf2f74f" pt="2" pb="2" pl="2">
                     <Text fontSize="sm" className="author">
