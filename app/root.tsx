@@ -12,7 +12,6 @@ import {
     Scripts,
     ScrollRestoration,
 } from '@remix-run/react';
-import { cssBundleHref } from '@remix-run/css-bundle';
 
 import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
@@ -29,7 +28,6 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => {
     return [
-        ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
         {

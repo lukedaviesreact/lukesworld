@@ -13,6 +13,7 @@ import {
     getPosts,
 } from '~/models/post.server';
 import { addToDb } from './addToDb';
+import { getPostSearchData } from './getPostSearchData';
 
 export const getDbData = async ({
     client,
@@ -32,8 +33,8 @@ export const getDbData = async ({
     const existsInDb = await checkDb();
     if (existsInDb) {
         const posts = await getPosts();
-
-        return { posts };
+        const searchData = getPostSearchData({ posts });
+        return { posts, searchData };
     }
 
     const { data } = await addToDb({
@@ -41,17 +42,17 @@ export const getDbData = async ({
         dbId,
     });
     if (data) {
-        return { posts: data };
+        const searchData = getPostSearchData({ posts: data });
+        return { posts: data, searchData };
     }
-    return { posts: [] };
+    return { posts: [], searchData: [] };
 };
 
 export const getDbPost = async ({ slug }: { slug: string }) => {
     try {
         const post = await getPost(slug);
-        if (!post) throw Error;
 
-        if (post.html !== '' || post.html === null) {
+        if (post?.html !== '' || post.html === null) {
             return { post: post };
         } else {
             const content = await NotionPageToHtml.convert(post.url, {

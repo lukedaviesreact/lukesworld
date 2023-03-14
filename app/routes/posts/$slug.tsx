@@ -11,7 +11,6 @@ type LoaderData = any;
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
     const slug = url.pathname.split('/posts/')[1];
-
     const post = await getDbPost({ slug });
 
     return json({ ...post });

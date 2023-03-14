@@ -1,26 +1,20 @@
-import {
-    Badge,
-    Box,
-    Grid,
-    GridItem,
-    Heading,
-    HStack,
-    space,
-    theme,
-    VStack,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, theme, VStack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { Client } from '@notionhq/client';
 import { Post } from '@prisma/client';
 import { json, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { Link, Outlet, useLoaderData } from '@remix-run/react';
-import { SearchBar } from '~/components/searchBar/searchBar';
+import { SearchBar, SearchDataProps } from '~/components/searchBar/searchBar';
 import { Taglist } from '~/components/taglist/Taglist';
 import { formatTitleForURL, getDbData } from '~/utils/posts';
+import { useNavigation } from '@remix-run/react';
+import { useState } from 'react';
 
 type LoaderData = {
     postList?: Post[];
+    searchData: any;
 };
+
 export const loader: LoaderFunction = async () => {
     const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
 
@@ -29,8 +23,12 @@ export const loader: LoaderFunction = async () => {
         dbId: ENV.NOTION_DATABASE_ID,
     });
 
-    return json<LoaderData>({ postList: data.posts });
+    return json<LoaderData>({
+        postList: data.posts,
+        searchData: data.searchData,
+    });
 };
+
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
     title: 'Dev Posts | Luke Davies Dev',
@@ -38,8 +36,10 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function PostsRoute() {
-    const { postList } = useLoaderData() as LoaderData;
-    console.log('POSTLIST:', postList);
+    const { postList, searchData } = useLoaderData() as LoaderData;
+    const [searchRes, setSearchRes] = useState<SearchDataProps>();
+
+    const navigation = useNavigation();
 
     const StyledLink = styled(Link)({
         width: '100%',
@@ -50,6 +50,8 @@ export default function PostsRoute() {
         },
     });
 
+    console.log({ searchRes, postList });
+
     return (
         <main>
             <Box pt={2}>
@@ -59,7 +61,16 @@ export default function PostsRoute() {
 
                 <Grid templateColumns="30% 70%" gap={6}>
                     <GridItem pt={2}>
-                        <SearchBar />
+                        {postList && (
+                            <SearchBar
+                                searchData={searchData}
+                                setSearchRes={setSearchRes}
+                            />
+                        )}
+                        {/* {navigation.state === 'loading' && (
+                            <PostListSkeleton tagCount={5} />
+                        )} */}
+
                         <VStack
                             align="start"
                             overflowY="scroll"
@@ -71,6 +82,7 @@ export default function PostsRoute() {
                                 }
                                 return (
                                     <StyledLink
+                                        key={post.id}
                                         to={`/posts/${formatTitleForURL(
                                             post.title
                                         )}`}
@@ -99,7 +111,18 @@ export default function PostsRoute() {
                     </GridItem>
                     <GridItem>
                         <Box>
-                            <Outlet />
+                            {navigation.state === 'idle' ? (
+                                <Outlet />
+                            ) : (
+                                <div>
+                                    <p>
+                                        oop looks like your the first person to
+                                        click that this week, im going to have
+                                        to actually hit the Notion API
+                                    </p>
+                                    <p>in the meantime, check this out</p>
+                                </div>
+                            )}
                         </Box>
                     </GridItem>
                 </Grid>
