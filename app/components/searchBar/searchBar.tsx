@@ -1,8 +1,5 @@
-import { Badge, Box, Input, Text } from '@chakra-ui/react';
-import { search } from '@notionhq/client/build/src/api-endpoints';
-import { Post } from '@prisma/client';
-import { useEffect, useState } from 'react';
-import { getCharMap } from '../utils/getCharMap';
+import { Box, Input } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 export interface SearchData {
     id: string;

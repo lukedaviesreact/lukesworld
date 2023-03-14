@@ -1,6 +1,5 @@
 import { Box, Button, Stack, theme } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
-import { RiArticleLine } from 'react-icons/ri';
 import styled from '@emotion/styled';
 
 export const NavBar = () => {

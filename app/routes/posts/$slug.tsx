@@ -1,9 +1,7 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
 import { json, LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PostWrap } from '~/components/post-wrap/post-wrap';
-import { Taglist } from '~/components/taglist/Taglist';
 import { getDbPost } from '~/utils/posts';
 
 type LoaderData = any;
