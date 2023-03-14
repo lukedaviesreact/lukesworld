@@ -1,4 +1,4 @@
-import { Client } from '@notionhq/client';
+import type { Client } from '@notionhq/client';
 import { createPost } from '~/models/post.server';
 import { getPostsFromNotion } from './getPostsFromNotion';
 

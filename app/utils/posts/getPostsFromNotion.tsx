@@ -1,6 +1,7 @@
+import type {
+    Client} from '@notionhq/client';
 import {
     APIErrorCode,
-    Client,
     isFullPage,
     isNotionClientError,
 } from '@notionhq/client';

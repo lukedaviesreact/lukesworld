@@ -1,4 +1,4 @@
-import { SearchData } from '../searchBar/searchBar';
+import type { SearchData } from '../searchBar/searchBar';
 
 export const getCharMap = (arr: SearchData[]) => {
     const charMap: { [key: string]: number } = {};

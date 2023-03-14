@@ -1,10 +1,6 @@
-import { Client, isFullPage } from '@notionhq/client';
+import type { Client} from '@notionhq/client';
+import { isFullPage } from '@notionhq/client';
 import NotionPageToHtml from 'notion-page-to-html';
-
-export interface Post {
-    id: string;
-    child_page?: { title: string };
-}
 
 import {
     createPost,
@@ -14,6 +10,11 @@ import {
 } from '~/models/post.server';
 import { addToDb } from './addToDb';
 import { getPostSearchData } from './getPostSearchData';
+
+export interface Post {
+    id: string;
+    child_page?: { title: string };
+}
 
 export const getDbData = async ({
     client,

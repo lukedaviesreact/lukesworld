@@ -1,10 +1,12 @@
 import { Box, Grid, GridItem, Heading, theme, VStack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { Client } from '@notionhq/client';
-import { Post } from '@prisma/client';
-import { json, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { Post } from '@prisma/client';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { Link, Outlet, useLoaderData } from '@remix-run/react';
-import { SearchBar, SearchDataProps } from '~/components/searchBar/searchBar';
+import type { SearchDataProps } from '~/components/searchBar/searchBar';
+import { SearchBar } from '~/components/searchBar/searchBar';
 import { Taglist } from '~/components/taglist/Taglist';
 import { formatTitleForURL, getDbData } from '~/utils/posts';
 import { useNavigation } from '@remix-run/react';

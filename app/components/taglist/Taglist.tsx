@@ -1,5 +1,5 @@
 import { Badge, HStack } from '@chakra-ui/react';
-import { Post } from '@prisma/client';
+import type { Post } from '@prisma/client';
 
 export const Taglist = ({ post }: { post: Post }) => {
     return (
