@@ -11,12 +11,17 @@ export function getEnv() {
         process.env.NOTION_POSTLIST_ID,
         'NOTION_POSTLIST_ID should be defined'
     );
+    invariant(
+        process.env.NOTION_DATABASE_ID,
+        'NOTION_DATABASE_ID should be defined'
+    );
 
     return {
         ADMIN_EMAIL: process.env.ADMIN_EMAIL,
         NOTION_KEY: process.env.NOTION_KEY,
         NOTION_LUKESWORLD_ID: process.env.NOTION_LUKESWORLD_ID,
         NOTION_POSTLIST_ID: process.env.NOTION_POSTLIST_ID,
+        NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID,
     };
 }
 

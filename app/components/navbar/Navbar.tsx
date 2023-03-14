@@ -1,6 +1,5 @@
 import { Box, Button, Stack, theme } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
-import { RiArticleLine } from 'react-icons/ri';
 import styled from '@emotion/styled';
 
 export const NavBar = () => {
@@ -20,11 +19,6 @@ export const NavBar = () => {
                 <Link to="/posts">
                     <Button variant="solid">
                         <span>Posts</span>
-                    </Button>
-                </Link>
-                <Link to="/">
-                    <Button variant="solid">
-                        <span>Work</span>
                     </Button>
                 </Link>
                 <Link to="/">
