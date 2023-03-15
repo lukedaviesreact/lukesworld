@@ -1,8 +1,4 @@
-import type {
-    LinksFunction,
-    LoaderFunction,
-    MetaFunction,
-} from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import {
     Links,
@@ -12,16 +8,21 @@ import {
     Scripts,
     ScrollRestoration,
 } from '@remix-run/react';
-import { cssBundleHref } from '@remix-run/css-bundle';
 
-import { getUser } from './session.server';
 import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
-import { Box, ChakraProvider } from '@chakra-ui/react';
-import { theme } from './style/theme';
-import { NavBar } from './components/navbar/Navbar';
+import { Box, ChakraProvider, theme } from '@chakra-ui/react';
+import { NavBar } from './components/nav-bar/nav-bar';
+
+import '@fontsource/nunito-sans/200.css';
+import '@fontsource/nunito-sans/300.css';
+import '@fontsource/nunito-sans/400.css';
+import '@fontsource/nunito-sans/600.css';
+import '@fontsource/nunito-sans/700.css';
+import '@fontsource/nunito-sans/800.css';
+import { Footer } from './components/footer/footer';
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -29,26 +30,12 @@ export const meta: MetaFunction = () => ({
     viewport: 'width=device-width,initial-scale=1',
 });
 
-export const links: LinksFunction = () => {
-    return [
-        ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-        {
-            rel: 'stylesheet',
-            href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-        },
-    ];
-};
-
 type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
     ENV: ReturnType<typeof getEnv>;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({
-        user: await getUser(request),
         ENV: getEnv(),
     });
 };
@@ -91,16 +78,17 @@ const Document = withEmotionCache(
                 </head>
                 <body>
                     <Box
-                        maxW={theme.breakpoints.xl}
                         margin="0 auto"
-                        paddingLeft="4"
-                        paddingRight="4"
+                        paddingLeft={theme.space[4]}
+                        paddingRight={theme.space[4]}
                     >
                         <NavBar />
 
                         <Box maxW={theme.breakpoints.lg} margin="0 auto" pt="4">
                             {children}
                         </Box>
+
+                        <Footer />
                     </Box>
 
                     <ScrollRestoration />

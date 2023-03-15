@@ -1,31 +1,97 @@
-import { Client } from '@notionhq/client';
-import { getBlockData } from '../../routes/posts/posts.utils';
+import type { Client } from '@notionhq/client';
+import { isFullPage } from '@notionhq/client';
+import NotionPageToHtml from 'notion-page-to-html';
 
-interface PostBlocks {
-    client: Client;
-    id: string;
-}
+import {
+    createPost,
+    getLatestPost,
+    getPost,
+    getPosts,
+} from '~/models/post.server';
+import { addToDb } from './addToDb';
+import { getPostSearchData } from './getPostSearchData';
 
 export interface Post {
     id: string;
     child_page?: { title: string };
 }
 
-export const getPostBlocks = async ({ client, id }: PostBlocks) => {
-    let posts;
-    let postList;
+export const getDbData = async ({
+    client,
+    dbId,
+}: {
+    client: Client;
+    dbId: string;
+}) => {
+    const checkDb = async () => {
+        const latestPost = await getLatestPost();
 
+        if (!latestPost) return false;
+
+        const expiresAt = new Date(latestPost.expiresAt).getTime();
+        const now = new Date().getTime();
+        const isValid = expiresAt - now > 0;
+
+        return isValid;
+    };
+
+    const existsInDb = await checkDb();
+    console.log('exists in db', existsInDb);
+    if (existsInDb) {
+        const posts = await getPosts();
+        const searchData = getPostSearchData({ posts });
+        return { posts, searchData };
+    }
+
+    const { data } = await addToDb({
+        client,
+        dbId,
+    });
+
+    if (data) {
+        const searchData = getPostSearchData({ posts: data });
+        return { posts: data, searchData };
+    }
+    return { posts: [], searchData: [] };
+};
+
+export const getDbPost = async ({ slug }: { slug: string }) => {
     try {
-        posts = await getBlockData(client, id);
+        const post = await getPost(slug);
+
+        if (post?.html !== '' || post.html === null) {
+            return { post: post };
+        } else {
+            const content = await NotionPageToHtml.convert(post.url, {
+                excludeCSS: true,
+                excludeMetadata: true,
+                excludeScripts: true,
+                excludeHeaderFromBody: true,
+                bodyContentOnly: true,
+            });
+
+            const updatedPost = await createPost({
+                ...post,
+                html: content.html,
+            });
+            return { post: updatedPost };
+        }
     } catch (error) {
-        throw Error('couldnt get post blocks');
+        throw new Error(`No post with that slug: ${slug} ${error}`);
     }
-    if (posts) {
-        postList = posts.map((post: Post) => ({
-            id: post.id,
-            title: post?.child_page?.title,
-        }));
+};
+
+export const formatTitleForURL = (title: string) => {
+    return title.toLowerCase().replace(/ /g, '-');
+};
+
+export const hasExpired = (date: Date) => {
+    const postDate = date.getTime();
+    const now = new Date().getTime();
+
+    if (now > postDate) {
+        return true;
     }
 
-    return { postList };
+    return false;
 };

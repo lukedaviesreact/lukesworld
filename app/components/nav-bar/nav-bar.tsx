@@ -1,30 +1,27 @@
 import { Box, Button, Stack, theme } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
-import { RiArticleLine } from 'react-icons/ri';
 import styled from '@emotion/styled';
 
 export const NavBar = () => {
     const StyledNav = styled(Box)({
-        borderBottom: `1px solid ${theme.colors.gray[300]}`,
+        borderBottom: `2px solid ${theme.colors.gray[100]}`,
         display: 'flex',
         justifyContent: 'space-between',
         padding: `${theme.space[2]} 0`,
+        maxWidth: theme.breakpoints.lg,
+        margin: '0 auto',
+        color: theme.colors.gray['600'],
     });
 
     return (
         <StyledNav>
             <Link to="/">
-                <span>LD.DEV</span>
+                <span>lukedavies.dev</span>
             </Link>
-            <Stack direction="row" spacing={6}>
+            <Stack direction="row" spacing={20}>
                 <Link to="/posts">
                     <Button variant="solid">
                         <span>Posts</span>
-                    </Button>
-                </Link>
-                <Link to="/">
-                    <Button variant="solid">
-                        <span>Work</span>
                     </Button>
                 </Link>
                 <Link to="/">
