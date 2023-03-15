@@ -30,7 +30,7 @@ export const PostCard = ({ post }: { post: Post }) => {
                 pl="2"
                 mr="2"
             >
-                {post.icon !== '' && post.icon}
+                {post?.icon !== '' && post?.icon}
                 {post.title}
 
                 <Box mt="2">
