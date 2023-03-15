@@ -1,5 +1,4 @@
-import type {
-    Client} from '@notionhq/client';
+import type { Client } from '@notionhq/client';
 import {
     APIErrorCode,
     isFullPage,
@@ -38,7 +37,9 @@ export const getPostsFromNotion = async ({
             }
 
             const id = entry.id;
+            // @ts-ignore
             const createdAt = entry.properties.Created.created_time;
+            // @ts-ignore
             const title = entry.properties.Name.title[0].plain_text;
             const author = 'Luke Davies';
             const url = entry.url;

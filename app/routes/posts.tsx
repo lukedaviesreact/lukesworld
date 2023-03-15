@@ -1,16 +1,15 @@
-import { Box, Grid, GridItem, Heading, theme, VStack } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Grid, GridItem, Heading, VStack } from '@chakra-ui/react';
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Link, Outlet, useLoaderData } from '@remix-run/react';
-import type { SearchDataProps } from '~/components/searchBar/searchBar';
-import { SearchBar } from '~/components/searchBar/searchBar';
-import { Taglist } from '~/components/taglist/Taglist';
-import { formatTitleForURL, getDbData } from '~/utils/posts';
+import { Outlet, useLoaderData } from '@remix-run/react';
+import type { SearchDataProps } from '~/components/search-bar/search-bar';
+import { SearchBar } from '~/components/search-bar/search-bar';
+import { getDbData } from '~/utils/posts';
 import { useNavigation } from '@remix-run/react';
 import { useState } from 'react';
+import { PostCard } from '~/components/post-card/post-card';
 
 type LoaderData = {
     postList?: Post[];
@@ -43,17 +42,6 @@ export default function PostsRoute() {
 
     const navigation = useNavigation();
 
-    const StyledLink = styled(Link)({
-        width: '100%',
-        color: theme.colors.gray[700],
-        transition: 'all .05s ease',
-        '&:hover': {
-            color: theme.colors.gray[900],
-        },
-    });
-
-    console.log({ searchRes, postList });
-
     return (
         <main>
             <Box pt={2}>
@@ -82,32 +70,7 @@ export default function PostsRoute() {
                                 if (!post.title || !post.id) {
                                     return <li>Invalid Post</li>;
                                 }
-                                return (
-                                    <StyledLink
-                                        key={post.id}
-                                        to={`/posts/${formatTitleForURL(
-                                            post.title
-                                        )}`}
-                                        prefetch="intent"
-                                    >
-                                        <Box
-                                            key={post.id}
-                                            shadow="md"
-                                            borderBottom={`2px solid gray.200`}
-                                            pt="4"
-                                            pb="4"
-                                            pl="2"
-                                            mr="2"
-                                        >
-                                            {post.icon !== '' && post.icon}
-                                            {post.title}
-
-                                            <Box mt="2">
-                                                <Taglist post={post} />
-                                            </Box>
-                                        </Box>
-                                    </StyledLink>
-                                );
+                                return <PostCard key={post.id} post={post} />;
                             })}
                         </VStack>
                     </GridItem>

@@ -8,4 +8,11 @@ const colors = {
     },
 };
 
-export const theme = extendTheme({ colors });
+const fonts = {
+    heading: `'Nunito Sans', sans-serif`,
+    body: `'Nunito Sans', sans-serif`,
+};
+
+export const theme = extendTheme({
+    colors,
+});

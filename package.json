@@ -41,6 +41,7 @@
         "@emotion/react": "^11.10.6",
         "@emotion/server": "^11.10.0",
         "@emotion/styled": "^11.10.6",
+        "@fontsource/nunito-sans": "^4.5.10",
         "@notionhq/client": "^2.2.1",
         "@prisma/client": "^3.14.0",
         "@remix-run/css-bundle": "^1.13.0",

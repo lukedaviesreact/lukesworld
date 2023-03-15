@@ -1,4 +1,4 @@
-import { Box, Heading, Tag, Text, theme } from '@chakra-ui/react';
+import { Box, Heading, Text, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Taglist } from '../taglist/Taglist';
