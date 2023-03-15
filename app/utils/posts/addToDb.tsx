@@ -11,6 +11,7 @@ export const addToDb = async ({
 }) => {
     const responseArr = [];
     const notionData = await getPostsFromNotion({ client, dbId });
+
     const EXPIRE_MINS = 2;
     if (!notionData)
         return {

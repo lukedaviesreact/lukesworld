@@ -1,4 +1,4 @@
-import type { Client} from '@notionhq/client';
+import type { Client } from '@notionhq/client';
 import { isFullPage } from '@notionhq/client';
 import NotionPageToHtml from 'notion-page-to-html';
 
@@ -28,10 +28,15 @@ export const getDbData = async ({
 
         if (!latestPost) return false;
 
-        return true;
+        const expiresAt = new Date(latestPost.expiresAt).getTime();
+        const now = new Date().getTime();
+        const isValid = expiresAt - now > 0;
+
+        return isValid;
     };
 
     const existsInDb = await checkDb();
+    console.log('exists in db', existsInDb);
     if (existsInDb) {
         const posts = await getPosts();
         const searchData = getPostSearchData({ posts });
@@ -42,6 +47,7 @@ export const getDbData = async ({
         client,
         dbId,
     });
+
     if (data) {
         const searchData = getPostSearchData({ posts: data });
         return { posts: data, searchData };

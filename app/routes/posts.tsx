@@ -21,7 +21,7 @@ export const loader: LoaderFunction = async () => {
 
     const data = await getDbData({
         client: NOTION_CLIENT,
-        dbId: ENV.NOTION_DATABASE_ID,
+        dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
     return json<LoaderData>({
