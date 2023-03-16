@@ -98,7 +98,7 @@ export default function Index() {
                 child={
                     <HStack align="start" gap={2} justifyContent="space-around">
                         {logoArr.map((logo, i) => (
-                            <Img key={i} src={logo} width={'150px'} />
+                            <Img key={i} src={logo} width={'120px'} />
                         ))}
                     </HStack>
                 }
