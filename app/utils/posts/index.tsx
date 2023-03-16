@@ -32,7 +32,6 @@ export const getDbData = async ({
     };
 
     const existsInDb = await checkDb();
-    console.log('existsInDb', existsInDb);
     if (existsInDb) {
         const posts = await getPosts();
         const searchData = getPostSearchData({ posts });
