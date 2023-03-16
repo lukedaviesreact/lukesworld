@@ -1,6 +1,22 @@
 import type { Client } from '@notionhq/client';
-import { createPost, Post } from '~/models/post.server';
+import { createPost } from '~/models/post.server';
 import { getPostsFromNotion } from './getPostsFromNotion';
+
+export interface NotionPost {
+    slug: string;
+    title: string;
+    id: string;
+    author: string;
+    tags: string;
+    url: string;
+    html: string | null;
+    icon: string | null;
+    cover: string | null;
+    createdAt: string;
+    expiresAt?: string | null;
+}
+
+export type NotionData = NotionPost[];
 
 const getNotionPosts = async ({
     client,
@@ -20,7 +36,10 @@ const getNotionPosts = async ({
     }
 };
 
-const addPostsToDb = async (notionData: Post[]) => {
+const addPostsToDb = async (notionData: NotionData) => {
+    if (!notionData) {
+        return;
+    }
     const EXPIRE_MINS = 2;
     const responseArr = [];
     const createPostPromises = notionData.map((entry) =>
@@ -70,4 +89,10 @@ export const addToDb = async ({
             data: responseFromDb,
         };
     }
+
+    return {
+        status: 'failed',
+        msg: 'posts not added',
+        data: [],
+    };
 };

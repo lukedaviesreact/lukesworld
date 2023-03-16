@@ -26,7 +26,7 @@ export const getDbData = async ({
     const checkDb = async () => {
         const latestPost = await getLatestPost();
 
-        if (!latestPost) return false;
+        if (!latestPost || !latestPost.expiresAt) return false;
 
         return !hasExpired(new Date(latestPost.expiresAt));
     };

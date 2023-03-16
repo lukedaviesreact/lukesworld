@@ -48,5 +48,5 @@ model Post {
   icon      String?
   cover     String?
   createdAt String
-  expiresAt String
+  expiresAt String?
 }
