@@ -1,5 +1,9 @@
 import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
-
+import cssLogo from '../assets/logos/css.png';
+import reactLogo from '../assets/logos/react.png';
+import typescriptLogo from '../assets/logos/typescript.png';
+import remixLogo from '../assets/logos/remix.png';
+import nodeLogo from '../assets/logos/node.png';
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
@@ -17,11 +21,6 @@ import {
 type LoaderData = {
     postList: Post[];
 };
-import cssLogo from '../assets/logos/css.png';
-import reactLogo from '../assets/logos/react.png';
-import typescriptLogo from '../assets/logos/typescript.png';
-import remixLogo from '../assets/logos/remix.png';
-import nodeLogo from '../assets/logos/node.png';
 
 export const loader: LoaderFunction = async () => {
     const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
