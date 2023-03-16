@@ -26,17 +26,13 @@ export const getDbData = async ({
     const checkDb = async () => {
         const latestPost = await getLatestPost();
 
-        if (!latestPost) return false;
+        if (!latestPost || !latestPost.expiresAt) return false;
 
-        const expiresAt = new Date(latestPost.expiresAt).getTime();
-        const now = new Date().getTime();
-        const isValid = expiresAt - now > 0;
-
-        return isValid;
+        return !hasExpired(new Date(latestPost.expiresAt));
     };
 
     const existsInDb = await checkDb();
-    console.log('exists in db', existsInDb);
+    console.log('existsInDb', existsInDb);
     if (existsInDb) {
         const posts = await getPosts();
         const searchData = getPostSearchData({ posts });
