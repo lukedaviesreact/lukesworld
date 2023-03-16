@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
 
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
@@ -17,6 +17,11 @@ import {
 type LoaderData = {
     postList: Post[];
 };
+import cssLogo from '../assets/logos/css.png';
+import reactLogo from '../assets/logos/react.png';
+import typescriptLogo from '../assets/logos/typescript.png';
+import remixLogo from '../assets/logos/remix.png';
+import nodeLogo from '../assets/logos/node.png';
 
 export const loader: LoaderFunction = async () => {
     const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
@@ -41,7 +46,7 @@ export const meta: MetaFunction = () => ({
 
 export default function Index() {
     const { postList } = useLoaderData() as LoaderData;
-
+    const logoArr = [cssLogo, reactLogo, typescriptLogo, remixLogo, nodeLogo];
     return (
         <main>
             <StyledHeadingWrap>
@@ -91,9 +96,11 @@ export default function Index() {
                 can do it or figure it out. Right now I'm usually
                 building with React TypeScript."
                 child={
-                    <VStack align="start">
-                        <Box>Tech </Box>
-                    </VStack>
+                    <HStack align="start" gap={2} justifyContent="space-around">
+                        {logoArr.map((logo, i) => (
+                            <Img key={i} src={logo} width={'150px'} />
+                        ))}
+                    </HStack>
                 }
                 subtext="Clean. yeah, not simple. Clean"
             />
