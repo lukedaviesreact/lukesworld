@@ -26,7 +26,6 @@ const getNotionPosts = async ({
     dbId: string;
 }) => {
     try {
-        console.log('getting posts from notion');
         const notionData = await getPostsFromNotion({ client, dbId });
         return notionData;
     } catch (err) {
@@ -52,7 +51,6 @@ const addPostsToDb = async (notionData: NotionData) => {
     );
 
     try {
-        console.log('adding to database');
         for await (const post of createPostPromises) {
             responseArr.push(post);
         }
@@ -81,8 +79,6 @@ export const addToDb = async ({
     const responseFromDb = notionData && (await addPostsToDb(notionData));
 
     if (responseFromDb && responseFromDb.length >= 1) {
-        console.log('response from db', responseFromDb);
-
         return {
             status: 'success',
             msg: 'posts added.',
