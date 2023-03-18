@@ -2,7 +2,6 @@ import { Box, Input } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 export interface SearchData {
-    id: string;
     name: string;
     color?: string;
 }
@@ -33,7 +32,7 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
 
         if (key === 'Backspace' && value.length <= 0) {
             setSearchRes(initialData);
-        } else {
+        } else if (value.length >= 2) {
             const filteredAuthors = searchData.authors.filter((item) =>
                 item.name.toLowerCase().includes(value)
             );
@@ -53,7 +52,7 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     };
 
     return (
-        <Box mb={6} mr={2}>
+        <Box mb={2} mr={2}>
             <Input
                 placeholder="Filter"
                 size="md"
