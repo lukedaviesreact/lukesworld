@@ -11,6 +11,7 @@ import { useNavigation } from '@remix-run/react';
 import { useState } from 'react';
 import { PostCard } from '~/components/post-card/post-card';
 import { filterByTag } from '~/utils/filter-posts/filter-by-tag';
+import { filterByTitle } from '~/utils/filter-posts/filter-by-title';
 
 type LoaderData = {
     postList?: Post[];
@@ -46,6 +47,14 @@ export default function PostsRoute() {
         postList,
     });
 
+    const postsFilteredBySearchTitle = filterByTitle({
+        searchResTitleArr: searchRes?.titles,
+        postList,
+    });
+
+    console.log('searchRes', searchRes);
+
+    console.log('postsFilteredBySearchTag', postsFilteredBySearchTag);
     console.log('postsFilteredBySearchTag', postsFilteredBySearchTag);
 
     return (
@@ -72,7 +81,7 @@ export default function PostsRoute() {
                             overflowY="scroll"
                             maxH="calc(100vh - 200px)"
                         >
-                            {postsFilteredBySearchTag?.map((post) => {
+                            {postsFilteredBySearchTitle?.map((post) => {
                                 if (!post.title || !post.id) {
                                     return <li>Invalid Post</li>;
                                 }
