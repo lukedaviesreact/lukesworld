@@ -1,20 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import { useEffect } from 'react';
-
-export interface SearchData {
-    name: string;
-    color?: string;
-}
-export interface SearchDataProps {
-    authors: SearchData[];
-    tags: SearchData[];
-    titles: SearchData[];
-}
-
-export interface SearchBarProps {
-    searchData: SearchDataProps;
-    setSearchRes: (searchRes: SearchDataProps) => void;
-}
+import { SearchBarProps } from './search-bar.d';
 
 export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     const initialData = {
