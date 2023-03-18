@@ -1,5 +1,4 @@
 import type { Client } from '@notionhq/client';
-import { isFullPage } from '@notionhq/client';
 import NotionPageToHtml from 'notion-page-to-html';
 
 import {

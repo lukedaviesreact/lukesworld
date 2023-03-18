@@ -1,4 +1,4 @@
-import { Box, theme } from '@chakra-ui/react';
+import { Box, Card, CardBody, Heading, Stack, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link } from '@remix-run/react';
@@ -14,29 +14,24 @@ export const PostCard = ({ post }: { post: Post }) => {
             color: theme.colors.gray[900],
         },
     });
-
     return (
         <StyledLink
             key={post.id}
             to={`/posts/${formatTitleForURL(post.title)}`}
             prefetch="intent"
         >
-            <Box
-                key={post.id}
-                shadow="md"
-                borderBottom={`2px solid gray.200`}
-                pt="4"
-                pb="4"
-                pl="2"
-                mr="2"
-            >
-                {post?.icon !== '' && post?.icon}
-                {post.title}
-
-                <Box mt="2">
-                    <Taglist post={post} />
-                </Box>
-            </Box>
+            <Card maxW="sm">
+                <CardBody>
+                    <Stack spacing="3">
+                        <Heading size={'sm'}>
+                            {post?.icon !== '' && post?.icon} {post.title}
+                        </Heading>
+                        <Box mt="2">
+                            <Taglist post={post} />
+                        </Box>
+                    </Stack>
+                </CardBody>
+            </Card>
         </StyledLink>
     );
 };
