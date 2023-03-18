@@ -79,7 +79,7 @@ export default function Index() {
                     <HStack align="start">
                         {postList?.slice(0, 3).map((post) => {
                             if (!post.title || !post.id) {
-                                return <li>Invalid Post</li>;
+                                return <li key="invalid-post">Invalid Post</li>;
                             }
                             return <PostCard key={post.id} post={post} />;
                         })}

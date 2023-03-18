@@ -1,17 +1,13 @@
-import { Post } from '@prisma/client';
-import { SearchData } from '~/components/search-bar/search-bar';
+import type { Post } from '@prisma/client';
+import type { SearchData } from '~/components/search-bar/search-bar';
 
 export const filterByTitle = ({
     searchResTitleArr,
     postList,
 }: {
-    searchResTitleArr: SearchData[] | undefined;
-    postList: Post[] | undefined;
+    searchResTitleArr: SearchData[];
+    postList: Post[];
 }) => {
-    if (!searchResTitleArr || !postList) {
-        return [];
-    }
-
     const searchResTitles = searchResTitleArr.map((tag) => tag.name);
 
     const postTitleArr = postList.map((post) => {

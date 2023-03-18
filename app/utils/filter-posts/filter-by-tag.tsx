@@ -1,5 +1,5 @@
-import { Post } from '@prisma/client';
-import { SearchData } from '~/components/search-bar/search-bar';
+import type { Post } from '@prisma/client';
+import type { SearchData } from '~/components/search-bar/search-bar';
 
 interface Tag {
     name: string;
@@ -10,12 +10,9 @@ export const filterByTag = ({
     searchResTagArr,
     postList,
 }: {
-    searchResTagArr: SearchData[] | undefined;
-    postList: Post[] | undefined;
+    searchResTagArr: SearchData[];
+    postList: Post[];
 }) => {
-    if (!searchResTagArr || !postList) {
-        return [];
-    }
     const searchResTags = searchResTagArr.map((tag) => tag.name);
 
     const postTagArr = postList.map((post) => {
