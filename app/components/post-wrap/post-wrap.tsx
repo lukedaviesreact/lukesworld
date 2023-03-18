@@ -1,6 +1,7 @@
-import { Box, Heading, Text, theme } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
+import { Link } from '@remix-run/react';
 import { Taglist } from '../taglist/Taglist';
 
 export const PostWrap = ({ post }: { post: Post }) => {
@@ -23,24 +24,44 @@ export const PostWrap = ({ post }: { post: Post }) => {
         },
     });
 
+    const StyledMeta = styled(Box)({
+        backgroundColor: '#edf2f74f',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+    });
+
     return (
         <Box>
             <StyledHeading mb={4}>
                 <Heading as="h1" fontSize={'4xl'}>
                     {post?.icon !== '' && post.icon} {post.title}
                 </Heading>
-                <Box bg="#edf2f74f" pt="2" pb="2" pl="2">
-                    <Text fontSize="sm" className="author">
-                        {post.author ? post.author : 'No author set'}
-                    </Text>
-                    <div className="taglist-wrap">
-                        <Taglist post={post} />
-                    </div>
+                <StyledMeta p={'2'}>
+                    <Box>
+                        <Text fontSize="sm" className="author">
+                            {post.author ? post.author : 'No author set'}
+                        </Text>
+                        <div className="taglist-wrap">
+                            <Taglist post={post} />
+                        </div>
 
-                    <Text fontSize="sm">
-                        {new Date('2023-03-08T01:36:00.000Z').toDateString()}
-                    </Text>
-                </Box>
+                        <Text fontSize="sm">
+                            {new Date(
+                                '2023-03-08T01:36:00.000Z'
+                            ).toDateString()}
+                        </Text>
+                    </Box>
+
+                    <Box display={['block', 'block', 'none']}>
+                        <Link to="/posts" prefetch="intent">
+                            <Button variant="outline">
+                                <span>Back 👈</span>
+                            </Button>
+                        </Link>
+                    </Box>
+                </StyledMeta>
             </StyledHeading>
             <StyledTextWrap
                 dangerouslySetInnerHTML={{ __html: post.html || '' }}

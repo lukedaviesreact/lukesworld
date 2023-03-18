@@ -20,7 +20,7 @@ export const PostCard = ({ post }: { post: Post }) => {
             to={`/posts/${formatTitleForURL(post.title)}`}
             prefetch="intent"
         >
-            <Card maxW="sm">
+            <Card>
                 <CardBody>
                     <Stack spacing="3">
                         <Heading size={'sm'}>

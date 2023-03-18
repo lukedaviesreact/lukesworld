@@ -1,5 +1,5 @@
 import type { Post } from '@prisma/client';
-import type { SearchDataProps } from '~/components/search-bar/search-bar';
+import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
 import { filterByTag } from './filter-by-tag';
 import { filterByTitle } from './filter-by-title';
 

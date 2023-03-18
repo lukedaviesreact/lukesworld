@@ -15,16 +15,16 @@ export const NavBar = () => {
 
     return (
         <StyledNav>
-            <Link to="/">
+            <Link to="/" prefetch="intent">
                 <span>lukedavies.dev</span>
             </Link>
             <Stack direction="row" spacing={20}>
-                <Link to="/posts">
+                <Link to="/posts" prefetch="intent">
                     <Button variant="solid">
                         <span>Posts</span>
                     </Button>
                 </Link>
-                <Link to="/">
+                <Link to="/" prefetch="intent">
                     <Button variant="solid">
                         <span>Projects</span>
                     </Button>
