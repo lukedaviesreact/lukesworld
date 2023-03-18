@@ -1,19 +1,16 @@
-import { Box, Grid, GridItem, Heading, VStack, Text } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
-import type { SearchDataProps } from '~/components/search-bar/search-bar';
-import { SearchBar } from '~/components/search-bar/search-bar';
 import { getDbData } from '~/utils/posts';
-import { useState } from 'react';
-import { PostCard } from '~/components/post-card/post-card';
-import { filterPosts } from '~/utils/filter-posts';
+import { PostList } from '~/components/post-list/post-list';
+import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
 
 type LoaderData = {
     postList?: Post[];
-    searchData: any;
+    searchData: SearchDataProps;
 };
 
 export const loader: LoaderFunction = async () => {
@@ -26,6 +23,7 @@ export const loader: LoaderFunction = async () => {
 
     return json<LoaderData>({
         postList: data.posts,
+        // @ts-ignore
         searchData: data.searchData,
     });
 };
@@ -38,45 +36,35 @@ export const meta: MetaFunction = () => ({
 
 export default function PostsRoute() {
     const { postList, searchData } = useLoaderData() as LoaderData;
-    const [searchRes, setSearchRes] = useState<SearchDataProps>();
-    console.time('filter posts');
-    const filteredPosts = filterPosts({
-        searchRes: searchRes,
-        postList: postList,
-    });
-    console.timeEnd('filter posts');
+
     return (
         <main>
             <Box pt={2}>
-                <Heading as="h1" size="lg" mb={'2'}>
-                    Dev Posts 💻🗒
-                </Heading>
+                {/* <Heading as="h1" size="lg" mb={'2'}>
+                    Dev Posts 💻
+                </Heading> */}
 
-                <Grid templateColumns="30% 70%" gap={6}>
+                <Grid
+                    templateColumns={['0% 100%', '0% 100%', '30% 70%']}
+                    gap={[0, 0, 6]}
+                >
                     <GridItem pt={2}>
-                        {postList && (
-                            <SearchBar
-                                searchData={searchData}
-                                setSearchRes={setSearchRes}
-                            />
-                        )}
-                        <Text color="gray.600" fontSize={'sm'} pb={2} pl={1}>
-                            Search by title or category tag
-                        </Text>
-                        <VStack
-                            align="start"
-                            overflowY="scroll"
-                            maxH="calc(100vh - 200px)"
+                        <Heading
+                            as="h1"
+                            size="lg"
+                            mb={'2'}
+                            display={['none', 'none', 'block']}
                         >
-                            {filteredPosts?.map((post) => {
-                                if (!post.title || !post.id) {
-                                    return (
-                                        <li key="invalid-post">Invalid Post</li>
-                                    );
-                                }
-                                return <PostCard key={post.id} post={post} />;
-                            })}
-                        </VStack>
+                            Dev Posts 💻
+                        </Heading>
+                        <Box display={['none', 'none', 'block']}>
+                            {postList && (
+                                <PostList
+                                    postList={postList}
+                                    searchData={searchData}
+                                />
+                            )}
+                        </Box>
                     </GridItem>
                     <GridItem>
                         <Box>

@@ -1,7 +1,8 @@
+import { Box } from '@chakra-ui/react';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useNavigate } from '@remix-run/react';
 import { PostWrap } from '~/components/post-wrap/post-wrap';
 import { getDbPost } from '~/utils/posts';
 
@@ -22,9 +23,11 @@ export default function PostRoute() {
         post: Post;
     } = useLoaderData() as LoaderData;
 
+    const navigate = useNavigate();
+
     return (
-        <main>
+        <Box>
             <PostWrap post={post} />
-        </main>
+        </Box>
     );
 }

@@ -1,5 +1,5 @@
 import type { Post } from '@prisma/client';
-import type { SearchData } from '~/components/search-bar/search-bar';
+import type { SearchData } from '~/components/search-bar/search-bar.d';
 
 interface Tag {
     name: string;
