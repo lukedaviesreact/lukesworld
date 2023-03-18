@@ -10,6 +10,7 @@ import { getDbData } from '~/utils/posts';
 import { useNavigation } from '@remix-run/react';
 import { useState } from 'react';
 import { PostCard } from '~/components/post-card/post-card';
+import { filterByTag } from '~/utils/filter-posts/filter-by-tag';
 
 type LoaderData = {
     postList?: Post[];
@@ -40,7 +41,12 @@ export default function PostsRoute() {
     const { postList, searchData } = useLoaderData() as LoaderData;
     const [searchRes, setSearchRes] = useState<SearchDataProps>();
 
-    const navigation = useNavigation();
+    const postsFilteredBySearchTag = filterByTag({
+        searchResTagArr: searchRes?.tags,
+        postList,
+    });
+
+    console.log('postsFilteredBySearchTag', postsFilteredBySearchTag);
 
     return (
         <main>
@@ -66,7 +72,7 @@ export default function PostsRoute() {
                             overflowY="scroll"
                             maxH="calc(100vh - 200px)"
                         >
-                            {postList?.map((post) => {
+                            {postsFilteredBySearchTag?.map((post) => {
                                 if (!post.title || !post.id) {
                                     return <li>Invalid Post</li>;
                                 }
@@ -76,18 +82,7 @@ export default function PostsRoute() {
                     </GridItem>
                     <GridItem>
                         <Box>
-                            {navigation.state === 'idle' ? (
-                                <Outlet />
-                            ) : (
-                                <div>
-                                    <p>
-                                        oop looks like your the first person to
-                                        click that this week, im going to have
-                                        to actually hit the Notion API
-                                    </p>
-                                    <p>in the meantime, check this out</p>
-                                </div>
-                            )}
+                            <Outlet />
                         </Box>
                     </GridItem>
                 </Grid>

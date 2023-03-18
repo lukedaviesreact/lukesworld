@@ -2,7 +2,6 @@ import { Box, Input } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 export interface SearchData {
-    id: string;
     name: string;
     color?: string;
 }

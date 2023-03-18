@@ -46,6 +46,7 @@ export const meta: MetaFunction = () => ({
 export default function Index() {
     const { postList } = useLoaderData() as LoaderData;
     const logoArr = [cssLogo, reactLogo, typescriptLogo, remixLogo, nodeLogo];
+
     return (
         <main>
             <StyledHeadingWrap>
@@ -97,7 +98,16 @@ export default function Index() {
                 child={
                     <HStack align="start" gap={2} justifyContent="space-around">
                         {logoArr.map((logo, i) => (
-                            <Img key={i} src={logo} width={'120px'} />
+                            <Img
+                                key={i}
+                                src={logo}
+                                width={'120px'}
+                                htmlWidth={'120px'}
+                                height={'120px'}
+                                htmlHeight={'120px'}
+                                loading="lazy"
+                                alt={'logos of technologies i use'}
+                            />
                         ))}
                     </HStack>
                 }
