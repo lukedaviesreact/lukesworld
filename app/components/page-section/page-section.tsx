@@ -1,18 +1,20 @@
 import { Text, Button } from '@chakra-ui/react';
+import { Link } from '@remix-run/react';
 
 import {
     StyledButtonWrap,
     StyledHeading,
     StyledHeadingWrap,
-    StyledLatestPostsWrap,
+    StyledPageSectionWrap,
     StyledSubline,
 } from './page-section.styled';
 
 interface PageSectionProps {
     heading: string;
-    subheading: string;
+    subheading?: string;
     child: JSX.Element;
-    subtext: string;
+    subtext?: string;
+    id?: string;
     buttonLink?: string;
     buttonLabel?: string;
 }
@@ -22,30 +24,38 @@ export const PageSection = ({
     subheading,
     child,
     subtext,
+    id,
     buttonLink,
     buttonLabel,
 }: PageSectionProps) => {
     return (
-        <StyledLatestPostsWrap>
+        <StyledPageSectionWrap id={id ? id : ''}>
             <StyledHeadingWrap>
                 <StyledHeading as="h2" size="lg" color="gray.700">
                     {heading}
                 </StyledHeading>
-                <Text fontSize={'sm'} color="gray.600">
-                    {subheading}
-                </Text>
+                {subheading ? (
+                    <Text fontSize={'sm'} color="gray.600">
+                        {subheading}
+                    </Text>
+                ) : null}
             </StyledHeadingWrap>
 
             {child}
 
             {buttonLink && buttonLabel && (
                 <StyledButtonWrap>
-                    <Button colorScheme={'gray'}>There's more</Button>
+                    <Link to={buttonLink} prefetch="intent">
+                        <Button colorScheme={'purple'}>There's more</Button>
+                    </Link>
                 </StyledButtonWrap>
             )}
-            <StyledSubline>
-                <Text fontSize={'xs'}>{subtext}</Text>
-            </StyledSubline>
-        </StyledLatestPostsWrap>
+
+            {subtext && (
+                <StyledSubline>
+                    <Text fontSize={'xs'}>{subtext}</Text>
+                </StyledSubline>
+            )}
+        </StyledPageSectionWrap>
     );
 };

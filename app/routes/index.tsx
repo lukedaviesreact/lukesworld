@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, Img, Text } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -17,6 +17,7 @@ import {
     StyledHeadline,
     StyledSubline,
 } from './home.styled';
+import { SocialLinks } from '~/components/social-links/social-links';
 
 type LoaderData = {
     postList: Post[];
@@ -34,6 +35,35 @@ export const loader: LoaderFunction = async () => {
         postList: data.posts,
     });
 };
+
+// export const action: ActionFunction = async ({ request }) => {
+//     const formData = await request.formData();
+//     const name = formData.get('name');
+//     const number = formData.get('phone');
+//     const message = formData.get('message');
+
+//     // const sgMail = require('@sendgrid/mail');
+//     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//     // const msg = {
+//     //     to: 'lukedaviesweb@gmail.com', // Change to your recipient
+//     //     from: 'luke@lukedavies.dev', // Change to your verified sender
+//     //     subject: 'Sending with SendGrid is Fun',
+//     //     text: 'and easy to do anywhere, even with Node.js',
+//     //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+//     // };
+//     // sgMail
+//     //     .send(msg)
+//     //     .then(() => {
+//     //         console.log('Email sent');
+//     //     })
+//     //     .catch((error: any) => {
+//     //         console.error(error);
+//     //     });
+
+//     console.log({ name, number, message });
+
+//     return json({});
+// };
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -63,6 +93,7 @@ export default function Index() {
                         >
                             I'm a software engineer, specialising in Javascript.
                         </Heading>
+                        <SocialLinks />
                     </Box>
                 </StyledHeadline>
                 <StyledSubline>
@@ -101,10 +132,10 @@ export default function Index() {
                             <Img
                                 key={i}
                                 src={logo}
-                                width={'120px'}
-                                htmlWidth={'120px'}
-                                height={'120px'}
-                                htmlHeight={'120px'}
+                                width={'90px'}
+                                htmlWidth={'90px'}
+                                height={'90px'}
+                                htmlHeight={'90px'}
                                 loading="lazy"
                                 alt={'logos of technologies i use'}
                             />
@@ -114,17 +145,12 @@ export default function Index() {
                 subtext="Clean. yeah, not simple. Clean"
             />
 
-            <PageSection
-                heading="Links and socials"
-                subheading="Not really sure what to put here. Add me on LinkedIn?
-                Like and Subscribe? 🤷‍♂️"
-                child={
-                    <VStack align="start">
-                        <Box>Socials </Box>
-                    </VStack>
-                }
-                subtext="I like to keep things clean"
-            />
+            {/* <PageSection
+                heading="Contact me directly"
+                subheading="If you're not into the whole social media thing"
+                child={<HomePageContactForm />}
+                id="contact"
+            /> */}
         </main>
     );
 }

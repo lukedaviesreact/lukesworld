@@ -1,6 +1,8 @@
-import { Box, Button, Stack, theme } from '@chakra-ui/react';
-import { Link } from '@remix-run/react';
+import { Box, theme } from '@chakra-ui/react';
+
 import styled from '@emotion/styled';
+import { NavLinks } from './nav-links';
+import { NavLogo } from './nav-logo';
 
 export const NavBar = () => {
     const StyledNav = styled(Box)({
@@ -11,25 +13,16 @@ export const NavBar = () => {
         maxWidth: theme.breakpoints.lg,
         margin: '0 auto',
         color: theme.colors.gray['600'],
+        position: 'sticky',
+        top: 0,
+        backgroundColor: theme.colors.white,
+        zIndex: 1,
     });
 
     return (
         <StyledNav>
-            <Link to="/" prefetch="intent">
-                <span>lukedavies.dev</span>
-            </Link>
-            <Stack direction="row" spacing={20}>
-                <Link to="/posts" prefetch="intent">
-                    <Button variant="solid">
-                        <span>Posts</span>
-                    </Button>
-                </Link>
-                <Link to="/" prefetch="intent">
-                    <Button variant="solid">
-                        <span>Projects</span>
-                    </Button>
-                </Link>
-            </Stack>
+            <NavLogo />
+            <NavLinks />
         </StyledNav>
     );
 };

@@ -1,6 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { SearchBarProps } from './search-bar.d';
+import type { SearchBarProps } from './search-bar.d';
 
 export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     const initialData = {
@@ -13,7 +13,7 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     }, []);
 
     const handleInputChange = (e: any) => {
-        const value = e.target.value;
+        const value = e.target.value.toLowerCase();
         const key = e.code;
 
         if (key === 'Backspace' && value.length <= 0) {

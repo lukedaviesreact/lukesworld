@@ -1,7 +1,7 @@
 import { Box, Heading, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const StyledLatestPostsWrap = styled(Box)({
+export const StyledPageSectionWrap = styled(Box)({
     padding: `${theme.space['16']} 0`,
     borderBottom: `1px solid ${theme.colors.gray[100]}`,
 });
