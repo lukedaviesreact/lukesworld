@@ -10,9 +10,9 @@ export const NavLinks = ({ size }: { size?: 'sm' }) => {
             <Link to="/" prefetch="intent">
                 <Text>Projects</Text>
             </Link>
-            <Link to="/#contact" prefetch="intent">
+            {/* <Link to="/#contact" prefetch="intent">
                 <Text>Contact</Text>
-            </Link>
+            </Link> */}
         </Stack>
     );
 };
