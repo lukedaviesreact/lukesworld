@@ -1,6 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { SearchBarProps } from './search-bar.d';
+import type { SearchBarProps } from './search-bar.d';
 
 export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     const initialData = {

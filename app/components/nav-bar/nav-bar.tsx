@@ -1,5 +1,5 @@
-import { Box, Button, Stack, theme, Text, background } from '@chakra-ui/react';
-import { Link } from '@remix-run/react';
+import { Box, theme } from '@chakra-ui/react';
+
 import styled from '@emotion/styled';
 import { NavLinks } from './nav-links';
 import { NavLogo } from './nav-logo';

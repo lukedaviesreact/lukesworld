@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { Client } from '@notionhq/client';
 import { Post } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
@@ -33,14 +33,6 @@ export default function PostIndexRoute() {
     console.log('postlist', postList);
     return (
         <main>
-            <Heading
-                as="h1"
-                size="lg"
-                mb={'2'}
-                display={['block', 'block', 'none']}
-            >
-                Dev Posts 💻
-            </Heading>
             <Box display={['block', 'block', 'none']}>
                 {postList && (
                     <PostList postList={postList} searchData={searchData} />

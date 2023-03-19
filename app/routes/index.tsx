@@ -1,16 +1,4 @@
-import {
-    Box,
-    Button,
-    FormControl,
-    FormHelperText,
-    FormLabel,
-    Heading,
-    HStack,
-    Img,
-    Input,
-    Text,
-    VStack,
-} from '@chakra-ui/react';
+import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -18,13 +6,9 @@ import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
-import type {
-    ActionFunction,
-    LoaderFunction,
-    MetaFunction,
-} from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Form, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
@@ -47,39 +31,39 @@ export const loader: LoaderFunction = async () => {
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
-    // const sgMail = require('@sendgrid/mail');
-    // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    // const msg = {
-    //     to: 'lukedaviesweb@gmail.com', // Change to your recipient
-    //     from: 'luke@lukedavies.dev', // Change to your verified sender
-    //     subject: 'Sending with SendGrid is Fun',
-    //     text: 'and easy to do anywhere, even with Node.js',
-    //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-    // };
-    // sgMail
-    //     .send(msg)
-    //     .then(() => {
-    //         console.log('Email sent');
-    //     })
-    //     .catch((error: any) => {
-    //         console.error(error);
-    //     });
-
     return json<LoaderData>({
         postList: data.posts,
     });
 };
 
-export const action: ActionFunction = async ({ request }) => {
-    const formData = await request.formData();
-    const name = formData.get('name');
-    const number = formData.get('phone');
-    const message = formData.get('message');
+// export const action: ActionFunction = async ({ request }) => {
+//     const formData = await request.formData();
+//     const name = formData.get('name');
+//     const number = formData.get('phone');
+//     const message = formData.get('message');
 
-    console.log({ name, number, message });
+//     // const sgMail = require('@sendgrid/mail');
+//     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//     // const msg = {
+//     //     to: 'lukedaviesweb@gmail.com', // Change to your recipient
+//     //     from: 'luke@lukedavies.dev', // Change to your verified sender
+//     //     subject: 'Sending with SendGrid is Fun',
+//     //     text: 'and easy to do anywhere, even with Node.js',
+//     //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+//     // };
+//     // sgMail
+//     //     .send(msg)
+//     //     .then(() => {
+//     //         console.log('Email sent');
+//     //     })
+//     //     .catch((error: any) => {
+//     //         console.error(error);
+//     //     });
 
-    return json({});
-};
+//     console.log({ name, number, message });
+
+//     return json({});
+// };
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -172,12 +156,12 @@ export default function Index() {
                 subtext="I like to keep things clean"
             />
 
-            <PageSection
+            {/* <PageSection
                 heading="Contact me directly"
                 subheading="If you're not into the whole social media thing"
                 child={<HomePageContactForm />}
                 id="contact"
-            />
+            /> */}
         </main>
     );
 }

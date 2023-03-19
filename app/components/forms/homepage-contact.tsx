@@ -1,4 +1,4 @@
-import { ChevronRightIcon, PhoneIcon } from '@chakra-ui/icons';
+import { PhoneIcon } from '@chakra-ui/icons';
 import {
     Box,
     Button,
