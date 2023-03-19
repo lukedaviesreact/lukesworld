@@ -1,4 +1,16 @@
-import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    FormControl,
+    FormHelperText,
+    FormLabel,
+    Heading,
+    HStack,
+    Img,
+    Input,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -6,9 +18,13 @@ import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type {
+    ActionFunction,
+    LoaderFunction,
+    MetaFunction,
+} from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Form, useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
@@ -17,6 +33,7 @@ import {
     StyledHeadline,
     StyledSubline,
 } from './home.styled';
+import { HomePageContactForm } from '~/components/forms/homepage-contact';
 
 type LoaderData = {
     postList: Post[];
@@ -30,9 +47,38 @@ export const loader: LoaderFunction = async () => {
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
+    // const sgMail = require('@sendgrid/mail');
+    // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    // const msg = {
+    //     to: 'lukedaviesweb@gmail.com', // Change to your recipient
+    //     from: 'luke@lukedavies.dev', // Change to your verified sender
+    //     subject: 'Sending with SendGrid is Fun',
+    //     text: 'and easy to do anywhere, even with Node.js',
+    //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    // };
+    // sgMail
+    //     .send(msg)
+    //     .then(() => {
+    //         console.log('Email sent');
+    //     })
+    //     .catch((error: any) => {
+    //         console.error(error);
+    //     });
+
     return json<LoaderData>({
         postList: data.posts,
     });
+};
+
+export const action: ActionFunction = async ({ request }) => {
+    const formData = await request.formData();
+    const name = formData.get('name');
+    const number = formData.get('phone');
+    const message = formData.get('message');
+
+    console.log({ name, number, message });
+
+    return json({});
 };
 
 export const meta: MetaFunction = () => ({
@@ -101,10 +147,10 @@ export default function Index() {
                             <Img
                                 key={i}
                                 src={logo}
-                                width={'120px'}
-                                htmlWidth={'120px'}
-                                height={'120px'}
-                                htmlHeight={'120px'}
+                                width={'90px'}
+                                htmlWidth={'90px'}
+                                height={'90px'}
+                                htmlHeight={'90px'}
                                 loading="lazy"
                                 alt={'logos of technologies i use'}
                             />
@@ -124,6 +170,13 @@ export default function Index() {
                     </VStack>
                 }
                 subtext="I like to keep things clean"
+            />
+
+            <PageSection
+                heading="Contact me directly"
+                subheading="If you're not into the whole social media thing"
+                child={<HomePageContactForm />}
+                id="contact"
             />
         </main>
     );

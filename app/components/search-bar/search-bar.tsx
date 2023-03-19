@@ -13,7 +13,7 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     }, []);
 
     const handleInputChange = (e: any) => {
-        const value = e.target.value;
+        const value = e.target.value.toLowerCase();
         const key = e.code;
 
         if (key === 'Backspace' && value.length <= 0) {

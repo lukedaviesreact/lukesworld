@@ -56,7 +56,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
 
                     <Box display={['block', 'block', 'none']}>
                         <Link to="/posts" prefetch="intent">
-                            <Button variant="outline">
+                            <Button variant="outline" colorScheme={'purple'}>
                                 <span>Back 👈</span>
                             </Button>
                         </Link>
