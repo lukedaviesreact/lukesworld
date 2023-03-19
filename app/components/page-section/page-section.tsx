@@ -1,4 +1,5 @@
 import { Text, Button } from '@chakra-ui/react';
+import { Link } from '@remix-run/react';
 
 import {
     StyledButtonWrap,
@@ -44,7 +45,9 @@ export const PageSection = ({
 
             {buttonLink && buttonLabel && (
                 <StyledButtonWrap>
-                    <Button colorScheme={'purple'}>There's more</Button>
+                    <Link to={buttonLink} prefetch="intent">
+                        <Button colorScheme={'purple'}>There's more</Button>
+                    </Link>
                 </StyledButtonWrap>
             )}
 

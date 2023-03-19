@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Img, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, Img, Text } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -17,7 +17,7 @@ import {
     StyledHeadline,
     StyledSubline,
 } from './home.styled';
-import { HomePageContactForm } from '~/components/forms/homepage-contact';
+import { SocialLinks } from '~/components/social-links/social-links';
 
 type LoaderData = {
     postList: Post[];
@@ -93,6 +93,7 @@ export default function Index() {
                         >
                             I'm a software engineer, specialising in Javascript.
                         </Heading>
+                        <SocialLinks />
                     </Box>
                 </StyledHeadline>
                 <StyledSubline>
@@ -142,18 +143,6 @@ export default function Index() {
                     </HStack>
                 }
                 subtext="Clean. yeah, not simple. Clean"
-            />
-
-            <PageSection
-                heading="Links and socials"
-                subheading="Not really sure what to put here. Add me on LinkedIn?
-                Like and Subscribe? 🤷‍♂️"
-                child={
-                    <VStack align="start">
-                        <Box>Socials </Box>
-                    </VStack>
-                }
-                subtext="I like to keep things clean"
             />
 
             {/* <PageSection
