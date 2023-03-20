@@ -24,8 +24,29 @@ CREATE TABLE "Note" (
     CONSTRAINT "Note_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Post" (
+    "slug" TEXT NOT NULL PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "tags" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    "seoTitle" TEXT NOT NULL DEFAULT '',
+    "seoDescription" TEXT NOT NULL DEFAULT '',
+    "excerpt" TEXT NOT NULL DEFAULT '',
+    "html" TEXT,
+    "icon" TEXT,
+    "cover" TEXT,
+    "createdAt" TEXT NOT NULL,
+    "expiresAt" TEXT
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Password_userId_key" ON "Password"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Post_id_key" ON "Post"("id");
