@@ -11,8 +11,9 @@ import {
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
-import { Link } from '@remix-run/react';
+import { Link, useNavigation } from '@remix-run/react';
 import { formatTitleForURL } from '~/utils/posts';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
 
@@ -31,7 +32,16 @@ export const PostCard = ({
             color: theme.colors.gray[900],
         },
     });
+    const navigation = useNavigation();
 
+    const isPostLoading = (post: Post) => {
+        return (
+            navigation.state === 'loading' &&
+            navigation.location.pathname.includes(
+                post.title.toLowerCase().replace(/\ /g, '-')
+            )
+        );
+    };
     return (
         <StyledLink
             key={post.id}
@@ -75,6 +85,8 @@ export const PostCard = ({
                                 {post.excerpt}
                             </Text>
                         ) : null}
+
+                        {isPostLoading(post) && <LoadingSpinner />}
                     </Stack>
                 </CardBody>
             </Card>

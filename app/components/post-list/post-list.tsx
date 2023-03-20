@@ -1,17 +1,21 @@
-import { VStack, Text } from '@chakra-ui/react';
-import { Post } from '@prisma/client';
+import { VStack, Text, theme } from '@chakra-ui/react';
+import type { Post } from '@prisma/client';
+import { useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import { filterPosts } from '~/utils/filter-posts';
 import { PostCard } from '../post-card/post-card';
 import { SearchBar } from '../search-bar/search-bar';
 import type { SearchDataProps } from '../search-bar/search-bar.d';
 
-interface PostListProps {
+type LoaderData = {
+    postList?: Post[];
     searchData: SearchDataProps;
-    postList: Post[];
-}
+    totalTags: number;
+    totalTitles: number;
+};
 
-export const PostList = ({ searchData, postList }: PostListProps) => {
+export const PostList = () => {
+    const { postList, searchData } = useLoaderData() as LoaderData;
     const [searchRes, setSearchRes] = useState<SearchDataProps>();
 
     const filteredPosts = filterPosts({
@@ -25,12 +29,18 @@ export const PostList = ({ searchData, postList }: PostListProps) => {
             <Text color="gray.600" fontSize={'sm'} pb={2} pl={1}>
                 Search by title or category tag
             </Text>
-            <VStack align="start" overflowY="scroll" maxH="calc(100vh - 200px)">
+            <VStack
+                align="start"
+                overflowY="scroll"
+                maxHeight={theme.sizes['3xl']}
+            >
                 {filteredPosts.map((post) => {
                     if (!post.title || !post.id) {
                         return <li key="invalid-post">Invalid Post</li>;
                     }
-                    return <PostCard key={post.id} post={post} />;
+                    return (
+                        <PostCard key={post.id} post={post} variation="sm" />
+                    );
                 })}
             </VStack>
         </>

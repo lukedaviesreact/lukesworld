@@ -1,5 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
-import { Client } from '@notionhq/client';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
@@ -12,6 +11,8 @@ import { getDbData } from '~/utils/posts';
 type LoaderData = {
     postList?: Post[];
     searchData: SearchDataProps;
+    totalTags: number;
+    totalTitles: number;
 };
 
 export const loader: LoaderFunction = async () => {
@@ -28,16 +29,21 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function PostIndexRoute() {
-    const { postList, searchData } = useLoaderData() as LoaderData;
+    const { postList } = useLoaderData() as LoaderData;
+
     return (
         <main>
             <Box display={['block', 'block', 'none']}>
-                {postList && (
-                    <PostList postList={postList} searchData={searchData} />
-                )}
+                {postList && <PostList />}
             </Box>
             <Box pt={2} display={['none', 'none', 'block']}>
-                <Text>TODO: desktop post landing page</Text>
+                <Heading as="h1" size={'xl'}>
+                    Dev Posts 💻
+                </Heading>
+                <Text color="gray.600">
+                    I've written down some of the stuff I've learnt along the
+                    way.
+                </Text>
             </Box>
         </main>
     );

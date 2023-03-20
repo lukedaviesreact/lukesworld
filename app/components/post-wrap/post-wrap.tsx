@@ -34,7 +34,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
     });
 
     return (
-        <Box>
+        <Box minH={theme.sizes['2xl']}>
             <StyledHeading mb={4}>
                 <Heading as="h1" fontSize={'4xl'}>
                     {post?.icon !== '' && post.icon} {post.title}
