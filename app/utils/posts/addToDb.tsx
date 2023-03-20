@@ -12,6 +12,9 @@ export interface NotionPost {
     html: string | null;
     icon: string | null;
     cover: string | null;
+    seoTitle: string;
+    seoDescription: string;
+    excerpt: string;
     createdAt: string;
     expiresAt?: string | null;
 }

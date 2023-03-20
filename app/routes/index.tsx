@@ -18,16 +18,15 @@ import {
     StyledSubline,
 } from './home.styled';
 import { SocialLinks } from '~/components/social-links/social-links';
+import { notion } from '~/db.server';
 
 type LoaderData = {
     postList: Post[];
 };
 
 export const loader: LoaderFunction = async () => {
-    const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
-
     const data = await getDbData({
-        client: NOTION_CLIENT,
+        client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
@@ -112,7 +111,13 @@ export default function Index() {
                             if (!post.title || !post.id) {
                                 return <li key="invalid-post">Invalid Post</li>;
                             }
-                            return <PostCard key={post.id} post={post} />;
+                            return (
+                                <PostCard
+                                    key={post.id}
+                                    post={post}
+                                    variation="lg"
+                                />
+                            );
                         })}
                     </HStack>
                 }

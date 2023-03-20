@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import type { Post } from '@prisma/client';
-import type { LoaderFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useNavigate } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { PostWrap } from '~/components/post-wrap/post-wrap';
 import { getDbPost } from '~/utils/posts';
 
@@ -15,6 +15,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     return json({ ...post });
 };
+
+export const meta: MetaFunction = ({ data }) => ({
+    charset: 'utf-8',
+    title: data.post.seoTitle || data.post.title,
+    description: data.post.description || 'tech blog post by lukedavies.dev',
+    viewport: 'width=device-width,initial-scale=1',
+});
 
 export default function PostRoute() {
     const {

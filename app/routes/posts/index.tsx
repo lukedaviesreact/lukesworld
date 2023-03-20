@@ -6,6 +6,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PostList } from '~/components/post-list/post-list';
 import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
+import { notion } from '~/db.server';
 import { getDbData } from '~/utils/posts';
 
 type LoaderData = {
@@ -14,10 +15,8 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async () => {
-    const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
-
     const data = await getDbData({
-        client: NOTION_CLIENT,
+        client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
@@ -30,7 +29,6 @@ export const loader: LoaderFunction = async () => {
 
 export default function PostIndexRoute() {
     const { postList, searchData } = useLoaderData() as LoaderData;
-    console.log('postlist', postList);
     return (
         <main>
             <Box display={['block', 'block', 'none']}>
