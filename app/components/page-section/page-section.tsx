@@ -35,7 +35,11 @@ export const PageSection = ({
                     {heading}
                 </StyledHeading>
                 {subheading ? (
-                    <Text fontSize={'sm'} color="gray.600">
+                    <Text
+                        fontSize={'sm'}
+                        color="gray.600"
+                        maxW={['100%', '100%', '90%']}
+                    >
                         {subheading}
                     </Text>
                 ) : null}
