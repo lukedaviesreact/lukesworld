@@ -1,23 +1,30 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type {
+    LinksFunction,
+    LoaderFunction,
+    MetaFunction,
+} from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
 import { getDbData } from '~/utils/posts';
 import { PostList } from '~/components/post-list/post-list';
 import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
+import { notion } from '~/db.server';
+import loadingSpinnerCss from '../components/loading-spinner/loading-spinner.css';
 
 type LoaderData = {
     postList?: Post[];
     searchData: SearchDataProps;
 };
 
-export const loader: LoaderFunction = async () => {
-    const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
+export const links: LinksFunction = () => [
+    { rel: 'stylesheet', href: loadingSpinnerCss },
+];
 
+export const loader: LoaderFunction = async () => {
     const data = await getDbData({
-        client: NOTION_CLIENT,
+        client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
@@ -46,12 +53,7 @@ export default function PostsRoute() {
                 >
                     <GridItem pt={2}>
                         <Box display={['none', 'none', 'block']}>
-                            {postList && (
-                                <PostList
-                                    postList={postList}
-                                    searchData={searchData}
-                                />
-                            )}
+                            {postList && <PostList />}
                         </Box>
                     </GridItem>
                     <GridItem>

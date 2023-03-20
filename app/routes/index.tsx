@@ -1,10 +1,9 @@
-import { Box, Heading, HStack, Img, Text } from '@chakra-ui/react';
+import { Box, Heading, Img, Stack, Text } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
 import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
-import { Client } from '@notionhq/client';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
@@ -18,16 +17,16 @@ import {
     StyledSubline,
 } from './home.styled';
 import { SocialLinks } from '~/components/social-links/social-links';
+import { notion } from '~/db.server';
+import { HomePageContactForm } from '~/components/forms/homepage-contact';
 
 type LoaderData = {
     postList: Post[];
 };
 
 export const loader: LoaderFunction = async () => {
-    const NOTION_CLIENT = new Client({ auth: process.env.NOTION_KEY });
-
     const data = await getDbData({
-        client: NOTION_CLIENT,
+        client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
@@ -107,14 +106,20 @@ export default function Index() {
                 things I've learnt so I've got reference later, you can
                 check it out too"
                 child={
-                    <HStack align="start">
+                    <Stack direction={['column', 'row']} spacing={4}>
                         {postList?.slice(0, 3).map((post) => {
                             if (!post.title || !post.id) {
                                 return <li key="invalid-post">Invalid Post</li>;
                             }
-                            return <PostCard key={post.id} post={post} />;
+                            return (
+                                <PostCard
+                                    key={post.id}
+                                    post={post}
+                                    variation="lg"
+                                />
+                            );
                         })}
-                    </HStack>
+                    </Stack>
                 }
                 buttonLabel="There's more"
                 buttonLink="/posts"
@@ -127,30 +132,41 @@ export default function Index() {
                 can do it or figure it out. Right now I'm usually
                 building with React TypeScript."
                 child={
-                    <HStack align="start" gap={2} justifyContent="space-around">
+                    <Stack
+                        direction={['row']}
+                        flexWrap="wrap"
+                        justifyContent="space-around"
+                        align="start"
+                        spacing={4}
+                    >
                         {logoArr.map((logo, i) => (
-                            <Img
-                                key={i}
-                                src={logo}
-                                width={'90px'}
-                                htmlWidth={'90px'}
-                                height={'90px'}
-                                htmlHeight={'90px'}
-                                loading="lazy"
-                                alt={'logos of technologies i use'}
-                            />
+                            <Box
+                                width={['120px', '90px', '90px']}
+                                height={['120px', '90px', '90px']}
+                                key={`logo-${i}`}
+                            >
+                                <Img
+                                    key={i}
+                                    src={logo}
+                                    htmlWidth={'90px'}
+                                    mb={['1rem', '0', '0']}
+                                    htmlHeight={'90px'}
+                                    loading="lazy"
+                                    alt={'logos of technologies i use'}
+                                />
+                            </Box>
                         ))}
-                    </HStack>
+                    </Stack>
                 }
                 subtext="Clean. yeah, not simple. Clean"
             />
 
-            {/* <PageSection
+            <PageSection
                 heading="Contact me directly"
                 subheading="If you're not into the whole social media thing"
                 child={<HomePageContactForm />}
                 id="contact"
-            /> */}
+            />
         </main>
     );
 }

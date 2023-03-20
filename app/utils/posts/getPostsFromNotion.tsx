@@ -32,7 +32,10 @@ export const getPostsFromNotion = async ({
                     cover: '',
                     url: '',
                     html: '',
+                    excerpt: '',
                     slug: '',
+                    seoTitle: '',
+                    seoDescription: '',
                 };
             }
 
@@ -43,6 +46,23 @@ export const getPostsFromNotion = async ({
             const title = entry.properties.Name.title[0].plain_text;
             const author = 'Luke Davies';
             const url = entry.url;
+
+            const seoDescription = // @ts-ignore
+                entry.properties['SEO Description'].rich_text[0]?.plain_text
+                    ? // @ts-ignore
+                      entry.properties['SEO Title'].rich_text[0].plain_text
+                    : '';
+            // @ts-ignore
+            const seoTitle = entry.properties['SEO Title'].rich_text[0]
+                ?.plain_text
+                ? // @ts-ignore
+                  entry.properties['SEO Title'].rich_text[0].plain_text
+                : '';
+            // @ts-ignore
+            const excerpt = entry.properties['Excerpt'].rich_text[0]?.plain_text
+                ? // @ts-ignore
+                  entry.properties['Excerpt'].rich_text[0].plain_text
+                : '';
 
             let cover: string = '';
             if (entry.cover && entry.cover.type === 'external') {
@@ -74,6 +94,9 @@ export const getPostsFromNotion = async ({
                 cover,
                 url,
                 html: '',
+                seoTitle,
+                seoDescription,
+                excerpt,
                 slug: formatTitleForURL(title) || '',
             };
         });

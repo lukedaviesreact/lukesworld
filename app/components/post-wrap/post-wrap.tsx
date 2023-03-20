@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link } from '@remix-run/react';
 import { Taglist } from '../taglist/Taglist';
+import { formatDate } from '../utils/formatDate';
 
 export const PostWrap = ({ post }: { post: Post }) => {
     const StyledHeading = styled(Box)({
@@ -33,7 +34,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
     });
 
     return (
-        <Box>
+        <Box minH={theme.sizes['2xl']}>
             <StyledHeading mb={4}>
                 <Heading as="h1" fontSize={'4xl'}>
                     {post?.icon !== '' && post.icon} {post.title}
@@ -47,11 +48,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
                             <Taglist post={post} />
                         </div>
 
-                        <Text fontSize="sm">
-                            {new Date(
-                                '2023-03-08T01:36:00.000Z'
-                            ).toDateString()}
-                        </Text>
+                        <Text fontSize="sm">{formatDate(post.createdAt)}</Text>
                     </Box>
 
                     <Box display={['block', 'block', 'none']}>

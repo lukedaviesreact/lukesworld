@@ -38,15 +38,18 @@ model Note {
 }
 
 model Post {
-  slug      String  @id
-  title     String
-  id        String  @unique
-  author    String
-  tags      String
-  url       String
-  html      String?
-  icon      String?
-  cover     String?
-  createdAt String
-  expiresAt String?
+  slug           String  @id
+  title          String
+  id             String  @unique
+  author         String
+  tags           String
+  url            String
+  seoTitle       String
+  seoDescription String
+  excerpt        String
+  html           String?
+  icon           String?
+  cover          String?
+  createdAt      String
+  expiresAt      String?
 }

@@ -1,11 +1,29 @@
-import { Box, Card, CardBody, Heading, Stack, theme } from '@chakra-ui/react';
+import {
+    Box,
+    Card,
+    CardBody,
+    Heading,
+    Stack,
+    theme,
+    Text,
+    HStack,
+    VStack,
+} from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
-import { Link } from '@remix-run/react';
+import { Link, useNavigation } from '@remix-run/react';
 import { formatTitleForURL } from '~/utils/posts';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { Taglist } from '../taglist/Taglist';
+import { formatDate } from '../utils/formatDate';
 
-export const PostCard = ({ post }: { post: Post }) => {
+export const PostCard = ({
+    post,
+    variation,
+}: {
+    post: Post;
+    variation: 'sm' | 'lg';
+}) => {
     const StyledLink = styled(Link)({
         width: '100%',
         color: theme.colors.gray[700],
@@ -14,21 +32,61 @@ export const PostCard = ({ post }: { post: Post }) => {
             color: theme.colors.gray[900],
         },
     });
+    const navigation = useNavigation();
+
+    const isPostLoading = (post: Post) => {
+        return (
+            navigation.state === 'loading' &&
+            navigation.location.pathname.includes(
+                post.title.toLowerCase().replace(/\ /g, '-')
+            )
+        );
+    };
     return (
         <StyledLink
             key={post.id}
             to={`/posts/${formatTitleForURL(post.title)}`}
             prefetch="intent"
         >
-            <Card>
+            <Card minH={variation === 'lg' ? '188px' : 'unset'}>
                 <CardBody>
                     <Stack spacing="3">
-                        <Heading size={'sm'}>
-                            {post?.icon !== '' && post?.icon} {post.title}
-                        </Heading>
-                        <Box mt="2">
-                            <Taglist post={post} />
+                        <Box
+                            minH={variation === 'lg' ? '40px' : 'unset'}
+                            display={'flex'}
+                            alignItems={'center'}
+                        >
+                            <Heading size={'sm'} noOfLines={2}>
+                                {post?.icon !== '' && post?.icon} {post.title}
+                            </Heading>
                         </Box>
+
+                        {variation === 'lg' ? (
+                            <HStack mt="2" justifyContent={'space-between'}>
+                                <Taglist post={post} />
+                                <Text fontSize="sm" color="gray.600">
+                                    {formatDate(post.createdAt)}
+                                </Text>
+                            </HStack>
+                        ) : (
+                            <VStack mt="2" alignItems={'start'}>
+                                <Taglist post={post} />
+                                <Text fontSize="sm" color="gray.600">
+                                    {formatDate(post.createdAt)}
+                                </Text>
+                            </VStack>
+                        )}
+                        {variation === 'lg' ? (
+                            <Text
+                                fontSize="sm"
+                                color="gray.600"
+                                noOfLines={[2, 2, 3]}
+                            >
+                                {post.excerpt}
+                            </Text>
+                        ) : null}
+
+                        {isPostLoading(post) && <LoadingSpinner />}
                     </Stack>
                 </CardBody>
             </Card>
