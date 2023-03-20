@@ -160,13 +160,13 @@ export default function Index() {
                 }
                 subtext="Clean. yeah, not simple. Clean"
             />
-
+            {/* 
             <PageSection
                 heading="Contact me directly"
                 subheading="If you're not into the whole social media thing"
                 child={<HomePageContactForm />}
                 id="contact"
-            />
+            /> */}
         </main>
     );
 }
