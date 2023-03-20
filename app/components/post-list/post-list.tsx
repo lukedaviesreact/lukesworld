@@ -33,6 +33,11 @@ export const PostList = () => {
                 align="start"
                 overflowY="scroll"
                 maxHeight={theme.sizes['3xl']}
+                gap={2}
+                pb={4}
+                pt={4}
+                pl={2}
+                pr={2}
             >
                 {filteredPosts.map((post) => {
                     if (!post.title || !post.id) {

@@ -86,7 +86,9 @@ export const PostCard = ({
                             </Text>
                         ) : null}
 
-                        {isPostLoading(post) && <LoadingSpinner />}
+                        {isPostLoading(post) && variation === 'sm' && (
+                            <LoadingSpinner />
+                        )}
                     </Stack>
                 </CardBody>
             </Card>
