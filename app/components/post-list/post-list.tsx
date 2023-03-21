@@ -23,8 +23,6 @@ export const PostList = () => {
         postList: postList,
     });
 
-    console.log({ postList, filteredPosts });
-
     return (
         <>
             <SearchBar searchData={searchData} setSearchRes={setSearchRes} />
