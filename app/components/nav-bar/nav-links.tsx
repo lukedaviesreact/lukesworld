@@ -7,9 +7,6 @@ export const NavLinks = ({ size }: { size?: 'sm' }) => {
             <Link to="/posts" prefetch="intent">
                 <Text>Posts</Text>
             </Link>
-            <Link to="https://www.github.com/lukedxvxes" prefetch="intent">
-                <Text>Projects</Text>
-            </Link>
             <Link to="/#contact" prefetch="intent">
                 <Text>Contact</Text>
             </Link>
