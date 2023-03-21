@@ -5,7 +5,12 @@ import typescriptLogo from '../assets/logos/typescript.png';
 import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import type { Post } from '@prisma/client';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type {
+    ActionFunction,
+    LoaderFunction,
+    MetaFunction,
+    redirect,
+} from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
@@ -18,13 +23,16 @@ import {
 } from './home.styled';
 import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
-import { HomePageContactForm } from '~/components/forms/homepage-contact';
+import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
 
-type LoaderData = {
+export type LoaderData = {
     postList: Post[];
+    formSuccess: boolean;
 };
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+    const url = new URL(request.url);
+    const success = url.searchParams.get('success');
     const data = await getDbData({
         client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
@@ -32,37 +40,68 @@ export const loader: LoaderFunction = async () => {
 
     return json<LoaderData>({
         postList: data.posts,
+        formSuccess: success === 'true' ? true : false || false,
     });
 };
 
-// export const action: ActionFunction = async ({ request }) => {
-//     const formData = await request.formData();
-//     const name = formData.get('name');
-//     const number = formData.get('phone');
-//     const message = formData.get('message');
+export const action: ActionFunction = async ({ request }) => {
+    const sgMail = require('@sendgrid/mail');
 
-//     // const sgMail = require('@sendgrid/mail');
-//     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-//     // const msg = {
-//     //     to: 'lukedaviesweb@gmail.com', // Change to your recipient
-//     //     from: 'luke@lukedavies.dev', // Change to your verified sender
-//     //     subject: 'Sending with SendGrid is Fun',
-//     //     text: 'and easy to do anywhere, even with Node.js',
-//     //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-//     // };
-//     // sgMail
-//     //     .send(msg)
-//     //     .then(() => {
-//     //         console.log('Email sent');
-//     //     })
-//     //     .catch((error: any) => {
-//     //         console.error(error);
-//     //     });
+    const formData = await request.formData();
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const message = formData.get('message');
 
-//     console.log({ name, number, message });
+    const formErrors = {
+        name: name ? null : 'Name is required',
+        email: name ? null : 'Email is required',
+        phone: name ? null : 'Phone number is required',
+        message: name ? null : 'Message is required',
+    };
 
-//     return json({});
-// };
+    const hasFormErrors = Object.values(formErrors).some(
+        (errorMessage) => errorMessage
+    );
+
+    if (hasFormErrors) {
+        return json({ error: 'Form was not filled out correctly' });
+    }
+
+    const msg = {
+        to: 'lukedaviesweb@gmail.com', // Change to your recipient
+        from: 'luke@lukedavies.dev', // Change to your verified sender
+        subject: 'lukedavies.dev - somebodys sent you a message',
+        text: `
+            Name: ${name}
+            Email: ${email}
+            Number: ${phone},
+            Message: ${message}
+        `,
+        html: `
+        <h1>You got mail!</h1>
+
+        <span>Name: <b>${name}</b></span></br>
+        <span>Email: <b>${email}</b></span></br>
+        <span>Number: <b>${phone}</b></span></br>
+        <span>Message: <b>${message}</b></span></br>
+
+        <p>Remember to reply!</p>
+    `,
+    };
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    try {
+        await sgMail.send(msg);
+        return redirect(`/?index&success=true#contact`);
+    } catch (error) {
+        console.error(error);
+        return json({
+            error: 'Something went wrong sending that email, please try again',
+        });
+    }
+};
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -74,7 +113,7 @@ export const meta: MetaFunction = () => ({
 
 export default function Index() {
     const { postList } = useLoaderData() as LoaderData;
-    const logoArr = [cssLogo, reactLogo, typescriptLogo, remixLogo, nodeLogo];
+    const logoArr = [reactLogo, typescriptLogo, remixLogo, cssLogo, nodeLogo];
 
     return (
         <main>
@@ -160,13 +199,13 @@ export default function Index() {
                 }
                 subtext="Clean. yeah, not simple. Clean"
             />
-            {/* 
+
             <PageSection
                 heading="Contact me directly"
-                subheading="If you're not into the whole social media thing"
+                subheading="Lets work together! Im open to new contract roles or freelance gigs"
                 child={<HomePageContactForm />}
                 id="contact"
-            /> */}
+            />
         </main>
     );
 }
