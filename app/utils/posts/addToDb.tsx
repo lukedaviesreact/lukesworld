@@ -1,5 +1,5 @@
 import type { Client } from '@notionhq/client';
-import { createPost } from '~/models/post.server';
+import { createPost, deleteAllPosts } from '~/models/post.server';
 import { getPostsFromNotion } from './getPostsFromNotion';
 
 export interface NotionPost {
@@ -78,7 +78,9 @@ export const addToDb = async ({
             data: [],
         };
     }
-
+    //clear db
+    await deleteAllPosts();
+    //add current notion posts to db
     const responseFromDb = notionData && (await addPostsToDb(notionData));
 
     if (responseFromDb && responseFromDb.length >= 1) {
