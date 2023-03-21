@@ -5,14 +5,14 @@ import typescriptLogo from '../assets/logos/typescript.png';
 import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import type { Post } from '@prisma/client';
-import {
+import type {
     ActionFunction,
     LoaderFunction,
     MetaFunction,
     redirect,
 } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useActionData, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';

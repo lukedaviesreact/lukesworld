@@ -1,5 +1,3 @@
-import { Textarea, theme } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { CustomLabel } from '../label/custom-label';
 import { StyledFormControl } from '../shared/input-style.styled';

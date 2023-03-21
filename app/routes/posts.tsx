@@ -12,11 +12,7 @@ import { PostList } from '~/components/post-list/post-list';
 import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
 import { notion } from '~/db.server';
 import loadingSpinnerCss from '../components/loading-spinner/loading-spinner.css';
-
-type LoaderData = {
-    postList?: Post[];
-    searchData: SearchDataProps;
-};
+import { LoaderData } from '.';
 
 export const links: LinksFunction = () => [
     { rel: 'stylesheet', href: loadingSpinnerCss },
@@ -42,7 +38,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function PostsRoute() {
-    const { postList, searchData } = useLoaderData() as LoaderData;
+    const { postList } = useLoaderData() as LoaderData;
 
     return (
         <main>
