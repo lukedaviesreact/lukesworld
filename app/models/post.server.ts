@@ -47,3 +47,7 @@ export async function updatePost(id: string, post: Pick<Post, 'url' | 'html'>) {
 export async function deletePost(slug: string) {
     return prisma.post.delete({ where: { slug } });
 }
+
+export async function deleteAllPosts() {
+    return prisma.post.deleteMany();
+}
