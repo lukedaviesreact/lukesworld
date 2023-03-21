@@ -76,7 +76,7 @@ const Document = withEmotionCache(
                         />
                     ))}
                 </head>
-                <body>
+                <body style={{ overflowX: 'hidden' }}>
                     <Box
                         margin="0 auto"
                         paddingLeft={theme.space[4]}

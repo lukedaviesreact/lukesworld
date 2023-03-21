@@ -24,7 +24,7 @@ import {
 import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
-
+import headerImg from '../assets/images/header.png';
 export type LoaderData = {
     postList: Post[];
     formSuccess: boolean;
@@ -117,9 +117,9 @@ export default function Index() {
 
     return (
         <main>
-            <StyledHeadingWrap>
+            <StyledHeadingWrap position={'relative'}>
                 <StyledHeadline>
-                    <Box>
+                    <Box position={'relative'} zIndex={'1'}>
                         <Heading size="xl" as="h2" color="gray.700">
                             Hi, my name's Luke <span>👋</span>
                         </Heading>
@@ -132,6 +132,21 @@ export default function Index() {
                             I'm a software engineer, specialising in Javascript.
                         </Heading>
                         <SocialLinks />
+                    </Box>
+                    <Box
+                        position={'absolute'}
+                        right={'-225px'}
+                        bottom={'0px'}
+                        opacity={['0.2', '0.3', '0.5']}
+                    >
+                        <Img
+                            src={headerImg}
+                            alt="header-img"
+                            width={'549px'}
+                            htmlWidth="549px"
+                            height={'519.2px'}
+                            htmlHeight={'519.2px'}
+                        />
                     </Box>
                 </StyledHeadline>
                 <StyledSubline>
