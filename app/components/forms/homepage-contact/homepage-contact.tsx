@@ -57,11 +57,15 @@ export const HomePageContactForm = () => {
 
     const onSubmit = (data: FormData | FieldValues) => {
         setName(data.name);
+
         submit(
             {
                 name: data.name.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
                 email: data.email.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
-                phone: data.phone.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+                phone: data.phone
+                    .toString()
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;'),
                 message: data.message
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;'),
