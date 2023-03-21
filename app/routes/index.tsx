@@ -5,7 +5,7 @@ import typescriptLogo from '../assets/logos/typescript.png';
 import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import type { Post } from '@prisma/client';
-import type {
+import {
     ActionFunction,
     LoaderFunction,
     MetaFunction,
