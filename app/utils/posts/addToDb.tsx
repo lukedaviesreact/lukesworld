@@ -42,7 +42,7 @@ const addPostsToDb = async (notionData: NotionData) => {
     if (!notionData) {
         return;
     }
-    const EXPIRE_MINS = 2;
+    const EXPIRE_MINS = 60 * 24;
     const responseArr = [];
     const createPostPromises = notionData.map((entry) =>
         createPost({
