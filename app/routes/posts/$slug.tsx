@@ -46,9 +46,9 @@ export default function PostRoute() {
         post: Post;
     } = useLoaderData() as LoaderData;
 
-    useEffect(() => {
-        hljs.highlightAll();
-    }, [post]);
+    // useEffect(() => {
+    //     hljs.highlightAll();
+    // }, [post]);
 
     return (
         <Box>

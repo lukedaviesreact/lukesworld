@@ -1,4 +1,8 @@
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type {
+    LinksFunction,
+    LoaderFunction,
+    MetaFunction,
+} from '@remix-run/node';
 import { json } from '@remix-run/node';
 import {
     Links,
@@ -29,6 +33,37 @@ export const meta: MetaFunction = () => ({
     title: 'Lukes Davies Dev',
     viewport: 'width=device-width,initial-scale=1',
 });
+
+export const links: LinksFunction = () => {
+    return [
+        {
+            rel: 'apple-touch-icon',
+            sizes: '180x180',
+            href: 'assets/favicon/apple-touch-icon.png',
+        },
+        {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '32x32',
+            href: 'assets/favicon/favicon-32x32.png',
+        },
+        {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '16x16',
+            href: 'assets/favicon/favicon-16x16.png',
+        },
+        {
+            rel: 'mask-icon',
+            color: '#5bbad5',
+            href: 'assets/favicon/safari-pinned-tab.svg',
+        },
+        {
+            rel: 'manifest',
+            href: 'assets/favicon/site.webmanifest',
+        },
+    ];
+};
 
 type LoaderData = {
     ENV: ReturnType<typeof getEnv>;
