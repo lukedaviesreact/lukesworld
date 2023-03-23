@@ -1,19 +1,35 @@
 import { Box } from '@chakra-ui/react';
 import type { Post } from '@prisma/client';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type {
+    LinksFunction,
+    LoaderFunction,
+    MetaFunction,
+} from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PostWrap } from '~/components/post-wrap/post-wrap';
 import { getDbPost } from '~/utils/posts';
-
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
+import { useEffect } from 'react';
 type LoaderData = any;
 
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
     const slug = url.pathname.split('/posts/')[1];
-    const post = await getDbPost({ slug });
+    const data = await getDbPost({ slug });
 
-    return json({ ...post });
+    return json(data);
+};
+
+export const links: LinksFunction = () => {
+    return [
+        {
+            rel: 'stylesheet',
+            href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nord.min.css',
+            crossOrigin: 'anonymous',
+        },
+    ];
 };
 
 export const meta: MetaFunction = ({ data }) => ({
@@ -29,6 +45,10 @@ export default function PostRoute() {
     }: {
         post: Post;
     } = useLoaderData() as LoaderData;
+
+    // useEffect(() => {
+    //     hljs.highlightAll();
+    // }, [post]);
 
     return (
         <Box>

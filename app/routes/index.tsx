@@ -117,7 +117,7 @@ export default function Index() {
 
     return (
         <main>
-            <StyledHeadingWrap position={'relative'}>
+            <StyledHeadingWrap position={'relative'} overflowX={'hidden'}>
                 <StyledHeadline>
                     <Box position={'relative'} zIndex={'1'}>
                         <Heading size="xl" as="h2" color="gray.700">
@@ -139,14 +139,14 @@ export default function Index() {
                         bottom={'0px'}
                         opacity={['0.2', '0.3', '0.5']}
                     >
-                        <Img
+                        {/* <Img
                             src={headerImg}
                             alt="header-img"
                             width={'549px'}
                             htmlWidth="549px"
                             height={'519.2px'}
                             htmlHeight={'519.2px'}
-                        />
+                        /> */}
                     </Box>
                 </StyledHeadline>
                 <StyledSubline>
