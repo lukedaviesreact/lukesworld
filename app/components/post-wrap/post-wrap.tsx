@@ -4,12 +4,14 @@ import type { Post } from '@prisma/client';
 import { Link } from '@remix-run/react';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
+import { isBrowser } from '../utils/isBrowser';
 
 export const PostWrap = ({ post }: { post: Post }) => {
     const StyledHeading = styled(Box)({
-        marginBottom: theme.space[4],
+        marginBottom: theme.space[8],
         h1: {
             marginBottom: theme.space[4],
+            color: theme.colors.gray[700],
         },
         '.author': {
             marginBottom: theme.space[1],
@@ -20,8 +22,42 @@ export const PostWrap = ({ post }: { post: Post }) => {
         },
     });
     const StyledTextWrap = styled(Box)({
+        pre: {
+            fontSize: '14px',
+            margin: `${theme.space['8']} 0`,
+            boxShadow: theme.shadows.md,
+        },
+        code: {
+            color: '#81a1c1',
+        },
+        img: {
+            margin: `${theme.space['8']} auto`,
+        },
         p: {
+            marginBottom: theme.space[4],
+        },
+
+        'ol,ul': {
+            marginLeft: theme.space[8],
+        },
+
+        li: {
+            paddingBottom: theme.space[2],
+        },
+        h3: {
+            fontSize: '1.3rem',
+            fontWeight: 'bold',
             marginBottom: theme.space[2],
+            marginTop: theme.space[8],
+        },
+        a: {
+            display: 'inline-block',
+            color: theme.colors.gray['500'],
+            transform: 'translateY(0px)',
+            transition: 'all .3s ease',
+            '&:hover': {
+                transform: 'translateY(-3px)',
+            },
         },
     });
 

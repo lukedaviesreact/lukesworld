@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import type { Post } from '@prisma/client';
 import type {
     LinksFunction,
     LoaderFunction,
@@ -9,13 +8,13 @@ import { json } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
 import { getDbData } from '~/utils/posts';
 import { PostList } from '~/components/post-list/post-list';
-import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
 import { notion } from '~/db.server';
 import loadingSpinnerCss from '../components/loading-spinner/loading-spinner.css';
 import { LoaderData } from '.';
 
 export const links: LinksFunction = () => [
     { rel: 'stylesheet', href: loadingSpinnerCss },
+    { page: '/posts' },
 ];
 
 export const loader: LoaderFunction = async () => {
@@ -31,9 +30,10 @@ export const loader: LoaderFunction = async () => {
     });
 };
 
-export const meta: MetaFunction = () => ({
+export const meta: MetaFunction<typeof loader> = () => ({
     charset: 'utf-8',
-    title: 'Dev Posts | Luke Davies Dev',
+    title: 'Posts | Luke Davies Dev',
+    description: 'Tech posts',
     viewport: 'width=device-width,initial-scale=1',
 });
 
@@ -48,7 +48,11 @@ export default function PostsRoute() {
                     gap={[0, 0, 6]}
                 >
                     <GridItem pt={2}>
-                        <Box display={['none', 'none', 'block']}>
+                        <Box
+                            display={['none', 'none', 'block']}
+                            position={'sticky'}
+                            top={'62px'}
+                        >
                             {postList && <PostList />}
                         </Box>
                     </GridItem>

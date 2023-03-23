@@ -16,6 +16,7 @@ import { formatTitleForURL } from '~/utils/posts';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
+import { isBrowser } from '../utils/isBrowser';
 
 export const PostCard = ({
     post,
@@ -32,6 +33,13 @@ export const PostCard = ({
             color: theme.colors.gray[900],
         },
     });
+
+    const StyledCard = styled(Card)({
+        transition: 'all .3s ease',
+        '&:hover': {
+            transform: `translateX(${theme.space[4]})`,
+        },
+    });
     const navigation = useNavigation();
 
     const isPostLoading = (post: Post) => {
@@ -42,13 +50,21 @@ export const PostCard = ({
             )
         );
     };
+    const activeSlug = isBrowser()
+        ? window.location.pathname.split('/posts/')[1]
+        : '';
+    const isActive =
+        post.title.replace(/\s+/g, '-').toLowerCase() === activeSlug;
     return (
         <StyledLink
             key={post.id}
             to={`/posts/${formatTitleForURL(post.title)}`}
             prefetch="intent"
         >
-            <Card minH={variation === 'lg' ? '188px' : 'unset'}>
+            <StyledCard
+                minH={variation === 'lg' ? '188px' : 'unset'}
+                transform={`translateX(${isActive ? theme.space[4] : 0})`}
+            >
                 <CardBody>
                     <Stack spacing="3">
                         <Box
@@ -91,7 +107,7 @@ export const PostCard = ({
                         )}
                     </Stack>
                 </CardBody>
-            </Card>
+            </StyledCard>
         </StyledLink>
     );
 };

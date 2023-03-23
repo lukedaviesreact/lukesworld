@@ -17,15 +17,6 @@ export const NavBar = () => {
         top: 0,
         backgroundColor: theme.colors.white,
         zIndex: 1,
-        '&:after': {
-            content: '""',
-            position: 'absolute',
-            height: '42px',
-            right: '-100%',
-            background: 'white',
-            width: '100%',
-            top: '0',
-        },
     });
 
     return (
