@@ -41,8 +41,6 @@ export const PostList = () => {
                 pr={2}
             >
                 {filteredPosts.map((post) => {
-                    console.log(post.title.replace(/\s+/g, '-').toLowerCase());
-
                     if (!post.title || !post.id) {
                         return <li key="invalid-post">Invalid Post</li>;
                     }
