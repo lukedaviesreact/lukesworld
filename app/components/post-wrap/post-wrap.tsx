@@ -27,7 +27,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
             margin: `${theme.space['8']} 0`,
             boxShadow: theme.shadows.md,
             background: '#2e3440',
-            padding: '20px',
+            padding: '2px',
         },
         code: {
             color: '#81a1c1',
