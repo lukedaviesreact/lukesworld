@@ -48,14 +48,6 @@ export const PostList = () => {
                         <PostCard key={post.id} post={post} variation="sm" />
                     );
                 })}
-                {filteredPosts.map((post) => {
-                    if (!post.title || !post.id) {
-                        return <li key="invalid-post">Invalid Post</li>;
-                    }
-                    return (
-                        <PostCard key={post.id} post={post} variation="sm" />
-                    );
-                })}
             </VStack>
         </Box>
     );
