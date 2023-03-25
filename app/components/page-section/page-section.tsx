@@ -1,9 +1,9 @@
-import { Text, Button } from '@chakra-ui/react';
+import { Text, Button, Box } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
+import { StyledHeading } from '../styled-heading/styled-heading';
 
 import {
     StyledButtonWrap,
-    StyledHeading,
     StyledHeadingWrap,
     StyledPageSectionWrap,
     StyledSubline,
@@ -31,9 +31,15 @@ export const PageSection = ({
     return (
         <StyledPageSectionWrap id={id ? id : ''}>
             <StyledHeadingWrap>
-                <StyledHeading as="h2" size="lg" color="gray.700">
-                    {heading}
-                </StyledHeading>
+                <Box mb={2}>
+                    <StyledHeading
+                        type="h2"
+                        size="lg"
+                        content={heading}
+                        color="dark"
+                    />
+                </Box>
+
                 {subheading ? (
                     <Text
                         fontSize={'sm'}

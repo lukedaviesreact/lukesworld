@@ -25,6 +25,7 @@ import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
 import headerImg from '../assets/images/header.png';
+import { StyledHeading } from '~/components/styled-heading/styled-heading';
 export type LoaderData = {
     postList: Post[];
     formSuccess: boolean;
@@ -120,17 +121,23 @@ export default function Index() {
             <StyledHeadingWrap position={'relative'} overflowX={'hidden'}>
                 <StyledHeadline>
                     <Box position={'relative'} zIndex={'1'}>
-                        <Heading size="xl" as="h2" color="gray.700">
-                            Hi, my name's Luke <span>👋</span>
-                        </Heading>
-                        <Heading
-                            as="h1"
+                        <StyledHeading
+                            type="h2"
+                            size="xl"
+                            content={
+                                <>
+                                    Hi, my name's Luke <span>👋</span>
+                                </>
+                            }
+                            color="dark"
+                        />
+                        <StyledHeading
+                            type="h1"
                             size="sm"
-                            fontWeight={400}
-                            color="gray.600"
-                        >
-                            I'm a software engineer, specialising in Javascript.
-                        </Heading>
+                            weight={400}
+                            content="I'm a software engineer, specialising in Javascript."
+                            color="light"
+                        />
                         <SocialLinks />
                     </Box>
                     <Box

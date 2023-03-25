@@ -5,6 +5,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PostList } from '~/components/post-list/post-list';
 import type { SearchDataProps } from '~/components/search-bar/search-bar.d';
+import { StyledHeading } from '~/components/styled-heading/styled-heading';
 import { notion } from '~/db.server';
 import { getDbData } from '~/utils/posts';
 
@@ -37,9 +38,12 @@ export default function PostIndexRoute() {
                 {postList && <PostList />}
             </Box>
             <Box pt={2} display={['none', 'none', 'block']}>
-                <Heading as="h1" size={'xl'}>
-                    Dev Posts 💻
-                </Heading>
+                <StyledHeading
+                    type="h1"
+                    size="xl"
+                    content={'Dev Posts 💻'}
+                    color="dark"
+                />
                 <Text color="gray.600">
                     I've written down some of the stuff I've learnt along the
                     way.

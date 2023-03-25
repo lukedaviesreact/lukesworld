@@ -2,12 +2,12 @@ import { Box, Button, Heading, Text, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link } from '@remix-run/react';
+import { StyledHeading } from '../styled-heading/styled-heading';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
-import { isBrowser } from '../utils/isBrowser';
 
 export const PostWrap = ({ post }: { post: Post }) => {
-    const StyledHeading = styled(Box)({
+    const StyledHeadingWrap = styled(Box)({
         marginBottom: theme.space[8],
         h1: {
             marginBottom: theme.space[4],
@@ -25,12 +25,11 @@ export const PostWrap = ({ post }: { post: Post }) => {
         pre: {
             fontSize: '14px',
             margin: `${theme.space['8']} 0`,
-            boxShadow: theme.shadows.md,
-            background: '#2e3440',
-            padding: '2px',
         },
-        code: {
+        'code:not(.hljs)': {
             color: '#81a1c1',
+            padding: '2px',
+            background: '#2e3440',
         },
         img: {
             margin: `${theme.space['8']} auto`,
@@ -73,10 +72,13 @@ export const PostWrap = ({ post }: { post: Post }) => {
 
     return (
         <Box minH={theme.sizes['2xl']}>
-            <StyledHeading mb={4}>
-                <Heading as="h1" fontSize={'4xl'}>
-                    {post?.icon !== '' && post.icon} {post.title}
-                </Heading>
+            <StyledHeadingWrap mb={4}>
+                <StyledHeading
+                    type="h1"
+                    size="xl"
+                    content={post.title}
+                    color="dark"
+                />
                 <StyledMeta p={'2'}>
                     <Box>
                         <Text fontSize="sm" className="author">
@@ -97,7 +99,7 @@ export const PostWrap = ({ post }: { post: Post }) => {
                         </Link>
                     </Box>
                 </StyledMeta>
-            </StyledHeading>
+            </StyledHeadingWrap>
             <StyledTextWrap
                 dangerouslySetInnerHTML={{ __html: post.html || '' }}
             ></StyledTextWrap>

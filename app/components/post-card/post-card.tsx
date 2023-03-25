@@ -14,6 +14,7 @@ import type { Post } from '@prisma/client';
 import { Link, useNavigation } from '@remix-run/react';
 import { formatTitleForURL } from '~/utils/posts';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import { StyledHeading } from '../styled-heading/styled-heading';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
 import { isBrowser } from '../utils/isBrowser';
@@ -68,9 +69,13 @@ export const PostCard = ({
                             display={'flex'}
                             alignItems={'center'}
                         >
-                            <Heading size={'sm'} noOfLines={2}>
-                                {post?.icon !== '' && post?.icon} {post.title}
-                            </Heading>
+                            <StyledHeading
+                                type="h4"
+                                size="sm"
+                                content={post.title}
+                                color="dark"
+                                noOfLines={2}
+                            />
                         </Box>
 
                         {variation === 'lg' ? (
