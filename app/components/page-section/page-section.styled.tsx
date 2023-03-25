@@ -9,9 +9,7 @@ export const StyledHeadingWrap = styled(Box)({
     marginBottom: `${theme.space['16']}`,
     maxWidth: theme.space['96'],
 });
-export const StyledHeading = styled(Heading)({
-    marginBottom: theme.space['2'],
-});
+
 export const StyledButtonWrap = styled(Heading)({
     display: 'flex',
     justifyContent: 'center',
