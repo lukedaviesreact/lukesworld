@@ -1,4 +1,4 @@
-import { Box, Heading, Img, Stack, Text } from '@chakra-ui/react';
+import { Box, Img, Stack, Text } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -24,8 +24,8 @@ import {
 import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
-import headerImg from '../assets/images/header.png';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
+
 export type LoaderData = {
     postList: Post[];
     formSuccess: boolean;
@@ -34,6 +34,7 @@ export type LoaderData = {
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
     const success = url.searchParams.get('success');
+
     const data = await getDbData({
         client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
@@ -41,7 +42,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     return json<LoaderData>({
         postList: data.posts,
-        formSuccess: success === 'true' ? true : false || false,
+        formSuccess: success === 'true',
     });
 };
 
@@ -139,21 +140,6 @@ export default function Index() {
                             color="light"
                         />
                         <SocialLinks />
-                    </Box>
-                    <Box
-                        position={'absolute'}
-                        right={'-225px'}
-                        bottom={'0px'}
-                        opacity={['0.2', '0.3', '0.5']}
-                    >
-                        {/* <Img
-                            src={headerImg}
-                            alt="header-img"
-                            width={'549px'}
-                            htmlWidth="549px"
-                            height={'519.2px'}
-                            htmlHeight={'519.2px'}
-                        /> */}
                     </Box>
                 </StyledHeadline>
                 <StyledSubline>

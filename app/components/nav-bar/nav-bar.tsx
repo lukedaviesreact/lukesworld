@@ -20,7 +20,7 @@ export const NavBar = () => {
     });
 
     return (
-        <StyledNav>
+        <StyledNav display={'flex'}>
             <NavLogo />
             <NavLinks />
         </StyledNav>
