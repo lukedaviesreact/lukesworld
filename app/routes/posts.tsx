@@ -77,7 +77,7 @@ export default function PostsRoute() {
                 }}
             />
         );
-    }, [transition.state]);
+    }, [transition.state, transition.location?.state]);
 
     return (
         <main>
