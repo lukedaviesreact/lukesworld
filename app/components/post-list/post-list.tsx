@@ -1,4 +1,4 @@
-import { VStack, Text, theme, Box } from '@chakra-ui/react';
+import { VStack, Text, Box } from '@chakra-ui/react';
 import type { Post } from '@prisma/client';
 import { useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
@@ -6,7 +6,6 @@ import { filterPosts } from '~/utils/filter-posts';
 import { PostCard } from '../post-card/post-card';
 import { SearchBar } from '../search-bar/search-bar';
 import type { SearchDataProps } from '../search-bar/search-bar.d';
-import { isBrowser } from '../utils/isBrowser';
 
 type LoaderData = {
     postList?: Post[];
