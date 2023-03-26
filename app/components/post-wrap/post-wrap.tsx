@@ -1,4 +1,13 @@
-import { Box, Button, Heading, Text, theme } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Heading,
+    Skeleton,
+    SkeletonText,
+    Text,
+    theme,
+    VStack,
+} from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link } from '@remix-run/react';
@@ -6,7 +15,13 @@ import { StyledHeading } from '../styled-heading/styled-heading';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
 
-export const PostWrap = ({ post }: { post: Post }) => {
+export const PostWrap = ({
+    post,
+    isLoading = false,
+}: {
+    post: Post;
+    isLoading?: boolean;
+}) => {
     const StyledHeadingWrap = styled(Box)({
         marginBottom: theme.space[8],
         h1: {
@@ -100,9 +115,40 @@ export const PostWrap = ({ post }: { post: Post }) => {
                     </Box>
                 </StyledMeta>
             </StyledHeadingWrap>
-            <StyledTextWrap
-                dangerouslySetInnerHTML={{ __html: post.html || '' }}
-            ></StyledTextWrap>
+            {isLoading ? (
+                <VStack spacing={4} alignItems="start">
+                    <SkeletonText
+                        w={'90%'}
+                        isLoaded={!isLoading}
+                        opacity={'0.5'}
+                        fadeDuration={1}
+                    />
+                    <Skeleton
+                        h={'180'}
+                        w={'90%'}
+                        isLoaded={!isLoading}
+                        opacity={'0.5'}
+                        fadeDuration={1}
+                    />
+                    <SkeletonText
+                        w={'90%'}
+                        isLoaded={!isLoading}
+                        opacity={'0.5'}
+                        fadeDuration={1}
+                    />
+                    <Skeleton
+                        h={'180'}
+                        w={'90%'}
+                        opacity={'0.5'}
+                        isLoaded={!isLoading}
+                        fadeDuration={1}
+                    />
+                </VStack>
+            ) : (
+                <StyledTextWrap
+                    dangerouslySetInnerHTML={{ __html: post.html || '' }}
+                ></StyledTextWrap>
+            )}
         </Box>
     );
 };

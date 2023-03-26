@@ -55,6 +55,14 @@ export const PostCard = ({
             key={post.id}
             to={`/posts/${formatTitleForURL(post.title)}`}
             prefetch="intent"
+            state={{
+                post: {
+                    title: post.title,
+                    author: post.author,
+                    createdAt: post.createdAt,
+                    tags: post.tags,
+                },
+            }}
         >
             <Card
                 minH={variation === 'lg' ? '188px' : 'unset'}

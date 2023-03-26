@@ -2,7 +2,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
 
 export const ErrorMessage = ({ error }: { error: string }) => {
-    console.log('error sending message', ErrorEvent);
+    console.log('error sending message', error);
     return (
         <Box>
             <StyledHeading

@@ -1,16 +1,18 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Skeleton, VStack } from '@chakra-ui/react';
 import type {
     LinksFunction,
     LoaderFunction,
     MetaFunction,
 } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet, useLoaderData, useTransition } from '@remix-run/react';
 import { getDbData } from '~/utils/posts';
 import { PostList } from '~/components/post-list/post-list';
 import { notion } from '~/db.server';
 import loadingSpinnerCss from '../components/loading-spinner/loading-spinner.css';
 import { LoaderData } from '.';
+import { useMemo } from 'react';
+import { PostWrap } from '~/components/post-wrap/post-wrap';
 
 export const links: LinksFunction = () => [
     { rel: 'stylesheet', href: loadingSpinnerCss },
@@ -37,8 +39,45 @@ export const meta: MetaFunction<typeof loader> = () => ({
     viewport: 'width=device-width,initial-scale=1',
 });
 
+export type TransitionLocationState = {
+    post: {
+        title: string;
+        author: string;
+        createdAt: string;
+        tags: string;
+    };
+};
+
 export default function PostsRoute() {
     const { postList } = useLoaderData() as LoaderData;
+    const transition = useTransition();
+
+    const OptimisticUI = useMemo(() => {
+        const { post } =
+            (transition.location?.state as TransitionLocationState) || {};
+
+        return (
+            <PostWrap
+                isLoading={true}
+                post={{
+                    title: post ? post.title : 'string',
+                    slug: 'string',
+                    id: 'string',
+                    author: post ? post.author : 'string',
+                    tags: post ? post.tags : '[{}]',
+                    url: 'string',
+                    seoTitle: 'string',
+                    seoDescription: 'string',
+                    excerpt: 'string',
+                    html: 'string',
+                    icon: 'string',
+                    cover: 'string',
+                    createdAt: post ? post.createdAt : 'string',
+                    expiresAt: 'string',
+                }}
+            />
+        );
+    }, [transition.state]);
 
     return (
         <main>
@@ -57,8 +96,12 @@ export default function PostsRoute() {
                         </Box>
                     </GridItem>
                     <GridItem>
-                        <Box>
-                            <Outlet />
+                        <Box padding="0 1rem 0 0 ">
+                            {transition.state === 'loading' ? (
+                                OptimisticUI
+                            ) : (
+                                <Outlet />
+                            )}
                         </Box>
                     </GridItem>
                 </Grid>
