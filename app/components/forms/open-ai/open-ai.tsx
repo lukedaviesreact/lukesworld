@@ -12,8 +12,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ErrorMsg } from '../../inputs/error-msg/error-msg';
 import { ErrorMessage } from './error-message';
-import { isBrowser } from 'framer-motion';
-import { redirect } from '@remix-run/server-runtime';
 import { Dispatch, SetStateAction } from 'react';
 
 type FormData = {

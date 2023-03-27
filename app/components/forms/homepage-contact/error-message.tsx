@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
 
 export const ErrorMessage = ({ error }: { error: string }) => {

@@ -2,7 +2,6 @@ import {
     Box,
     Card,
     CardBody,
-    Heading,
     Stack,
     theme,
     Text,

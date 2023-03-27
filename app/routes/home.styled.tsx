@@ -7,6 +7,7 @@ export const StyledHeadingWrap = styled(Box)({
 export const StyledHeadline = styled(Box)({
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     minHeight: '60vh',
 });
 

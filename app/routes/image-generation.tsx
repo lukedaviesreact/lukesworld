@@ -1,6 +1,5 @@
 import {
     Box,
-    HStack,
     Image,
     Img,
     Skeleton,
@@ -13,7 +12,7 @@ import { ActionFunction, json, MetaFunction, redirect } from '@remix-run/node';
 import { useLoaderData, useTransition } from '@remix-run/react';
 import { Configuration, OpenAIApi } from 'openai';
 import { useEffect, useState } from 'react';
-import { LoaderFunction } from 'react-router';
+import type { LoaderFunction } from 'react-router';
 import { OpenAIForm } from '~/components/forms/open-ai/open-ai';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
 import placeholderImg from '../assets/images/placeholder.png';

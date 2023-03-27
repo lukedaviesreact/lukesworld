@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Skeleton, VStack } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
 import type {
     LinksFunction,
     LoaderFunction,
@@ -77,7 +77,7 @@ export default function PostsRoute() {
                 }}
             />
         );
-    }, [transition.state, transition.location?.state]);
+    }, [transition.location?.state]);
 
     return (
         <main>
@@ -97,7 +97,9 @@ export default function PostsRoute() {
                     </GridItem>
                     <GridItem>
                         <Box padding="0 1rem 0 0 ">
-                            {transition.state === 'loading' ? (
+                            {transition.state === 'loading' &&
+                            transition.location.pathname.split('/').length >
+                                2 ? (
                                 OptimisticUI
                             ) : (
                                 <Outlet />
