@@ -13,10 +13,19 @@ import * as yup from 'yup';
 import { ErrorMsg } from '../../inputs/error-msg/error-msg';
 import { ErrorMessage } from './error-message';
 import { Dispatch, SetStateAction } from 'react';
+import { motion } from 'framer-motion';
+import * as gtag from '~/utils/gtags.client';
 
 type FormData = {
     prompt: string;
 };
+
+export interface ImageResult {
+    prompt: string;
+    image: string;
+}
+
+export type ImageResults = ImageResult[];
 
 const schema = yup
     .object({
@@ -27,9 +36,8 @@ const schema = yup
 export const OpenAIForm = ({
     setImageResults,
 }: {
-    setImageResults: Dispatch<
-        SetStateAction<{ prompt: string; image: string }[]>
-    >;
+    setImageResults: Dispatch<SetStateAction<ImageResults>>;
+    imageResults: ImageResults;
 }) => {
     const {
         control,
@@ -43,7 +51,14 @@ export const OpenAIForm = ({
     const isSubmitting = Boolean(transition.submission);
     const navigate = useNavigate();
     const submit = useSubmit();
+
     const onSubmit = (data: FormData | FieldValues) => {
+        gtag.event({
+            action: 'submit_openai_form',
+            category: 'Image Generation',
+            label: data.prompt,
+        });
+
         submit(
             {
                 prompt: data.prompt.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
@@ -61,8 +76,10 @@ export const OpenAIForm = ({
             <Box maxW={['100%', '100%', '40%']}>
                 <TextInput name="prompt" label="Prompt" control={control} />
                 <ErrorMsg errors={errors} fieldName="prompt" />
-                <HStack mt={4}>
+                <HStack mt={4} spacing={4}>
                     <Button
+                        as={motion.button}
+                        whileTap={{ scale: 0.95 }}
                         type="submit"
                         colorScheme={'purple'}
                         size={'md'}
@@ -70,6 +87,7 @@ export const OpenAIForm = ({
                     >
                         {isSubmitting ? 'Submitting...' : 'Generate an image'}
                     </Button>
+
                     <Button
                         colorScheme={'purple'}
                         variant={'outline'}

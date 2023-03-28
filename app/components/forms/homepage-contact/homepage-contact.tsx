@@ -16,6 +16,8 @@ import { LoaderData } from '~/routes';
 import { useState } from 'react';
 import { SuccessMessage } from './success-message';
 import { ErrorMessage } from './error-message';
+import { motion } from 'framer-motion';
+import * as gtag from '~/utils/gtags.client';
 
 type FormData = {
     name: string;
@@ -58,6 +60,12 @@ export const HomePageContactForm = () => {
     const onSubmit = (data: FormData | FieldValues) => {
         setName(data.name);
 
+        gtag.event({
+            action: 'submit_contact_form',
+            category: 'Image Generation',
+            label: data.email,
+        });
+
         submit(
             {
                 name: data.name.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
@@ -84,7 +92,7 @@ export const HomePageContactForm = () => {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <Box maxW={['100%', '100%', '40%']}>
+            <Box maxW={['100%', '60%', '80%']}>
                 <TextInput name="name" label="Name" control={control} />
                 <ErrorMsg errors={errors} fieldName="name" />
 
@@ -112,6 +120,8 @@ export const HomePageContactForm = () => {
                 <ErrorMsg errors={errors} fieldName="message" />
 
                 <Button
+                    as={motion.button}
+                    whileTap={{ scale: 0.95 }}
                     type="submit"
                     colorScheme={'purple'}
                     size={'md'}

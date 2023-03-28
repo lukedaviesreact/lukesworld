@@ -11,6 +11,8 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
+    useLoaderData,
+    useLocation,
 } from '@remix-run/react';
 
 import { getEnv } from './env.server';
@@ -19,6 +21,7 @@ import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
 import { Box, ChakraProvider, theme } from '@chakra-ui/react';
 import { NavBar } from './components/nav-bar/nav-bar';
+import * as gtag from '~/utils/gtags.client';
 
 import '@fontsource/nunito-sans/200.css';
 import '@fontsource/nunito-sans/300.css';
@@ -67,11 +70,13 @@ export const links: LinksFunction = () => {
 
 type LoaderData = {
     ENV: ReturnType<typeof getEnv>;
+    gaTrackingId?: string;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({
         ENV: getEnv(),
+        gaTrackingId: process.env.GA_TRACKING_ID,
     });
 };
 
@@ -83,6 +88,14 @@ const Document = withEmotionCache(
     ({ children }: DocumentProps, emotionCache) => {
         const serverStyleData = useContext(ServerStyleContext);
         const clientStyleData = useContext(ClientStyleContext);
+        const { gaTrackingId } = useLoaderData<typeof loader>();
+        const location = useLocation();
+
+        useEffect(() => {
+            if (gaTrackingId?.length) {
+                gtag.pageview(location.pathname, gaTrackingId);
+            }
+        }, [location, gaTrackingId]);
 
         // Only executed on client
         useEffect(() => {
@@ -111,7 +124,31 @@ const Document = withEmotionCache(
                         />
                     ))}
                 </head>
+
                 <body>
+                    {process.env.NODE_ENV === 'development' ||
+                    !gaTrackingId ? null : (
+                        <>
+                            <script
+                                async
+                                src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
+                            />
+                            <script
+                                async
+                                id="gtag-init"
+                                dangerouslySetInnerHTML={{
+                                    __html: `
+                                        window.dataLayer = window.dataLayer || [];
+                                        function gtag(){dataLayer.push(arguments);}
+                                        gtag('js', new Date());
+                                        gtag('config', '${gaTrackingId}', {
+                                        page_path: window.location.pathname,
+                                        });
+                                    `,
+                                }}
+                            />
+                        </>
+                    )}
                     <Box
                         margin="0 auto"
                         paddingLeft={theme.space[4]}

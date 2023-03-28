@@ -31,13 +31,13 @@ export const PostList = () => {
             </Text>
             <VStack
                 align="start"
-                overflowY="scroll"
+                overflowY={filteredPosts.length > 4 ? 'scroll' : 'hidden'}
                 maxHeight={'calc(100vh - 158px)'}
                 gap={2}
                 pb={4}
                 pt={4}
                 pl={2}
-                pr={2}
+                pr={[0, 0, 2]}
             >
                 {filteredPosts.map((post) => {
                     if (!post.title || !post.id) {

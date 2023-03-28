@@ -51,6 +51,9 @@ export type TransitionLocationState = {
 export default function PostsRoute() {
     const { postList } = useLoaderData() as LoaderData;
     const transition = useTransition();
+    const transitioningToSinglePost =
+        transition.location &&
+        transition.location.pathname.split('/').length > 2;
 
     const OptimisticUI = useMemo(() => {
         const { post } =
@@ -98,8 +101,7 @@ export default function PostsRoute() {
                     <GridItem>
                         <Box padding="0 1rem 0 0 ">
                             {transition.state === 'loading' &&
-                            transition.location.pathname.split('/').length >
-                                2 ? (
+                            transitioningToSinglePost ? (
                                 OptimisticUI
                             ) : (
                                 <Outlet />
