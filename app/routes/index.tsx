@@ -121,7 +121,7 @@ export default function Index() {
         <main>
             <StyledHeadingWrap position={'relative'} overflowX={'hidden'}>
                 <StyledHeadline>
-                    <Box position={'relative'} zIndex={'1'}>
+                    <Box position={'relative'} zIndex={'1'} flex={'1'}>
                         <StyledHeading
                             type="h2"
                             size="xl"
@@ -141,7 +141,11 @@ export default function Index() {
                         />
                         <SocialLinks />
                     </Box>
+                    {/* <Box flex={'1'}>
+                        <Circles />
+                    </Box> */}
                 </StyledHeadline>
+
                 <StyledSubline>
                     <Text fontSize={'xs'}>I like to keep things simple</Text>
                 </StyledSubline>

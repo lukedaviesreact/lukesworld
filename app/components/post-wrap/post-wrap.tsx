@@ -1,7 +1,6 @@
 import {
     Box,
     Button,
-    Heading,
     Skeleton,
     SkeletonText,
     Text,

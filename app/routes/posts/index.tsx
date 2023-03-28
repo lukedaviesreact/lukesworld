@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import type { Post } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
