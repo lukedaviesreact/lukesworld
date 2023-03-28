@@ -12,7 +12,7 @@ import {
     redirect,
 } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
@@ -25,7 +25,6 @@ import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
-import { Circles } from '~/components/circles/circles';
 
 export type LoaderData = {
     postList: Post[];
@@ -74,7 +73,7 @@ export const action: ActionFunction = async ({ request }) => {
     const msg = {
         to: 'lukedaviesweb@gmail.com', // Change to your recipient
         from: 'luke@lukedavies.dev', // Change to your verified sender
-        subject: 'lukedavies.dev - somebodys sent you a message',
+        subject: "lukedavies.dev - somebody's sent you a message",
         text: `
             Name: ${name}
             Email: ${email}
@@ -211,6 +210,9 @@ export default function Index() {
                     </Stack>
                 }
                 subtext="Clean. yeah, not simple. Clean"
+                buttonLabel="Download Resume"
+                buttonLink="/luke-davies-front-end-engineer-resume.pdf"
+                buttonDownload={true}
             />
 
             <PageSection

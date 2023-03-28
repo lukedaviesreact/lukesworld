@@ -18,6 +18,7 @@ interface PageSectionProps {
     id?: string;
     buttonLink?: string;
     buttonLabel?: string;
+    buttonDownload?: boolean;
 }
 
 export const PageSection = ({
@@ -28,6 +29,7 @@ export const PageSection = ({
     id,
     buttonLink,
     buttonLabel,
+    buttonDownload = false,
 }: PageSectionProps) => {
     return (
         <StyledPageSectionWrap id={id ? id : ''}>
@@ -54,15 +56,19 @@ export const PageSection = ({
 
             {child}
 
-            {buttonLink && buttonLabel && (
+            {buttonLink && buttonLabel && !buttonDownload && (
                 <StyledButtonWrap>
-                    <Link to={buttonLink} prefetch="intent">
+                    <Link
+                        to={buttonLink}
+                        prefetch="intent"
+                        download={buttonDownload}
+                    >
                         <Button
                             as={motion.button}
                             whileTap={{ scale: 0.95 }}
                             colorScheme={'purple'}
                         >
-                            There's more
+                            {buttonLabel}
                         </Button>
                     </Link>
                 </StyledButtonWrap>
