@@ -1,4 +1,4 @@
-import { Box, Img, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Img, Stack, Text } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -12,7 +12,7 @@ import {
     redirect,
 } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
@@ -25,6 +25,7 @@ import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
+import { Circles } from '~/components/circles/circles';
 
 export type LoaderData = {
     postList: Post[];
@@ -119,9 +120,9 @@ export default function Index() {
 
     return (
         <main>
-            <StyledHeadingWrap position={'relative'} overflowX={'hidden'}>
+            <StyledHeadingWrap>
                 <StyledHeadline>
-                    <Box position={'relative'} zIndex={'1'} flex={'1'}>
+                    <Box flex={'1'}>
                         <StyledHeading
                             type="h2"
                             size="xl"
@@ -214,8 +215,24 @@ export default function Index() {
 
             <PageSection
                 heading="Contact me directly"
-                subheading="Lets work together! Im open to new contract roles or freelance gigs"
-                child={<HomePageContactForm />}
+                subheading="Im always down to hear about exiting new projects, hit me up"
+                child={
+                    <Flex>
+                        <Box flex={1}>
+                            <HomePageContactForm />
+                        </Box>
+                        <Box
+                            flex={1}
+                            display={['none', 'none', 'flex']}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                        >
+                            <Text fontSize={'sm'} color={'gray.600'} mb={10}>
+                                ~ Insert AI generated image here ~
+                            </Text>
+                        </Box>
+                    </Flex>
+                }
                 id="contact"
             />
         </main>

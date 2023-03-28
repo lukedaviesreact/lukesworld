@@ -1,5 +1,6 @@
 import { Text, Button, Box } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
+import { motion } from 'framer-motion';
 import { StyledHeading } from '../styled-heading/styled-heading';
 
 import {
@@ -56,7 +57,13 @@ export const PageSection = ({
             {buttonLink && buttonLabel && (
                 <StyledButtonWrap>
                     <Link to={buttonLink} prefetch="intent">
-                        <Button colorScheme={'purple'}>There's more</Button>
+                        <Button
+                            as={motion.button}
+                            whileTap={{ scale: 0.95 }}
+                            colorScheme={'purple'}
+                        >
+                            There's more
+                        </Button>
                     </Link>
                 </StyledButtonWrap>
             )}

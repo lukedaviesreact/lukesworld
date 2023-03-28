@@ -90,7 +90,7 @@ export const PostWrap = ({
                 <StyledHeading
                     type="h1"
                     size="xl"
-                    content={post.title}
+                    content={post.title ? post.title : 'no title set'}
                     color="dark"
                 />
                 <StyledMeta p={'2'}>

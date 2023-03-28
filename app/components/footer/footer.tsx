@@ -14,13 +14,14 @@ export const Footer = () => {
         color: theme.colors.gray['600'],
         marginBottom: `${theme.space[4]}`,
         width: '100%',
+        alignItems: 'center',
     });
 
     return (
         <StyledFooter>
             <Text fontSize={'small'}>lukedavies.dev 2023</Text>
             <SocialLinks />
-            <NavLinks size="sm" />
+            <NavLinks />
         </StyledFooter>
     );
 };

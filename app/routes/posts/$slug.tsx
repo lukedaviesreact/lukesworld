@@ -32,12 +32,19 @@ export const links: LinksFunction = () => {
     ];
 };
 
-export const meta: MetaFunction = ({ data }) => ({
-    charset: 'utf-8',
-    title: data.post.seoTitle || data.post.title,
-    description: data.post.description || 'tech blog post by lukedavies.dev',
-    viewport: 'width=device-width,initial-scale=1',
-});
+export const meta: MetaFunction = ({ data }) => {
+    if (data.post) {
+        return {
+            charset: 'utf-8',
+            title: data.post.seoTitle || data.post.title,
+            description:
+                data.post.description || 'tech blog post by lukedavies.dev',
+            viewport: 'width=device-width,initial-scale=1',
+        };
+    } else {
+        return {};
+    }
+};
 
 export default function PostRoute() {
     const {
@@ -50,9 +57,5 @@ export default function PostRoute() {
         hljs.highlightAll();
     }, []);
 
-    return (
-        <Box>
-            <PostWrap post={post} />
-        </Box>
-    );
+    return <Box>{post && <PostWrap post={post} />}</Box>;
 }
