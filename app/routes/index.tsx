@@ -113,7 +113,7 @@ export const meta: MetaFunction = () => ({
     charset: 'utf-8',
     title: 'Luke Davies Dev 👋',
     description:
-        'Javascript software engineer specialising in React Typescript',
+        'Javascript software engineer specialising in React Typescript.',
     viewport: 'width=device-width,initial-scale=1',
 });
 
