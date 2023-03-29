@@ -26,6 +26,10 @@ import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
 import { StyledHeading } from '~/components/styled-heading/styled-heading';
 
+import AIimage from '../assets/images/AI-space.png';
+import AIimage_two from '../assets/images/AI-space-2.png';
+import AIimage_three from '../assets/images/AI-space-3.png';
+
 export type LoaderData = {
     postList: Post[];
     formSuccess: boolean;
@@ -116,6 +120,7 @@ export const meta: MetaFunction = () => ({
 export default function Index() {
     const { postList } = useLoaderData() as LoaderData;
     const logoArr = [reactLogo, typescriptLogo, remixLogo, cssLogo, nodeLogo];
+    const aiImgArr = [AIimage, AIimage_two, AIimage_three];
 
     return (
         <main>
@@ -174,7 +179,38 @@ export default function Index() {
                 }
                 buttonLabel="There's more"
                 buttonLink="/posts"
-                subtext="Simple doesnt mean dumb"
+                subtext="I should've started writing stuff down ages ago"
+            />
+
+            <PageSection
+                heading="OpenAI's image generation"
+                subheading="Honestly, i needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
+                child={
+                    <Stack direction={['column', 'row']} spacing={4}>
+                        {aiImgArr.map((aiImg, i) => (
+                            <Box
+                                key={`aiImg-${i}`}
+                                display={[
+                                    `${i >= 1 ? 'none' : 'inline-block'}`,
+                                    `${i >= 1 ? 'none' : 'inline-block'}`,
+                                    'inline-block',
+                                ]}
+                            >
+                                <Img
+                                    key={i}
+                                    src={aiImg}
+                                    loading="lazy"
+                                    alt={'Ai generated images'}
+                                    borderRadius={8}
+                                    boxShadow={'md'}
+                                />
+                            </Box>
+                        ))}
+                    </Stack>
+                }
+                buttonLabel="Have a go"
+                buttonLink="/image-generation"
+                subtext="it's 2023"
             />
 
             <PageSection
@@ -209,7 +245,7 @@ export default function Index() {
                         ))}
                     </Stack>
                 }
-                subtext="Clean. yeah, not simple. Clean"
+                subtext="✨"
                 buttonLabel="Download Resume"
                 buttonLink="/luke-davies-front-end-engineer-resume.pdf"
                 buttonDownload={true}
