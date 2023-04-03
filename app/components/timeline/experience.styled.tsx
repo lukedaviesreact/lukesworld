@@ -29,15 +29,17 @@ export const StyledExperienceWrap = styled(Box)({
             },
         },
     '.vertical-timeline-element-icon': {
-        marginLeft: '15px',
-        top: '18px',
+        marginLeft: '15px !important',
+        top: '18px !important',
         background: '#805AD5',
         color: '#805AD5',
-        height: '10px',
-        width: '10px',
+        height: '10px !important',
+        width: '10px !important',
         '@media (min-width: 1170px)': {
-            marginLeft: '-5px',
-            top: '25px',
+            marginLeft: '-5px !important',
+            top: '25px !important',
+            height: '10px !important',
+            width: '10px !important',
         },
     },
 });

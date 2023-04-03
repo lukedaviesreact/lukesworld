@@ -3,14 +3,13 @@ import { Skeleton, SkeletonText, VStack } from '@chakra-ui/react';
 export const ImageGenerateSkeleton = () => {
     return (
         <VStack
-            mt={8}
             display={'flex'}
             justifyContent={'center'}
             flexDir={'column'}
             alignItems={'center'}
             spacing={4}
             maxWidth={'516px'}
-            margin={'0 auto'}
+            margin={'1rem auto 0 auto'}
         >
             <SkeletonText
                 alignSelf={'stretch'}

@@ -93,7 +93,7 @@ export const HomePageContactForm = () => {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <Box maxW={['100%', '60%', '80%']}>
+            <Box maxW={['100%', '60%', '80%']} marginTop={'-1rem'}>
                 <TextInput name="name" label="Name" control={control} />
                 <ErrorMsg errors={errors} fieldName="name" />
 

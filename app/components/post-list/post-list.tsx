@@ -31,7 +31,7 @@ export const PostList = () => {
             </Text>
             <VStack
                 align="start"
-                overflowY={filteredPosts.length > 4 ? 'scroll' : 'hidden'}
+                overflowY={filteredPosts.length > 5 ? 'scroll' : 'hidden'}
                 maxHeight={'calc(100vh - 158px)'}
                 gap={2}
                 pb={4}
