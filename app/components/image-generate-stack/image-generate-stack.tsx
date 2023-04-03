@@ -2,7 +2,7 @@ import { VStack, Wrap, Image } from '@chakra-ui/react';
 
 import { useMemo } from 'react';
 import placeholderImg from '../../assets/images/placeholder.png';
-import { ImageResult, ImageResults } from '../forms/open-ai/open-ai';
+import type { ImageResult, ImageResults } from '../forms/open-ai/open-ai';
 
 export type SetSelectedImage = (
     value: React.SetStateAction<ImageResult | undefined>

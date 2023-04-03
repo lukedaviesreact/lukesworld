@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues } from 'react-hook-form';
+import type { FieldErrors, FieldValues } from 'react-hook-form';
 import { Text } from '@chakra-ui/react';
 interface ErrorMsgProps {
     errors: FieldErrors<FieldValues>;

@@ -5,12 +5,12 @@ import typescriptLogo from '../assets/logos/typescript.png';
 import remixLogo from '../assets/logos/remix.png';
 import nodeLogo from '../assets/logos/node.png';
 import type { Post } from '@prisma/client';
-import {
+import type {
     ActionFunction,
     LoaderFunction,
     MetaFunction,
-    redirect,
 } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
@@ -29,6 +29,12 @@ import { StyledHeading } from '~/components/styled-heading/styled-heading';
 import AIimage from '../assets/images/AI-space.png';
 import AIimage_two from '../assets/images/AI-space-2.png';
 import AIimage_three from '../assets/images/AI-space-3.png';
+import { ExperienceComponent } from '../components/timeline/experience';
+import timelineStyles from 'react-vertical-timeline-component/style.min.css';
+
+export function links() {
+    return [{ rel: 'stylesheet', href: timelineStyles }];
+}
 
 export type LoaderData = {
     postList: Post[];
@@ -181,6 +187,8 @@ export default function Index() {
                 buttonLink="/posts"
                 subtext="I should've started writing stuff down ages ago"
             />
+
+            <ExperienceComponent />
 
             <PageSection
                 heading="OpenAI's image generation"

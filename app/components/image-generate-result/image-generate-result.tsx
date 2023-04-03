@@ -1,5 +1,5 @@
 import { Box, Img, Text } from '@chakra-ui/react';
-import { ImageResult } from '../forms/open-ai/open-ai';
+import type { ImageResult } from '../forms/open-ai/open-ai';
 
 interface ImageGenerateResultProps {
     selectedImage?: ImageResult;

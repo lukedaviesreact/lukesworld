@@ -10,7 +10,7 @@ import { getDbData } from '~/utils/posts';
 import { PostList } from '~/components/post-list/post-list';
 import { notion } from '~/db.server';
 import loadingSpinnerCss from '../components/loading-spinner/loading-spinner.css';
-import { LoaderData } from '.';
+import type { LoaderData } from '.';
 import { useMemo } from 'react';
 import { PostWrap } from '~/components/post-wrap/post-wrap';
 
