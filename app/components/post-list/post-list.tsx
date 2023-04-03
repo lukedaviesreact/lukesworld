@@ -1,4 +1,5 @@
-import { VStack, Text, Box } from '@chakra-ui/react';
+import { VStack, Text, Box, theme } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
@@ -23,15 +24,24 @@ export const PostList = () => {
         postList: postList,
     });
 
+    const postCount = filteredPosts.length;
+
+    const StyledPostStack = styled(VStack)(({ postcount }) => ({
+        overflowY: 'scroll',
+        [`@media (min-width: ${theme.breakpoints.sm})`]: {
+            overflowY: postCount > 5 ? 'scroll' : 'hidden',
+        },
+    }));
+
     return (
         <Box>
             <SearchBar searchData={searchData} setSearchRes={setSearchRes} />
             <Text color="gray.600" fontSize={'sm'} pb={2} pl={1}>
                 Search by title or category tag
             </Text>
-            <VStack
+            <StyledPostStack
                 align="start"
-                overflowY={filteredPosts.length > 5 ? 'scroll' : 'hidden'}
+                postcount={postCount}
                 maxHeight={'calc(100vh - 158px)'}
                 gap={2}
                 pb={4}
@@ -47,7 +57,7 @@ export const PostList = () => {
                         <PostCard key={post.id} post={post} variation="sm" />
                     );
                 })}
-            </VStack>
+            </StyledPostStack>
         </Box>
     );
 };
