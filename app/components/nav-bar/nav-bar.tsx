@@ -1,28 +1,10 @@
-import { HStack, Stack, theme, Text, Box } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { HStack, Text } from '@chakra-ui/react';
+
 import { Link } from '@remix-run/react';
+import { StyledNav, StyledNavInner } from './nav-bar.styled';
 import { NavLogo } from './nav-logo';
 
 export const NavBar = () => {
-    const StyledNav = styled(Box)({
-        color: theme.colors.gray['600'],
-        position: 'sticky',
-        top: 0,
-        zIndex: '9',
-        backgroundColor: theme.colors.white,
-    });
-
-    const StyledNavInner = styled(Stack)({
-        maxWidth: `${theme.breakpoints.lg}`,
-        padding: `${theme.space[2]} ${theme.space[4]}`,
-        borderBottom: `2px solid ${theme.colors.gray[100]}`,
-        margin: '0 auto',
-
-        [`@media (min-width:${theme.breakpoints.lg})`]: {
-            padding: `${theme.space[2]} 0`,
-        },
-    });
-
     return (
         <StyledNav>
             <StyledNavInner direction={'row'} justifyContent={'space-between'}>
