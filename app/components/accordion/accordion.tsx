@@ -5,7 +5,6 @@ import {
     AccordionItem,
     AccordionPanel,
 } from '@chakra-ui/accordion';
-import { Box } from '@chakra-ui/react';
 
 export interface AccordionComponentProps {
     titleComponent: JSX.Element;

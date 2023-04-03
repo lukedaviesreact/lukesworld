@@ -11,7 +11,6 @@ import {
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link, useNavigation } from '@remix-run/react';
-import { motion } from 'framer-motion';
 import { formatTitleForURL } from '~/utils/posts';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { StyledHeading } from '../styled-heading/styled-heading';

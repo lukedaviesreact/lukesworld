@@ -6,13 +6,14 @@ import {
     useSubmit,
     useTransition,
 } from '@remix-run/react';
-import { FieldValues, useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { TextInput } from '../../inputs/text/text-input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ErrorMsg } from '../../inputs/error-msg/error-msg';
 import { ErrorMessage } from './error-message';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 import * as gtag from '~/utils/gtags.client';
 

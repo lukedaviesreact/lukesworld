@@ -1,4 +1,5 @@
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import type { Control, FieldValues } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { CustomLabel } from '../label/custom-label';
 import { StyledFormControl } from '../shared/input-style.styled';
 import { StyledInput } from './text-input.styled';

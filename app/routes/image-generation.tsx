@@ -1,14 +1,15 @@
 import { Box, Divider, Text } from '@chakra-ui/react';
-import { ActionFunction, json, MetaFunction, redirect } from '@remix-run/node';
+import type { ActionFunction, MetaFunction } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { useLoaderData, useTransition } from '@remix-run/react';
 import { Configuration, OpenAIApi } from 'openai';
 import { useEffect, useState } from 'react';
 import type { LoaderFunction } from 'react-router';
-import {
+import type {
     ImageResult,
     ImageResults,
-    OpenAIForm,
 } from '~/components/forms/open-ai/open-ai';
+import { OpenAIForm } from '~/components/forms/open-ai/open-ai';
 import { ImageGenerateResult } from '~/components/image-generate-result/image-generate-result';
 import { ImageGenerateSkeleton } from '~/components/image-generate-skeleton/image-generate-skeleton';
 import { ImageGenerateStack } from '~/components/image-generate-stack/image-generate-stack';

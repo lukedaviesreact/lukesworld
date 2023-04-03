@@ -1,4 +1,5 @@
-import { As, Heading } from '@chakra-ui/react';
+import type { As } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 export const StyledHeading = ({
     type,

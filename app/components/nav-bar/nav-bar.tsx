@@ -1,12 +1,9 @@
 import { HStack, Stack, theme, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { Link } from '@remix-run/react';
-import { useState } from 'react';
 import { NavLogo } from './nav-logo';
 
 export const NavBar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
     const StyledNav = styled(Stack)({
         borderBottom: `2px solid ${theme.colors.gray[100]}`,
         padding: `${theme.space[2]} 0`,
