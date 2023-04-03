@@ -15,7 +15,6 @@ export const ExperienceComponent = () => {
             <VerticalTimeline>
                 {experienceData.map((data) => (
                     <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
                         contentArrowStyle={{
                             borderRight: '7px solid  #e1e6ea',
                         }}
