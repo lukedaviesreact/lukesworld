@@ -149,13 +149,12 @@ const Document = withEmotionCache(
                             />
                         </>
                     )}
+                    <NavBar />
                     <Box
                         margin="0 auto"
                         paddingLeft={theme.space[4]}
                         paddingRight={theme.space[4]}
                     >
-                        <NavBar />
-
                         <Box maxW={theme.breakpoints.lg} margin="0 auto" pt="4">
                             {children}
                         </Box>
