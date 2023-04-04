@@ -18,7 +18,6 @@ export const GithubProjects = ({
     projects: GithubProjectsData[];
     showMoreProjects: boolean;
 }) => {
-    console.log(projects);
     if (projects.length) {
         return (
             <SimpleGrid

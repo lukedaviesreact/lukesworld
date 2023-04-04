@@ -5,7 +5,7 @@ export const experienceData = [
         position: 'Software Engineer (React)',
         date: '2022 - present',
         description:
-            'My role is highly focused on improving customer retention and conversion, our team ownes the customer facing applications and used data to drive our quarterly OCRs. Working closely with our stakeholders, designers and data team we using Typescript React in combination with a 100% test coverage approach to ensure a consistent user experience.',
+            'My role is highly focused on improving customer retention and conversion, our team ownes the customer facing applications and used data to drive our quarterly OKRs. Working closely with our stakeholders, designers and data team we using Typescript React in combination with a 100% test coverage approach to ensure a consistent user experience.',
         technologies: [
             'React',
             'Typscript',

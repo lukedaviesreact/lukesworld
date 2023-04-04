@@ -41,15 +41,11 @@ export const PostCard = ({
         return (
             navigation.state === 'loading' &&
             navigation.location.pathname.includes(
-                post.title.toLowerCase().replace(/\ /g, '-')
+                post.title.toLowerCase().replace(/ /g, '-')
             )
         );
     };
-    const activeSlug = isBrowser()
-        ? window.location.pathname.split('/posts/')[1]
-        : '';
-    const isActive =
-        post.title.replace(/\s+/g, '-').toLowerCase() === activeSlug;
+
     return (
         <StyledLink
             key={post.id}
@@ -66,9 +62,6 @@ export const PostCard = ({
         >
             <Card
                 minH={variation === 'lg' ? '188px' : 'unset'}
-                // transform={`translateX(${
-                //     isActive && variation === 'lg' ? theme.space[4] : 0
-                // })`}
                 as={motion.div}
                 whileHover={{
                     scale: 1.025,

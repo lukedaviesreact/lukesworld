@@ -1,4 +1,12 @@
-import { Box, Flex, Img, Stack, Text } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    GridItem,
+    Img,
+    SimpleGrid,
+    Stack,
+    Text,
+} from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
 import typescriptLogo from '../assets/logos/typescript.png';
@@ -176,20 +184,35 @@ export default function Index() {
                 things I've learnt so I've got reference later, you can
                 check it out too"
                 child={
-                    <Stack direction={['column', 'row']} spacing={4}>
+                    <SimpleGrid
+                        gridTemplateColumns="repeat(6, 1fr)"
+                        gridRowGap={4}
+                        gridColumnGap={4}
+                    >
                         {postList?.slice(0, 3).map((post) => {
                             if (!post.title || !post.id) {
                                 return <li key="invalid-post">Invalid Post</li>;
                             }
                             return (
-                                <PostCard
+                                <GridItem
+                                    colSpan={{
+                                        base: 6,
+                                        md: 3,
+                                        lg: 2,
+                                        xl: 2,
+                                    }}
                                     key={post.id}
-                                    post={post}
-                                    variation="lg"
-                                />
+                                    h="100%"
+                                >
+                                    <PostCard
+                                        key={post.id}
+                                        post={post}
+                                        variation="lg"
+                                    />
+                                </GridItem>
                             );
                         })}
-                    </Stack>
+                    </SimpleGrid>
                 }
                 buttonLabel="There's more"
                 buttonLink="/posts"
@@ -202,7 +225,7 @@ export default function Index() {
                 heading="OpenAI's image generation"
                 subheading="Honestly, i needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
                 child={
-                    <Stack direction={['column', 'row']} spacing={4}>
+                    <Stack direction={'row'} spacing={4}>
                         {aiImgArr.map((aiImg, i) => (
                             <Box
                                 key={`aiImg-${i}`}
