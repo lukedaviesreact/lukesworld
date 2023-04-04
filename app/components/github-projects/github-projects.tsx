@@ -3,12 +3,11 @@ import {
     Box,
     Card,
     CardBody,
-    Flex,
     GridItem,
-    Heading,
     SimpleGrid,
     Text,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { StyledHeading } from '../styled-heading/styled-heading';
 import type { GithubProjectsData } from './github-projects.d';
 
@@ -19,6 +18,7 @@ export const GithubProjects = ({
     projects: GithubProjectsData[];
     showMoreProjects: boolean;
 }) => {
+    console.log(projects);
     if (projects.length) {
         return (
             <SimpleGrid
@@ -47,11 +47,13 @@ export const GithubProjects = ({
                                     : 'unset'
                             }
                         >
-                            <a
+                            <motion.a
                                 href={reposUrl}
                                 target="_blank"
                                 rel="noopeneer noreferrer"
                                 style={{ display: 'block', height: '100%' }}
+                                whileTap={{ scale: 0.9 }}
+                                whileHover={{ scale: 1.025 }}
                             >
                                 <Card h="100%">
                                     <CardBody>
@@ -82,7 +84,7 @@ export const GithubProjects = ({
                                         </Box>
                                     </CardBody>
                                 </Card>
-                            </a>
+                            </motion.a>
                         </GridItem>
                     );
                 })}

@@ -74,7 +74,7 @@ export const PageSection = ({
                 <StyledButtonWrap>
                     <Button
                         as={motion.button}
-                        whileTap={{ scale: 0.95 }}
+                        whileTap={{ scale: 0.9 }}
                         colorScheme={'purple'}
                         onClick={buttonCallback}
                     >

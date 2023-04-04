@@ -1,10 +1,17 @@
-import { HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Text, theme } from '@chakra-ui/react';
 
-import { Link } from '@remix-run/react';
+import { Link, useTransition } from '@remix-run/react';
+import { motion } from 'framer-motion';
 import { StyledNav, StyledNavInner } from './nav-bar.styled';
 import { NavLogo } from './nav-logo';
 
 export const NavBar = () => {
+    const transition = useTransition();
+
+    console.log('transition from nav', transition);
+
+    const isLoadingPage = transition.state === 'loading';
+
     return (
         <StyledNav>
             <StyledNavInner direction={'row'} justifyContent={'space-between'}>
@@ -18,24 +25,28 @@ export const NavBar = () => {
                         <Text>Contact</Text>
                     </Link>
                 </HStack>
-                {/* <Button onClick={() => setIsOpen((isOpen) => !isOpen)}>
-                {isOpen ? 'CLOSE' : 'OPEN'} MENU
-            </Button> */}
-
-                {/* <AnimatePresence>
-                <StyledMenu
-                    key={'menu'}
-                    initial={{ opacity: 0, x: '400px' }}
-                    transition={spring}
-                    animate={
-                        isOpen
-                            ? { opacity: 1, x: '0px' }
-                            : { opacity: 0, x: '400px' }
-                    }
-                    exit={{ opacity: 0 }}
-                />
-            </AnimatePresence> */}
             </StyledNavInner>
+            {isLoadingPage && (
+                <Box
+                    position={'absolute'}
+                    width={'100%'}
+                    height={'5px'}
+                    role="progressbar"
+                >
+                    <Box
+                        as={motion.div}
+                        w={'20%'}
+                        h={'100%'}
+                        background={theme.colors.purple[200]}
+                        initial={{ opacity: 0, width: '20%' }}
+                        animate={{
+                            opacity: 1,
+                            width: '100%',
+                            transition: { duration: 2 },
+                        }}
+                    ></Box>
+                </Box>
+            )}
         </StyledNav>
     );
 };

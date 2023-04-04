@@ -38,7 +38,7 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
     };
 
     return (
-        <Box mb={2} mr={2}>
+        <Box mb={2} mr={[0, 0, 2]}>
             <Input
                 placeholder="Filter"
                 size="md"
