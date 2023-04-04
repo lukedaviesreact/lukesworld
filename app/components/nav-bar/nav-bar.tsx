@@ -1,6 +1,7 @@
 import { HStack, Text } from '@chakra-ui/react';
 
 import { Link } from '@remix-run/react';
+import { LoadingBar } from '../search-bar/loading-bar';
 import { StyledNav, StyledNavInner } from './nav-bar.styled';
 import { NavLogo } from './nav-logo';
 
@@ -18,24 +19,8 @@ export const NavBar = () => {
                         <Text>Contact</Text>
                     </Link>
                 </HStack>
-                {/* <Button onClick={() => setIsOpen((isOpen) => !isOpen)}>
-                {isOpen ? 'CLOSE' : 'OPEN'} MENU
-            </Button> */}
-
-                {/* <AnimatePresence>
-                <StyledMenu
-                    key={'menu'}
-                    initial={{ opacity: 0, x: '400px' }}
-                    transition={spring}
-                    animate={
-                        isOpen
-                            ? { opacity: 1, x: '0px' }
-                            : { opacity: 0, x: '400px' }
-                    }
-                    exit={{ opacity: 0 }}
-                />
-            </AnimatePresence> */}
             </StyledNavInner>
+            <LoadingBar />
         </StyledNav>
     );
 };

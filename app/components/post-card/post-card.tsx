@@ -11,6 +11,7 @@ import {
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link, useNavigation } from '@remix-run/react';
+import { motion } from 'framer-motion';
 import { formatTitleForURL } from '~/utils/posts';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { StyledHeading } from '../styled-heading/styled-heading';
@@ -65,9 +66,13 @@ export const PostCard = ({
         >
             <Card
                 minH={variation === 'lg' ? '188px' : 'unset'}
-                transform={`translateX(${
-                    isActive && variation === 'lg' ? theme.space[4] : 0
-                })`}
+                // transform={`translateX(${
+                //     isActive && variation === 'lg' ? theme.space[4] : 0
+                // })`}
+                as={motion.div}
+                whileHover={{
+                    scale: 1.025,
+                }}
             >
                 <CardBody>
                     <Stack spacing="3">

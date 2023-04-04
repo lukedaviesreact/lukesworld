@@ -10,6 +10,12 @@ export const StyledExperienceWrap = styled(Box)({
         width: '100%',
         padding: '3rem 0',
     },
+
+    '.vertical-timeline.vertical-timeline--two-columns': {
+        '@media (min-width: 1170px)': {
+            width: '100%',
+        },
+    },
     '.vertical-timeline-element': {
         '@media (min-width: 1170px)': {
             margin: `${theme.space[8]} 0`,

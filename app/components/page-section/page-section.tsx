@@ -18,7 +18,7 @@ interface PageSectionProps {
     id?: string;
     buttonLink?: string;
     buttonLabel?: string;
-    buttonDownload?: boolean;
+    buttonCallback?: () => void;
 }
 
 export const PageSection = ({
@@ -29,7 +29,7 @@ export const PageSection = ({
     id,
     buttonLink,
     buttonLabel,
-    buttonDownload = false,
+    buttonCallback,
 }: PageSectionProps) => {
     return (
         <StyledPageSectionWrap id={id ? id : ''}>
@@ -56,13 +56,9 @@ export const PageSection = ({
 
             {child}
 
-            {buttonLink && buttonLabel && !buttonDownload && (
+            {buttonLink && buttonLabel && !buttonCallback && (
                 <StyledButtonWrap>
-                    <Link
-                        to={buttonLink}
-                        prefetch="intent"
-                        download={buttonDownload}
-                    >
+                    <Link to={buttonLink} prefetch="intent">
                         <Button
                             as={motion.button}
                             whileTap={{ scale: 0.95 }}
@@ -71,6 +67,19 @@ export const PageSection = ({
                             {buttonLabel}
                         </Button>
                     </Link>
+                </StyledButtonWrap>
+            )}
+
+            {buttonCallback && (
+                <StyledButtonWrap>
+                    <Button
+                        as={motion.button}
+                        whileTap={{ scale: 0.9 }}
+                        colorScheme={'purple'}
+                        onClick={buttonCallback}
+                    >
+                        {buttonLabel}
+                    </Button>
                 </StyledButtonWrap>
             )}
 

@@ -31,6 +31,10 @@ import AIimage_two from '../assets/images/AI-space-2.png';
 import AIimage_three from '../assets/images/AI-space-3.png';
 import { ExperienceComponent } from '../components/timeline/experience';
 import timelineStyles from 'react-vertical-timeline-component/style.min.css';
+import { getProjects } from '../utils/projects/getProjects';
+import { GithubProjects } from '../components/github-projects/github-projects';
+import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
+import { useState } from 'react';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -38,6 +42,7 @@ export function links() {
 
 export type LoaderData = {
     postList: Post[];
+    projects: GithubProjectsData[];
     formSuccess: boolean;
 };
 
@@ -50,8 +55,11 @@ export const loader: LoaderFunction = async ({ request }) => {
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
+    const githubProjects = await getProjects();
+
     return json<LoaderData>({
         postList: data.posts,
+        projects: githubProjects,
         formSuccess: success === 'true',
     });
 };
@@ -124,10 +132,10 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function Index() {
-    const { postList } = useLoaderData() as LoaderData;
+    const { postList, projects } = useLoaderData() as LoaderData;
     const logoArr = [reactLogo, typescriptLogo, remixLogo, cssLogo, nodeLogo];
     const aiImgArr = [AIimage, AIimage_two, AIimage_three];
-
+    const [showMoreProjects, setshowMoreProjects] = useState(false);
     return (
         <main>
             <StyledHeadingWrap>
@@ -222,6 +230,20 @@ export default function Index() {
             />
 
             <PageSection
+                heading="Github"
+                subheading="Quick view of my github repos - some are finished most are not. Theres a few cool ones in there though"
+                child={
+                    <GithubProjects
+                        projects={projects}
+                        showMoreProjects={showMoreProjects}
+                    />
+                }
+                buttonLabel={showMoreProjects ? 'Hide some' : 'Show more'}
+                buttonCallback={() => setshowMoreProjects(!showMoreProjects)}
+                subtext="2FA locked me out of this for a few months 🥳"
+            />
+
+            <PageSection
                 heading="Tech tools 🔨"
                 subheading="Everything front end, if you can see it on a website i
                 can do it or figure it out. Right now I'm usually
@@ -254,9 +276,6 @@ export default function Index() {
                     </Stack>
                 }
                 subtext="✨"
-                buttonLabel="Download Resume"
-                buttonLink="/luke-davies-front-end-engineer-resume.pdf"
-                buttonDownload={true}
             />
 
             <PageSection
