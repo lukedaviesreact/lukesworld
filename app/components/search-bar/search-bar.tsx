@@ -44,45 +44,6 @@ export const SearchBar = ({ searchData, setSearchRes }: SearchBarProps) => {
                 size="md"
                 onKeyUp={(e) => handleInputChange(e)}
             />
-            <Box>
-                {/* <div>
-                    <Text>Authors</Text>
-                    {searchData.authors.map((author: any, i: number) => (
-                        <Badge
-                            key={`${author}-${i}`}
-                            colorScheme={'gray'}
-                            onClick={() =>
-                                handleTagClick({
-                                    type: 'author',
-                                    id: `${author}-${i}`,
-                                    name: author,
-                                })
-                            }
-                        >
-                            {author}
-                        </Badge>
-                    ))}
-                </div> */}
-
-                {/* <div>
-                    <Text>Tags</Text>
-                    {searchData.tags.map((tag: any, i: number) => (
-                        <Badge
-                            key={`${tag}-${i}`}
-                            colorScheme={'gray'}
-                            onClick={() =>
-                                handleTagClick({
-                                    type: 'tag',
-                                    id: `${tag}-${i}`,
-                                    name: tag,
-                                })
-                            }
-                        >
-                            {tag}
-                        </Badge>
-                    ))}
-                </div> */}
-            </Box>
         </Box>
     );
 };
