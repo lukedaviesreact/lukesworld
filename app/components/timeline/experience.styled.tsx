@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export const StyledExperienceWrap = styled(Box)({
     '--line-color': '#E2E8F0',
     position: 'relative',
-    padding: '0  3rem 0 0',
+    padding: '0 2rem 0 0',
     '@media (min-width: 1170px)': {
         padding: '0  3rem',
     },
