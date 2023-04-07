@@ -8,6 +8,7 @@ interface StyledCurvesProps {
 
 export const StyledCurves = styled('div')<StyledCurvesProps>(({ wavePos }) => ({
     position: 'absolute',
+    zIndex: '1',
     bottom: wavePos === 'bottom' ? `0` : 'unset',
     transform: wavePos === 'bottom' ? 'rotate(180deg)' : 'unset',
     left: 0,
