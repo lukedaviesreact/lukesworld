@@ -1,11 +1,13 @@
 import {
     Box,
+    Button,
     Flex,
     GridItem,
     Img,
     SimpleGrid,
     Stack,
     Text,
+    useColorMode,
 } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
@@ -43,6 +45,7 @@ import { getProjects } from '../utils/projects/getProjects';
 import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
 import { useState } from 'react';
+import { Circles } from '../components/circles/circles';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -144,6 +147,8 @@ export default function Index() {
     const logoArr = [reactLogo, typescriptLogo, remixLogo, cssLogo, nodeLogo];
     const aiImgArr = [AIimage, AIimage_two, AIimage_three];
     const [showMoreProjects, setshowMoreProjects] = useState(false);
+    const { colorMode, toggleColorMode } = useColorMode();
+
     return (
         <main>
             <StyledHeadingWrap>
@@ -172,6 +177,10 @@ export default function Index() {
                         <Circles />
                     </Box> */}
                 </StyledHeadline>
+
+                {/* <Button onClick={toggleColorMode}>
+                    Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+                </Button> */}
 
                 <StyledSubline>
                     <Text fontSize={'xs'}>I like to keep things simple</Text>
