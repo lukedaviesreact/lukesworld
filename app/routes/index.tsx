@@ -8,6 +8,7 @@ import {
     Stack,
     Text,
     useColorMode,
+    useToast,
 } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
 import reactLogo from '../assets/logos/react.png';
@@ -22,7 +23,7 @@ import type {
 } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
 import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
@@ -44,7 +45,7 @@ import timelineStyles from 'react-vertical-timeline-component/style.min.css';
 import { getProjects } from '../utils/projects/getProjects';
 import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -147,6 +148,51 @@ export default function Index() {
     const aiImgArr = [AIimage, AIimage_two, AIimage_three];
     const [showMoreProjects, setshowMoreProjects] = useState(false);
     const { colorMode, toggleColorMode } = useColorMode();
+    const toast = useToast();
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [toastIsActive, setToastIsActive] = useState(false);
+
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (scrollPosition > 750 && !toastIsActive) {
+            setToastIsActive(true);
+            toast({
+                title: 'Do you need a Front end dev?',
+                description: (
+                    <>
+                        <p>
+                            I&apos;m currently looking for my next contract or
+                            fulltime role. <br />
+                            Click{' '}
+                            <b>
+                                <Link to="/#contact" prefetch="intent">
+                                    here
+                                </Link>
+                            </b>{' '}
+                            to contact me
+                        </p>
+                    </>
+                ),
+
+                status: 'info',
+                duration: 4000,
+                variant: 'left-accent',
+                isClosable: true,
+            });
+        }
+    }, [scrollPosition, toast, toastIsActive]);
 
     return (
         <main>
