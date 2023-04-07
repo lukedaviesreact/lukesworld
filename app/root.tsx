@@ -19,7 +19,7 @@ import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
-import { Box, ChakraProvider, theme } from '@chakra-ui/react';
+import { Box, ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react';
 import { NavBar } from './components/nav-bar/nav-bar';
 import * as gtag from '~/utils/gtags.client';
 
@@ -162,6 +162,9 @@ const Document = withEmotionCache(
                         <Footer />
                     </Box>
 
+                    <ColorModeScript
+                        initialColorMode={theme.config.initialColorMode}
+                    />
                     <ScrollRestoration />
                     <Scripts />
                     <LiveReload />
