@@ -15,6 +15,19 @@ export const Footer = () => {
         marginBottom: `${theme.space[4]}`,
         width: '100%',
         alignItems: 'center',
+        '>*': {
+            flex: 1,
+        },
+        'p:first-of-type': {
+            justifyContent: 'flex-start',
+        },
+        '.chakra-stack:first-of-type': {
+            justifyContent: 'center',
+        },
+
+        '.chakra-stack:last-of-type': {
+            justifyContent: 'flex-end',
+        },
     });
 
     return (

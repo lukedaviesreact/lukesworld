@@ -5,7 +5,7 @@ import * as gtag from '~/utils/gtags.client';
 
 export const SocialLinks = () => {
     return (
-        <HStack spacing={2} mt={2}>
+        <HStack spacing={2} mt={2} justifyContent={'center'}>
             <Tooltip label="Github">
                 <Link href="https://www.github.com/lukedxvxes">
                     <AiFillGithub size="24" color="#2d3748" />
