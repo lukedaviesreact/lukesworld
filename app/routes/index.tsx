@@ -45,7 +45,6 @@ import { getProjects } from '../utils/projects/getProjects';
 import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
 import { useState } from 'react';
-import { Circles } from '../components/circles/circles';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -173,9 +172,6 @@ export default function Index() {
                         />
                         <SocialLinks />
                     </Box>
-                    {/* <Box flex={'1'}>
-                        <Circles />
-                    </Box> */}
                 </StyledHeadline>
 
                 {/* <Button onClick={toggleColorMode}>
@@ -225,7 +221,7 @@ export default function Index() {
                 }
                 buttonLabel="There's more"
                 buttonLink="/posts"
-                subtext="I should've started writing stuff down ages ago"
+                subtext="Check out my experience below"
             />
 
             <ExperienceComponent />
@@ -272,14 +268,11 @@ export default function Index() {
                 }
                 buttonLabel={showMoreProjects ? 'Hide some' : 'Show more'}
                 buttonCallback={() => setshowMoreProjects(!showMoreProjects)}
-                subtext="2FA locked me out of this for a few months 🥳"
+                subtext="Let's build something together 🥳"
             />
 
             <PageSection
                 heading="Tech tools 🔨"
-                subheading="Everything front end, if you can see it on a website i
-                can do it or figure it out. Right now I'm usually
-                building with React TypeScript."
                 child={
                     <Stack
                         direction={['row']}
