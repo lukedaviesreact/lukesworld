@@ -3,6 +3,7 @@ import {
     VerticalTimeline,
     VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
+import { Curves } from '../curves/curves';
 import { StyledHeading } from '../styled-heading/styled-heading';
 import { experienceData } from './experience.constants';
 import { StyledExperienceWrap } from './experience.styled';
@@ -12,6 +13,7 @@ export const ExperienceComponent = () => {
         <StyledExperienceWrap
             borderBottom={`1px solid ${theme.colors.gray[100]}`}
         >
+            <Curves wavePos="top" />
             <VerticalTimeline>
                 {experienceData.map((data) => (
                     <VerticalTimelineElement
@@ -59,6 +61,7 @@ export const ExperienceComponent = () => {
                     </VerticalTimelineElement>
                 ))}
             </VerticalTimeline>
+            <Curves wavePos="bottom" />
         </StyledExperienceWrap>
     );
 };

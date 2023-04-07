@@ -46,6 +46,7 @@ import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
 import { useState } from 'react';
 import { Circles } from '../components/circles/circles';
+import { Curves } from '../components/curves/curves';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -173,9 +174,6 @@ export default function Index() {
                         />
                         <SocialLinks />
                     </Box>
-                    {/* <Box flex={'1'}>
-                        <Circles />
-                    </Box> */}
                 </StyledHeadline>
 
                 {/* <Button onClick={toggleColorMode}>
