@@ -8,7 +8,7 @@ export const Footer = () => {
         borderBottom: `2px solid ${theme.colors.gray[100]}`,
         display: 'flex',
         justifyContent: 'space-between',
-        padding: `${theme.space[16]} 0`,
+        padding: `${theme.space[4]}`,
         maxWidth: theme.breakpoints.lg,
         margin: '0 auto',
         color: theme.colors.gray['600'],

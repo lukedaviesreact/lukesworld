@@ -19,7 +19,7 @@ import { getEnv } from './env.server';
 import { withEmotionCache } from '@emotion/react';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
-import { Box, ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react';
+import { Box, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { NavBar } from './components/nav-bar/nav-bar';
 import * as gtag from '~/utils/gtags.client';
 
@@ -30,6 +30,8 @@ import '@fontsource/nunito-sans/600.css';
 import '@fontsource/nunito-sans/700.css';
 import '@fontsource/nunito-sans/800.css';
 import { Footer } from './components/footer/footer';
+import theme from './style/theme';
+import { MobileMenu } from './components/mobile-menu/mobile-menu';
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -149,18 +151,8 @@ const Document = withEmotionCache(
                             />
                         </>
                     )}
-                    <NavBar />
-                    <Box
-                        margin="0 auto"
-                        paddingLeft={theme.space[4]}
-                        paddingRight={theme.space[4]}
-                    >
-                        <Box maxW={theme.breakpoints.lg} margin="0 auto" pt="4">
-                            {children}
-                        </Box>
 
-                        <Footer />
-                    </Box>
+                    {children}
 
                     <ColorModeScript
                         initialColorMode={theme.config.initialColorMode}
@@ -178,7 +170,18 @@ export default function App() {
     return (
         <Document>
             <ChakraProvider theme={theme}>
-                <Outlet />
+                <NavBar />
+                <Box
+                    margin="0 auto"
+                    paddingLeft={theme.space[4]}
+                    paddingRight={theme.space[4]}
+                >
+                    <Box maxW={theme.breakpoints.lg} margin="0 auto" pt="4">
+                        <Outlet />
+                    </Box>
+                </Box>
+
+                <Footer />
             </ChakraProvider>
         </Document>
     );

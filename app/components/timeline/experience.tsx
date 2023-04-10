@@ -11,6 +11,7 @@ import { StyledExperienceWrap } from './experience.styled';
 export const ExperienceComponent = () => {
     return (
         <StyledExperienceWrap
+            id="experience"
             borderBottom={`1px solid ${theme.colors.gray[100]}`}
         >
             <Curves wavePos="top" />

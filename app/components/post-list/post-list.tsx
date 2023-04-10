@@ -39,7 +39,7 @@ export const PostList = () => {
             <StyledPostStack
                 align="start"
                 postcount={postCount}
-                maxHeight={'calc(100vh - 158px)'}
+                maxHeight={'calc(100vh - 150px)'}
                 gap={2}
                 pb={4}
                 pt={4}
