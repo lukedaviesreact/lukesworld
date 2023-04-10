@@ -350,6 +350,7 @@ export default function Index() {
             />
 
             <PageSection
+                id="contact"
                 heading="Contact me directly"
                 subheading="Im always down to hear about exiting new projects, hit me up"
                 child={
@@ -369,7 +370,6 @@ export default function Index() {
                         </Box>
                     </Flex>
                 }
-                id="contact"
             />
         </main>
     );
