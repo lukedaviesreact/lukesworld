@@ -18,9 +18,10 @@ export const Footer = () => {
         '>*': {
             flex: 1,
         },
-        'p:first-of-type': {
-            justifyContent: 'flex-start',
+        '.chakra-stack p': {
+            textAlign: 'end',
         },
+
         '.chakra-stack:first-of-type': {
             justifyContent: 'center',
         },
