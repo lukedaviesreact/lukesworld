@@ -18,7 +18,7 @@ export const SocialLinks = () => {
             </Tooltip>
             <Tooltip label="Download resume">
                 <Link
-                    href="/luke-davies-software-engineer-react.pdf"
+                    href="/Luke_Davies-Frontend_Software_Eng-Resume.pdf"
                     download={true}
                     onClick={() => {
                         gtag.event({
