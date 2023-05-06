@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { StyledHeading } from '../styled-heading/styled-heading';
-import type { GithubProjectsData } from './github-projects.d';
+import type { GithubProjectsData } from '../../utils/projects/github-projects';
 
 export const GithubProjects = ({
     projects,

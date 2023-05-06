@@ -44,7 +44,7 @@ import { ExperienceComponent } from '../components/timeline/experience';
 import timelineStyles from 'react-vertical-timeline-component/style.min.css';
 import { getProjects } from '../utils/projects/getProjects';
 import { GithubProjects } from '../components/github-projects/github-projects';
-import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
+import type { GithubProjectsData } from '../utils/projects/github-projects';
 import { useEffect, useState } from 'react';
 
 export function links() {
