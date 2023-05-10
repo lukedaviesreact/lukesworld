@@ -12,13 +12,13 @@ export const SocialLinks = () => {
                 </Link>
             </Tooltip>
             <Tooltip label="Linkedin">
-                <Link href="https://www.linkedin.com/in/luke-davies-3503aa13a/">
+                <Link href="https://www.linkedin.com/in/luke-davies-software-engineer/">
                     <AiFillLinkedin size="24" color="#2d3748" />
                 </Link>
             </Tooltip>
             <Tooltip label="Download resume">
                 <Link
-                    href="/lukedavies-frontendEng-resume.pdf"
+                    href="/Luke_Davies-Software_Engineer-CV.pdf"
                     download={true}
                     onClick={() => {
                         gtag.event({
