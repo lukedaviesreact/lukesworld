@@ -363,11 +363,7 @@ export default function Index() {
                             display={['none', 'none', 'flex']}
                             justifyContent={'center'}
                             alignItems={'center'}
-                        >
-                            <Text fontSize={'sm'} color={'gray.600'} mb={10}>
-                                ~ Insert AI generated image here ~
-                            </Text>
-                        </Box>
+                        ></Box>
                     </Flex>
                 }
             />
