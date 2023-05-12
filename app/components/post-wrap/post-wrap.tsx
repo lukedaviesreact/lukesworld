@@ -45,8 +45,24 @@ export const PostWrap = ({
             padding: '2px',
             background: '#2e3440',
         },
+        '.callout': {
+            padding: theme.space[4],
+            backgroundColor: `${theme.colors.purple[100]} !important`,
+            borderRadius: theme.space[1],
+            display: 'flex',
+            alignItems: 'center',
+
+            '.callout-emoji': {
+                fontSize: theme.fontSizes.lg,
+            },
+            p: {
+                marginBottom: 0,
+                marginLeft: theme.space[4],
+            },
+        },
         img: {
             margin: `${theme.space['8']} auto`,
+            borderRadius: theme.space[1],
         },
         p: {
             marginBottom: theme.space[4],
@@ -73,6 +89,12 @@ export const PostWrap = ({
             '&:hover': {
                 transform: 'translateY(-3px)',
             },
+        },
+        figcaption: {
+            marginTop: `calc(${theme.space[8]} * -1)`,
+            marginBottom: theme.space[8],
+            fontSize: '12px',
+            color: theme.colors.gray[400],
         },
     });
 
