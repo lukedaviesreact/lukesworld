@@ -40,6 +40,10 @@ export const PostWrap = ({
             fontSize: '14px',
             margin: `${theme.space['8']} 0`,
         },
+        code: {
+            borderRadius: theme.space[1],
+            boxShadow: theme.shadows.md,
+        },
         'code:not(.hljs)': {
             color: '#81a1c1',
             padding: '2px',
