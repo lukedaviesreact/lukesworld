@@ -10,8 +10,8 @@ cmd = "start.sh"
 entrypoint = "sh"
 
 [mounts]
-source = "data"
-destination = "/data"
+source = "data-machines"
+destination = "/data-machines"
 
 [[services]]
 internal_port = 8080
