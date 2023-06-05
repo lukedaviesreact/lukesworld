@@ -75,7 +75,7 @@ export const PostCard = ({
                             alignItems={'center'}
                         >
                             <StyledHeading
-                                type="h4"
+                                type="h3"
                                 size="sm"
                                 content={post.title}
                                 color="dark"
