@@ -11,6 +11,7 @@ import {
     HStack,
     VStack,
     space,
+    VisuallyHidden,
 } from '@chakra-ui/react';
 import { IoMdMenu } from 'react-icons/io';
 import { useRef } from 'react';
@@ -27,6 +28,7 @@ export const MobileMenu = () => {
         <>
             <>
                 <Button ref={btnRef} onClick={onOpen}>
+                    <VisuallyHidden>mobile menu</VisuallyHidden>
                     <IoMdMenu size="24px" />
                 </Button>
 
