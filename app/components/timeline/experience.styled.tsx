@@ -11,6 +11,7 @@ export const StyledExperienceWrap = styled(Box)({
     p: {
         fontSize: theme.fontSizes.sm,
     },
+
     '.vertical-timeline': {
         width: '100%',
     },

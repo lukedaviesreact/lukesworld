@@ -15,7 +15,6 @@ import { ErrorMsg } from '../../inputs/error-msg/error-msg';
 import { ErrorMessage } from './error-message';
 import type { Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
-import * as gtag from '~/utils/gtags.client';
 
 type FormData = {
     prompt: string;
@@ -54,12 +53,6 @@ export const OpenAIForm = ({
     const submit = useSubmit();
 
     const onSubmit = (data: FormData | FieldValues) => {
-        gtag.event({
-            action: 'submit_openai_form',
-            category: 'Image Generation',
-            label: data.prompt,
-        });
-
         submit(
             {
                 prompt: data.prompt.replace(/</g, '&lt;').replace(/>/g, '&gt;'),

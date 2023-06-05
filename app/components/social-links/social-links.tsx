@@ -1,7 +1,6 @@
 import { HStack, Link, Tooltip } from '@chakra-ui/react';
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import { RiSave2Fill } from 'react-icons/ri';
-import * as gtag from '~/utils/gtags.client';
 
 export const SocialLinks = () => {
     return (
@@ -20,13 +19,6 @@ export const SocialLinks = () => {
                 <Link
                     href="/Luke-Davies_Software-Engineer_CV.pdf"
                     download={true}
-                    onClick={() => {
-                        gtag.event({
-                            action: 'download_resume',
-                            category: 'job-seeking',
-                            label: 'resume downloaded',
-                        });
-                    }}
                 >
                     <RiSave2Fill size="24" color="#2d3748" />
                 </Link>
