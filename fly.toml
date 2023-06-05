@@ -10,7 +10,7 @@ cmd = "start.sh"
 entrypoint = "sh"
 
 [mounts]
-source = "data-machines"
+source = "data"
 destination = "/data-machines"
 
 [[services]]
