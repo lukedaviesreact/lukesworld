@@ -1,13 +1,11 @@
 import {
     Box,
-    Button,
     Flex,
     GridItem,
     Img,
     SimpleGrid,
     Stack,
     Text,
-    useColorMode,
     useToast,
 } from '@chakra-ui/react';
 import cssLogo from '../assets/logos/css.png';
@@ -147,7 +145,6 @@ export default function Index() {
     const logoArr = [reactLogo, typescriptLogo, remixLogo, cssLogo, nodeLogo];
     const aiImgArr = [AIimage, AIimage_two, AIimage_three];
     const [showMoreProjects, setshowMoreProjects] = useState(false);
-    const { colorMode, toggleColorMode } = useColorMode();
     const toast = useToast();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [toastIsActive, setToastIsActive] = useState(false);
@@ -219,10 +216,6 @@ export default function Index() {
                         <SocialLinks />
                     </Box>
                 </StyledHeadline>
-
-                {/* <Button onClick={toggleColorMode}>
-                    Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-                </Button> */}
 
                 <StyledSubline>
                     <Text fontSize={'xs'}>I like to keep things simple</Text>

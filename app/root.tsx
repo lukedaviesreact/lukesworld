@@ -11,8 +11,6 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useLoaderData,
-    useLocation,
 } from '@remix-run/react';
 
 import { getEnv } from './env.server';
@@ -21,7 +19,6 @@ import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
 import { Box, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { NavBar } from './components/nav-bar/nav-bar';
-import * as gtag from '~/utils/gtags.client';
 
 import '@fontsource/nunito-sans/200.css';
 import '@fontsource/nunito-sans/300.css';
@@ -31,7 +28,6 @@ import '@fontsource/nunito-sans/700.css';
 import '@fontsource/nunito-sans/800.css';
 import { Footer } from './components/footer/footer';
 import theme from './style/theme';
-import { MobileMenu } from './components/mobile-menu/mobile-menu';
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
@@ -90,14 +86,6 @@ const Document = withEmotionCache(
     ({ children }: DocumentProps, emotionCache) => {
         const serverStyleData = useContext(ServerStyleContext);
         const clientStyleData = useContext(ClientStyleContext);
-        const { gaTrackingId } = useLoaderData<typeof loader>();
-        const location = useLocation();
-
-        useEffect(() => {
-            if (gaTrackingId?.length) {
-                gtag.pageview(location.pathname, gaTrackingId);
-            }
-        }, [location, gaTrackingId]);
 
         // Only executed on client
         useEffect(() => {
@@ -128,30 +116,6 @@ const Document = withEmotionCache(
                 </head>
 
                 <body>
-                    {process.env.NODE_ENV === 'development' ||
-                    !gaTrackingId ? null : (
-                        <>
-                            <script
-                                async
-                                src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
-                            />
-                            <script
-                                async
-                                id="gtag-init"
-                                dangerouslySetInnerHTML={{
-                                    __html: `
-                                        window.dataLayer = window.dataLayer || [];
-                                        function gtag(){dataLayer.push(arguments);}
-                                        gtag('js', new Date());
-                                        gtag('config', '${gaTrackingId}', {
-                                        page_path: window.location.pathname,
-                                        });
-                                    `,
-                                }}
-                            />
-                        </>
-                    )}
-
                     {children}
 
                     <ColorModeScript

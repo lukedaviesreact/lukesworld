@@ -18,7 +18,6 @@ import { useState } from 'react';
 import { SuccessMessage } from './success-message';
 import { ErrorMessage } from './error-message';
 import { motion } from 'framer-motion';
-import * as gtag from '~/utils/gtags.client';
 
 type FormData = {
     name: string;
@@ -60,12 +59,6 @@ export const HomePageContactForm = () => {
 
     const onSubmit = (data: FormData | FieldValues) => {
         setName(data.name);
-
-        gtag.event({
-            action: 'submit_contact_form',
-            category: 'Image Generation',
-            label: data.email,
-        });
 
         submit(
             {
