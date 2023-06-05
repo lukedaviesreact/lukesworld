@@ -27,7 +27,7 @@ export const filterByTitle = ({
     });
 
     const filteredPostTitlesArr = filteredPostTitleArr.map(
-        (post) => Object.keys(post)[0]
+        (post) => Object.keys(post)[0] // slug
     );
 
     return postList.filter((post) => {

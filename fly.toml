@@ -11,7 +11,7 @@ entrypoint = "sh"
 
 [mounts]
 source = "data"
-destination = "/data_machines"
+destination = "/data"
 
 [[services]]
 internal_port = 8080
