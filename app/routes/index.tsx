@@ -310,7 +310,7 @@ export default function Index() {
                 subtext="Let's build something together 🥳"
             />
 
-            <PageSection
+            {/* <PageSection
                 heading="Tech tools 🔨"
                 child={
                     <Stack
@@ -340,7 +340,7 @@ export default function Index() {
                     </Stack>
                 }
                 subtext="✨"
-            />
+            /> */}
 
             <PageSection
                 id="contact"

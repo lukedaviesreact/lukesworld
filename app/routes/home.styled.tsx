@@ -12,7 +12,7 @@ export const StyledHeadline = styled(Box)({
 });
 
 export const StyledSubline = styled(Box)({
-    color: theme.colors.gray[500],
+    color: theme.colors.gray[600],
     display: 'flex',
     justifyContent: 'center',
     position: 'relative',
