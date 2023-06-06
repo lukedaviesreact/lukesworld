@@ -1,7 +1,7 @@
 import { Box, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const StyledExperienceWrap = styled(Box)({
+export const StyledTimelineWrap = styled(Box)({
     '--line-color': '#E2E8F0',
     position: 'relative',
     padding: '0 2rem 0 0',

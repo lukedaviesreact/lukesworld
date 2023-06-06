@@ -33,12 +33,13 @@ import { StyledHeading } from '~/components/styled-heading/styled-heading';
 import AIimage from '../assets/images/AI-space.png';
 import AIimage_two from '../assets/images/AI-space-2.png';
 import AIimage_three from '../assets/images/AI-space-3.png';
-import { ExperienceComponent } from '../components/timeline/experience';
+
 import timelineStyles from 'react-vertical-timeline-component/style.min.css';
 import { getProjects } from '../utils/projects/getProjects';
 import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
 import { useState } from 'react';
+import { TimelineComponent } from '../components/timeline/timeline';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -212,7 +213,7 @@ export default function Index() {
                 subtext="Check out my experience below"
             />
 
-            <ExperienceComponent />
+            <TimelineComponent />
 
             <PageSection
                 heading="OpenAI's image generation"
