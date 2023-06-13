@@ -55,16 +55,18 @@ export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
     const success = url.searchParams.get('success');
 
-    const data = await getDbData({
+    const postData = getDbData({
         client: notion,
         dbId: process.env.NOTION_DATABASE_ID || '',
     });
 
-    const githubProjects = await getProjects();
+    const githubProjects = getProjects();
+
+    const allData = await Promise.all([postData, githubProjects]);
 
     return json<LoaderData>({
-        postList: data.posts,
-        projects: githubProjects,
+        postList: allData[0].posts,
+        projects: allData[1],
         formSuccess: success === 'true',
     });
 };
