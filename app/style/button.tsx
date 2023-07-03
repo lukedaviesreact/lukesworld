@@ -5,9 +5,19 @@ export const Button = defineStyleConfig({
     baseStyle: {
         fontWeight: 'bold',
         borderRadius: '0', // <-- border radius is same for all variants and sizes
-        boxShadow: `4px 4px #1A202C`,
         border: '1px solid #1A202C',
+
+        transition: 'all .2s ease',
+        position: 'relative',
+
+        transform: 'translateX(-2px) translateY(-2px)',
+        boxShadow: '4px 4px #1A202C ',
+        _hover: {
+            transform: 'translateX(0px) translateY(0px)',
+            boxShadow: '0px 0px  #1A202C ',
+        },
     },
+
     // Two sizes: sm and md
     sizes: {
         sm: {

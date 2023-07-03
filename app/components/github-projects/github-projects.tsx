@@ -8,6 +8,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { container, item } from '../../style/animation';
 import { StyledCard } from '../styled-card/styled-card.styled';
 import { StyledHeading } from '../styled-heading/styled-heading';
 import type { GithubProjectsData } from './github-projects.d';
@@ -22,9 +23,14 @@ export const GithubProjects = ({
     if (projects.length) {
         return (
             <SimpleGrid
+                as={motion.div}
                 gridTemplateColumns="repeat(6, 1fr)"
                 gridRowGap={4}
                 gridColumnGap={4}
+                variants={container}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
             >
                 {projects.map((repo: GithubProjectsData, index: number) => {
                     const name = repo.name;
@@ -33,6 +39,7 @@ export const GithubProjects = ({
                     const stars = repo.stargazers_count;
                     return (
                         <GridItem
+                            as={motion.div}
                             colSpan={{
                                 base: 6,
                                 md: 3,
@@ -46,6 +53,7 @@ export const GithubProjects = ({
                                     ? 'none'
                                     : 'unset'
                             }
+                            variants={item}
                         >
                             <motion.a
                                 href={reposUrl}

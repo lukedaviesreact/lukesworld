@@ -19,7 +19,10 @@ export const StyledButtonWrap = styled(Heading)({
 export const StyledSubline = styled(Box)({
     color: theme.colors.gray[600],
     display: 'flex',
-    justifyContent: 'right',
+    justifyContent: 'center',
     position: 'relative',
     bottom: '-3rem',
+    [`@media (min-width:${theme.breakpoints.lg})`]: {
+        justifyContent: 'end',
+    },
 });

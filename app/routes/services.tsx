@@ -25,6 +25,9 @@ import { AccordionComponent } from '../components/accordion/accordion';
 import { HomePageContactForm } from '../components/forms/homepage-contact/homepage-contact';
 import { ReviewCard } from '../components/review-card/review-card';
 import { useServicesData } from '../hooks/useServicesData';
+import { motion } from 'framer-motion';
+import { container, item } from '../style/animation';
+import { Link } from '@remix-run/react';
 
 export type LoaderData = {
     formSuccess: boolean;
@@ -108,25 +111,22 @@ export const meta: MetaFunction<typeof loader> = () => ({
 
 export default function ServicesRoute() {
     const { reviews, services } = useServicesData();
+
     return (
         <main>
             <StyledHeadingWrap>
                 <StyledHeadline>
-                    <Box flex={'1'}>
+                    <Box>
                         <Heading
                             as="h1"
                             color={'gray.700'}
-                            fontSize="6xl"
-                            lineHeight={'4rem'}
+                            fontSize={['4xl', '6xl']}
+                            lineHeight={['2.5rem', '4rem']}
                         >
                             Powering Your Digital Journey
                         </Heading>
                     </Box>
 
-                    <Box flex={'1'} gridColumn={2}>
-                        <Box></Box>
-                        <Box></Box>
-                    </Box>
                     <SocialLinks isHeader={true} />
                 </StyledHeadline>
 
@@ -149,13 +149,19 @@ export default function ServicesRoute() {
                 subheading=""
                 child={
                     <SimpleGrid
+                        as={motion.div}
                         gridTemplateColumns="repeat(6, 1fr)"
                         gridRowGap={4}
                         gridColumnGap={4}
+                        variants={container}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
                     >
                         {reviews.map((review) => {
                             return (
                                 <GridItem
+                                    as={motion.div}
                                     colSpan={{
                                         base: 6,
                                         md: 3,
@@ -164,6 +170,7 @@ export default function ServicesRoute() {
                                     }}
                                     key={review.id}
                                     h="100%"
+                                    variants={item}
                                 >
                                     <ReviewCard
                                         key={review.id}

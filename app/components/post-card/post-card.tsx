@@ -61,13 +61,7 @@ export const PostCard = ({
                 },
             }}
         >
-            <StyledCard
-                minH={variation === 'lg' ? '188px' : 'unset'}
-                as={motion.div}
-                whileHover={{
-                    scale: 1.025,
-                }}
-            >
+            <StyledCard minH={variation === 'lg' ? '188px' : 'unset'}>
                 <CardBody>
                     <Stack spacing="3">
                         <Box

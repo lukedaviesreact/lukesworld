@@ -6,18 +6,29 @@ export const StyledHeadingWrap = styled(Box)({
 });
 export const StyledHeadline = styled(Box)({
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+
+    flexDirection: 'column',
+    justifyContent: 'center',
     minHeight: '60vh',
     position: 'relative',
+
+    [`@media (min-width:${theme.breakpoints.lg})`]: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        maxWidth: '50%',
+    },
 });
 
 export const StyledSubline = styled(Box)({
     color: theme.colors.gray[600],
     display: 'flex',
-    justifyContent: 'end',
+    justifyContent: 'center',
     position: 'relative',
     top: '-1.25rem',
+    [`@media (min-width:${theme.breakpoints.lg})`]: {
+        justifyContent: 'end',
+    },
 });
 
 export const Styledhighlight = styled('span')({

@@ -31,9 +31,23 @@ export const PageSection = ({
     buttonLabel,
     buttonCallback,
 }: PageSectionProps) => {
+    const container = {
+        hidden: { opacity: 0, y: '15px' },
+        visible: {
+            opacity: 1,
+            y: '0px',
+        },
+    };
+
     return (
         <StyledPageSectionWrap id={id ? id : ''}>
-            <StyledHeadingWrap>
+            <StyledHeadingWrap
+                as={motion.div}
+                variants={container}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
                 <Box mb={2}>
                     <StyledHeading
                         type="h2"
