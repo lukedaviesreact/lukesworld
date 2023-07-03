@@ -6,8 +6,11 @@ export const StyledPageSectionWrap = styled(Box)({
     borderBottom: `1px solid ${theme.colors.gray[100]}`,
 });
 export const StyledHeadingWrap = styled(Box)({
-    marginBottom: `${theme.space['16']}`,
-    maxWidth: theme.space['96'],
+    marginBottom: `${theme.space['8']}`,
+    maxWidth: '25rem',
+    [`@media (min-width:${theme.breakpoints.lg})`]: {
+        marginBottom: `${theme.space['16']}`,
+    },
 });
 
 export const StyledButtonWrap = styled(Heading)({

@@ -23,6 +23,39 @@ export const useServicesData = () => {
         },
     ];
 
+    const highlightedServices = [
+        {
+            service: 'Custom Web Development',
+            description:
+                "With a keen eye for detail and a commitment to excellence, I specialize in crafting tailor-made websites that capture your brand's essence and captivate your audience. By leveraging the latest technologies and industry best practices, I ensure your website is not only visually stunning but also highly functional, responsive, and user-friendly.",
+            emoji: '🚀',
+        },
+        {
+            service: 'E-commerce Solutions',
+            description:
+                "Looking to expand your online presence and boost your sales? I can develop robust e-commerce platforms that seamlessly integrate with your existing systems or start from scratch, providing you with a secure and scalable solution. From shopping carts and payment gateways to inventory management and order tracking, I've got you covered.",
+            emoji: '🛠️',
+        },
+        {
+            service: 'Mobile Application Development',
+            description:
+                "In today's mobile-first world, having a mobile app is essential to stay ahead of the competition. With expertise in both iOS and Android app development, I create user-friendly and feature-rich mobile applications that deliver an immersive experience. Whether it's a productivity tool, a customer engagement platform, or a game-changing app, I have the skills to bring your vision to life.",
+            emoji: '🚀',
+        },
+        {
+            service: 'API Integration',
+            description:
+                'Streamline your business operations by integrating third-party APIs into your existing software systems. I possess extensive experience in API integration, allowing you to seamlessly connect your applications with popular services, such as payment gateways, social media platforms, and cloud storage providers. Unlock the power of integration and enhance your workflow efficiency.',
+            emoji: '🚀',
+        },
+        {
+            service: 'Website Maintenance and Support',
+            description:
+                'Your digital presence requires regular upkeep to ensure optimal performance and security. I offer comprehensive website maintenance and support services, including security updates, bug fixes, content updates, and performance optimization. Let me handle the technical aspects, so you can focus on your core business activities.',
+            emoji: '🚀',
+        },
+    ];
+
     const services = [
         {
             title: 'Responsive Web Design',
@@ -71,5 +104,5 @@ export const useServicesData = () => {
         },
     ];
 
-    return { reviews, services };
+    return { reviews, services, highlightedServices };
 };
