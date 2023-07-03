@@ -28,6 +28,7 @@ import { useServicesData } from '../hooks/useServicesData';
 import { motion } from 'framer-motion';
 import { container, item } from '../style/animation';
 import { Link } from '@remix-run/react';
+import { HighlightSection } from '../components/highlight-section/highlight-section';
 
 export type LoaderData = {
     formSuccess: boolean;
@@ -110,7 +111,7 @@ export const meta: MetaFunction<typeof loader> = () => ({
 });
 
 export default function ServicesRoute() {
-    const { reviews, services } = useServicesData();
+    const { reviews, services, highlightedServices } = useServicesData();
 
     return (
         <main>
@@ -136,10 +137,40 @@ export default function ServicesRoute() {
                     </Text>
                 </StyledSubline>
             </StyledHeadingWrap>
+            <PageSection
+                heading="Exceptional digital solutions"
+                child={
+                    <p>
+                        As a{' '}
+                        <b>
+                            passionate and experienced web and software
+                            developer{' '}
+                        </b>
+                        with five years in the field, I offer a range of
+                        in-demand services{' '}
+                        <b>tailored to meet your unique needs.</b>
+                        Having worked across multiple industries, I bring a
+                        <b> fresh perspective and a deep understanding</b> of
+                        diverse business requirements. Whether you're a startup,
+                        a small business, or an established enterprise, I have
+                        the expertise to{' '}
+                        <b>
+                            transform your ideas into exceptional digital
+                            solutions.
+                        </b>
+                    </p>
+                }
+                subtext=""
+            />
+
+            <Box mt={16}>
+                <HighlightSection highlightedService={highlightedServices[0]} />
+                <HighlightSection highlightedService={highlightedServices[1]} />
+            </Box>
 
             <PageSection
                 heading="All Services"
-                subheading="Here's a list of services most often requested by clients, if you need something that isnt listed here please reach out."
+                subheading=""
                 child={<AccordionComponent content={services} />}
                 subtext="Let's work together "
             />
@@ -187,7 +218,10 @@ export default function ServicesRoute() {
             <PageSection
                 id="contact"
                 heading="Contact me directly"
-                subheading="Im excited to chat! Lets work together."
+                subheading="  Ready to embark on a transformative journey?
+                Contact me today to discuss your project
+                requirements and let's create something
+                exceptional together!"
                 child={
                     <Flex>
                         <Box flex={1}>

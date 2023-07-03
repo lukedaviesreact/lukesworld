@@ -1,6 +1,7 @@
 import { Text, Button, Box } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
 import { motion } from 'framer-motion';
+import { item } from '../../style/animation';
 import { StyledHeading } from '../styled-heading/styled-heading';
 
 import {
@@ -67,8 +68,15 @@ export const PageSection = ({
                     </Text>
                 ) : null}
             </StyledHeadingWrap>
-
-            {child}
+            <Box
+                as={motion.div}
+                variants={container}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                {child}
+            </Box>
 
             {buttonLink && buttonLabel && !buttonCallback && (
                 <StyledButtonWrap>
