@@ -11,14 +11,14 @@ export const useServicesData = () => {
             id: 2,
             name: 'Zac Duggan',
             business: 'Peddle Perth',
-            review: 'Working with Luke was an absolute pleasure! Their team developed a responsive website that exceeded our expectations. They paid great attention to detail, ensuring our site looked fantastic on all devices.',
+            review: 'Working with Luke was an absolute pleasure! He developed a responsive website that exceeded our expectations. He paid great attention to detail, ensuring our site looked fantastic on all devices.',
             services: ['Custom Development'],
         },
         {
             id: 3,
             name: 'Jack Herringe',
             business: 'CarCup',
-            review: 'Their expertise in e-commerce development helped us create a seamless online shopping experience for our customers. We highly recommend Luke.',
+            review: 'His expertise in e-commerce development helped us create a seamless online shopping experience for our customers. We highly recommend Luke.',
             services: ['E-commerce', 'SEO'],
         },
     ];
