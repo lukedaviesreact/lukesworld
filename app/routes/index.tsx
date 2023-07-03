@@ -1,12 +1,4 @@
-import {
-    Box,
-    Flex,
-    GridItem,
-    Img,
-    SimpleGrid,
-    Stack,
-    Text,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, theme } from '@chakra-ui/react';
 
 import type { Post } from '@prisma/client';
 import type {
@@ -18,7 +10,6 @@ import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PageSection } from '~/components/page-section/page-section';
-import { PostCard } from '~/components/post-card/post-card';
 import { getDbData } from '~/utils/posts';
 import {
     StyledHeadingWrap,
@@ -28,7 +19,6 @@ import {
 import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
-import { StyledHeading } from '~/components/styled-heading/styled-heading';
 
 import AIimage from '../assets/images/AI-space.png';
 import AIimage_two from '../assets/images/AI-space-2.png';
@@ -40,6 +30,9 @@ import { GithubProjects } from '../components/github-projects/github-projects';
 import type { GithubProjectsData } from '../components/github-projects/github-projects.d';
 import { useState } from 'react';
 import { TimelineComponent } from '../components/timeline/timeline';
+import { PostGrid } from '../components/post-grid/post-grid';
+import { ImageStack } from '../components/image-stack/image-stack';
+import styled from '@emotion/styled';
 
 export function links() {
     return [{ rel: 'stylesheet', href: timelineStyles }];
@@ -147,30 +140,23 @@ export default function Index() {
         <main>
             <StyledHeadingWrap>
                 <StyledHeadline>
-                    <Box flex={'1'}>
-                        <StyledHeading
-                            type="h2"
-                            size="xl"
-                            content={
-                                <>
-                                    Hi, my name's Luke <span>👋</span>
-                                </>
-                            }
-                            color="dark"
-                        />
-                        <StyledHeading
-                            type="h1"
-                            size="sm"
-                            weight={400}
-                            content="I'm a software engineer, specialising in Javascript."
-                            color="light"
-                        />
-                        <SocialLinks />
+                    <Box>
+                        <Heading
+                            as="h1"
+                            color={'gray.700'}
+                            fontSize={['4xl', '6xl']}
+                            lineHeight={['2.5rem', '4rem']}
+                        >
+                            Driving Digital <span>Transformation</span>
+                        </Heading>
                     </Box>
+                    <SocialLinks isHeader={true} />
                 </StyledHeadline>
 
                 <StyledSubline>
-                    <Text fontSize={'xs'}>I like to keep things simple</Text>
+                    <Text fontSize={'xs'}>
+                        Building technical solutions to business problems
+                    </Text>
                 </StyledSubline>
             </StyledHeadingWrap>
 
@@ -179,37 +165,7 @@ export default function Index() {
                 subheading="It's mostly a tech blog. I like to document about new
                 things I've learnt so I've got reference later, you can
                 check it out too"
-                child={
-                    <SimpleGrid
-                        gridTemplateColumns="repeat(6, 1fr)"
-                        gridRowGap={4}
-                        gridColumnGap={4}
-                    >
-                        {postList?.slice(0, 3).map((post) => {
-                            if (!post.title || !post.id) {
-                                return <li key="invalid-post">Invalid Post</li>;
-                            }
-                            return (
-                                <GridItem
-                                    colSpan={{
-                                        base: 6,
-                                        md: 3,
-                                        lg: 2,
-                                        xl: 2,
-                                    }}
-                                    key={post.id}
-                                    h="100%"
-                                >
-                                    <PostCard
-                                        key={post.id}
-                                        post={post}
-                                        variation="lg"
-                                    />
-                                </GridItem>
-                            );
-                        })}
-                    </SimpleGrid>
-                }
+                child={<PostGrid postList={postList} />}
                 buttonLabel="There's more"
                 buttonLink="/posts"
                 subtext="Check out my experience below"
@@ -219,30 +175,8 @@ export default function Index() {
 
             <PageSection
                 heading="OpenAI's image generation"
-                subheading="Honestly, i needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
-                child={
-                    <Stack direction={'row'} spacing={4}>
-                        {aiImgArr.map((aiImg, i) => (
-                            <Box
-                                key={`aiImg-${i}`}
-                                display={[
-                                    `${i >= 1 ? 'none' : 'inline-block'}`,
-                                    `${i >= 1 ? 'none' : 'inline-block'}`,
-                                    'inline-block',
-                                ]}
-                            >
-                                <Img
-                                    key={i}
-                                    src={aiImg}
-                                    loading="lazy"
-                                    alt={'Ai generated images'}
-                                    borderRadius={8}
-                                    boxShadow={'md'}
-                                />
-                            </Box>
-                        ))}
-                    </Stack>
-                }
+                subheading="Honestly, I needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
+                child={<ImageStack images={aiImgArr} />}
                 buttonLabel="Have a go"
                 buttonLink="/image-generation"
                 subtext="it's 2023"
@@ -250,7 +184,7 @@ export default function Index() {
 
             <PageSection
                 heading="Github"
-                subheading="Quick view of my github repos - some are finished most are not. Theres a few cool ones in there though"
+                subheading="Quick view of my github repos - needs a clean up"
                 child={
                     <GithubProjects
                         projects={projects}

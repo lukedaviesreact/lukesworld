@@ -22,4 +22,7 @@ export const StyledSubline = styled(Box)({
     justifyContent: 'center',
     position: 'relative',
     bottom: '-3rem',
+    [`@media (min-width:${theme.breakpoints.lg})`]: {
+        justifyContent: 'end',
+    },
 });

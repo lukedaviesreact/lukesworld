@@ -2,6 +2,7 @@ import { VStack, Text, Box, theme } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { useLoaderData } from '@remix-run/react';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { filterPosts } from '~/utils/filter-posts';
 import { PostCard } from '../post-card/post-card';
@@ -28,6 +29,10 @@ export const PostList = () => {
 
     const StyledPostStack = styled(VStack)(({ postcount }) => ({
         overflowY: 'scroll',
+
+        '&::-webkit-scrollbar': {
+            display: 'none',
+        },
     }));
 
     return (
@@ -37,13 +42,14 @@ export const PostList = () => {
                 Search by title or category tag
             </Text>
             <StyledPostStack
+                as={motion.div}
                 align="start"
                 postcount={postCount}
                 maxHeight={'calc(100vh - 150px)'}
                 gap={2}
                 pb={4}
                 pt={4}
-                pl={'1px'}
+                pl={'4px'}
                 pr={[0, 0, 4]}
             >
                 {filteredPosts.map((post) => {
@@ -51,7 +57,9 @@ export const PostList = () => {
                         return <li key="invalid-post">Invalid Post</li>;
                     }
                     return (
-                        <PostCard key={post.id} post={post} variation="sm" />
+                        <Box as={motion.div} key={post.id} width="100%">
+                            <PostCard post={post} variation="sm" />
+                        </Box>
                     );
                 })}
             </StyledPostStack>

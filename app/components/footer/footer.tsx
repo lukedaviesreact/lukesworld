@@ -22,11 +22,11 @@ export const Footer = () => {
             textAlign: 'end',
         },
 
-        '.chakra-stack:first-of-type': {
+        '.social-links .chakra-stack': {
             justifyContent: 'center',
         },
 
-        '.chakra-stack:last-of-type': {
+        '.nav-links .chakra-stack': {
             justifyContent: 'flex-end',
         },
     });
@@ -34,8 +34,13 @@ export const Footer = () => {
     return (
         <StyledFooter>
             <Text fontSize={'small'}>lukedavies.dev 2023</Text>
-            <SocialLinks />
-            <NavLinks />
+            <div className="social-links">
+                <SocialLinks />
+            </div>
+
+            <div className="nav-links">
+                <NavLinks />
+            </div>
         </StyledFooter>
     );
 };
