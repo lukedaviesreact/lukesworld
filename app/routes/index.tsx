@@ -2,6 +2,7 @@ import {
     Box,
     Flex,
     GridItem,
+    Heading,
     Img,
     SimpleGrid,
     Stack,
@@ -28,7 +29,6 @@ import {
 import { SocialLinks } from '~/components/social-links/social-links';
 import { notion } from '~/db.server';
 import { HomePageContactForm } from '~/components/forms/homepage-contact/homepage-contact';
-import { StyledHeading } from '~/components/styled-heading/styled-heading';
 
 import AIimage from '../assets/images/AI-space.png';
 import AIimage_two from '../assets/images/AI-space-2.png';
@@ -148,29 +148,27 @@ export default function Index() {
             <StyledHeadingWrap>
                 <StyledHeadline>
                     <Box flex={'1'}>
-                        <StyledHeading
-                            type="h2"
-                            size="xl"
-                            content={
-                                <>
-                                    Hi, my name's Luke <span>👋</span>
-                                </>
-                            }
-                            color="dark"
-                        />
-                        <StyledHeading
-                            type="h1"
-                            size="sm"
-                            weight={400}
-                            content="I'm a software engineer, specialising in Javascript."
-                            color="light"
-                        />
-                        <SocialLinks />
+                        <Heading
+                            as="h1"
+                            color={'gray.700'}
+                            fontSize="6xl"
+                            lineHeight={'4rem'}
+                        >
+                            Driving Digital Transformation
+                        </Heading>
                     </Box>
+
+                    <Box flex={'1'} gridColumn={2}>
+                        <Box></Box>
+                        <Box></Box>
+                    </Box>
+                    <SocialLinks isHeader={true} />
                 </StyledHeadline>
 
                 <StyledSubline>
-                    <Text fontSize={'xs'}>I like to keep things simple</Text>
+                    <Text fontSize={'xs'}>
+                        Building technical solutions to business problems
+                    </Text>
                 </StyledSubline>
             </StyledHeadingWrap>
 
@@ -219,7 +217,7 @@ export default function Index() {
 
             <PageSection
                 heading="OpenAI's image generation"
-                subheading="Honestly, i needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
+                subheading="Honestly, I needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
                 child={
                     <Stack direction={'row'} spacing={4}>
                         {aiImgArr.map((aiImg, i) => (
@@ -236,8 +234,9 @@ export default function Index() {
                                     src={aiImg}
                                     loading="lazy"
                                     alt={'Ai generated images'}
-                                    borderRadius={8}
-                                    boxShadow={'md'}
+                                    borderRadius={0}
+                                    boxShadow={'6px 6px #2D3748'}
+                                    border={'1px solid white'}
                                 />
                             </Box>
                         ))}
@@ -250,7 +249,7 @@ export default function Index() {
 
             <PageSection
                 heading="Github"
-                subheading="Quick view of my github repos - some are finished most are not. Theres a few cool ones in there though"
+                subheading="Quick view of my github repos - needs a clean up"
                 child={
                     <GithubProjects
                         projects={projects}

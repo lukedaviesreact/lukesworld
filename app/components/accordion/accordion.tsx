@@ -5,26 +5,34 @@ import {
     AccordionItem,
     AccordionPanel,
 } from '@chakra-ui/accordion';
+import { Box } from '@chakra-ui/react';
+import { StyledAccordionWrap } from './accordion.styled';
 
 export interface AccordionComponentProps {
-    titleComponent: JSX.Element;
-    contentComponent: JSX.Element;
+    content: {
+        title: string;
+        content: string;
+    }[];
 }
 
-export const AccordionComponent = ({
-    titleComponent,
-    contentComponent,
-}: AccordionComponentProps) => {
+export const AccordionComponent = ({ content }: AccordionComponentProps) => {
     return (
-        <Accordion>
-            <AccordionItem>
-                <AccordionButton>
-                    {titleComponent}
-                    <AccordionIcon />
-                </AccordionButton>
-
-                <AccordionPanel pb={4}>{contentComponent}</AccordionPanel>
-            </AccordionItem>
-        </Accordion>
+        <StyledAccordionWrap>
+            <Accordion>
+                {content.map((item) => (
+                    <AccordionItem key={item.title}>
+                        <h2>
+                            <AccordionButton>
+                                <Box as="span" flex="1" textAlign="left">
+                                    <b>{item.title}</b>
+                                </Box>
+                                <AccordionIcon />
+                            </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>{item.content}</AccordionPanel>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+        </StyledAccordionWrap>
     );
 };

@@ -1,23 +1,24 @@
 import {
     Box,
-    Card,
     CardBody,
     Stack,
     theme,
     Text,
     HStack,
     VStack,
+    Card,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import type { Post } from '@prisma/client';
 import { Link, useNavigation } from '@remix-run/react';
 import { motion } from 'framer-motion';
 import { formatTitleForURL } from '~/utils/posts';
+
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import { StyledCard } from '../styled-card/styled-card.styled';
 import { StyledHeading } from '../styled-heading/styled-heading';
 import { Taglist } from '../taglist/Taglist';
 import { formatDate } from '../utils/formatDate';
-import { isBrowser } from '../utils/isBrowser';
 
 export const PostCard = ({
     post,
@@ -60,7 +61,7 @@ export const PostCard = ({
                 },
             }}
         >
-            <Card
+            <StyledCard
                 minH={variation === 'lg' ? '188px' : 'unset'}
                 as={motion.div}
                 whileHover={{
@@ -113,7 +114,7 @@ export const PostCard = ({
                         )}
                     </Stack>
                 </CardBody>
-            </Card>
+            </StyledCard>
         </StyledLink>
     );
 };

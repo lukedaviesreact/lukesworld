@@ -8,6 +8,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { StyledCard } from '../styled-card/styled-card.styled';
 import { StyledHeading } from '../styled-heading/styled-heading';
 import type { GithubProjectsData } from './github-projects.d';
 
@@ -54,7 +55,7 @@ export const GithubProjects = ({
                                 whileTap={{ scale: 0.9 }}
                                 whileHover={{ scale: 1.025 }}
                             >
-                                <Card h="100%">
+                                <StyledCard h="100%">
                                     <CardBody>
                                         <Box mb={1}>
                                             <StyledHeading
@@ -82,7 +83,7 @@ export const GithubProjects = ({
                                             </Text>
                                         </Box>
                                     </CardBody>
-                                </Card>
+                                </StyledCard>
                             </motion.a>
                         </GridItem>
                     );

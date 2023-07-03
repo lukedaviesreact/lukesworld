@@ -1,5 +1,6 @@
 // 1. import `extendTheme` function
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
+import { Button } from './button';
 
 // 2. Add your color mode config
 const config = {
@@ -16,6 +17,12 @@ const colors = {
 };
 
 // 3. extend the theme
-const theme = extendTheme({ config, colors });
+const theme = extendTheme({
+    config,
+    colors,
+    components: {
+        Button,
+    },
+});
 
 export default theme;

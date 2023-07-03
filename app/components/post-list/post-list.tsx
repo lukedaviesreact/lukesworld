@@ -43,7 +43,7 @@ export const PostList = () => {
                 gap={2}
                 pb={4}
                 pt={4}
-                pl={'1px'}
+                pl={'4px'}
                 pr={[0, 0, 4]}
             >
                 {filteredPosts.map((post) => {

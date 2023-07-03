@@ -19,7 +19,7 @@ export const StyledButtonWrap = styled(Heading)({
 export const StyledSubline = styled(Box)({
     color: theme.colors.gray[600],
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'right',
     position: 'relative',
     bottom: '-3rem',
 });
