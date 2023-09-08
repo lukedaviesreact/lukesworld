@@ -25,7 +25,7 @@ export const SocialLinks = ({ isHeader = false }: SocialLinksArgs) => {
                 </Tooltip>
                 <Tooltip label="Download resume">
                     <Link
-                        href="/Luke-Davies_Software-Engineer_CV.pdf"
+                        href="/Luke-Davies-Software-Engineer-CV.pdf"
                         download={true}
                     >
                         <VisuallyHidden>Resume link</VisuallyHidden>
