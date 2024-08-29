@@ -173,16 +173,16 @@ export default function Index() {
 
             <TimelineComponent />
 
-            <PageSection
+            {/* <PageSection
                 heading="OpenAI's image generation"
                 subheading="Honestly, I needed a quick way to generate pictures of a spaceman cowboy riding an elephant. I also wanted to play with the API. So here we are."
                 child={<ImageStack images={aiImgArr} />}
                 buttonLabel="Have a go"
                 buttonLink="/image-generation"
                 subtext="it's 2023"
-            />
+            /> */}
 
-            <PageSection
+            {/* <PageSection/>
                 heading="Github"
                 subheading="Quick view of my github repos - needs a clean up"
                 child={
@@ -194,7 +194,7 @@ export default function Index() {
                 buttonLabel={showMoreProjects ? 'Hide some' : 'Show more'}
                 buttonCallback={() => setshowMoreProjects(!showMoreProjects)}
                 subtext="Let's build something together 🥳"
-            />
+            /> */}
 
             {/* <PageSection
                 heading="Tech tools 🔨"
